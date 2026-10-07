@@ -17,9 +17,9 @@ Q-planner turns natural-language requests (e.g., “optimize ethanol and compute
 > GPU and ORCA requirements, and states what is deliberately not redistributed.
 >
 > To cite that work's code, use the archived release DOI for the tagged commit, never this branch
-> URL -- a branch is mutable. See its "Release and archiving" section. **No licence is granted yet**
-> -- reuse terms are pending confirmation of institutional copyright. ORCA, benchmark reference data
-> and NOMAD inputs remain under their own upstream terms.
+> URL -- a branch is mutable. See its "Release and archiving" section. Licence: MIT
+> ([`LICENSE.md`](LICENSE.md)), which also records the third-party terms covering ORCA, benchmark
+> reference data and NOMAD inputs.
 
 ---
 

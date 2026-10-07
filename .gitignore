@@ -22,10 +22,7 @@
 !/skills.py
 !/test_success_rate.py
 !/test_skill_schema_consistency.py
-# LICENSE.md is deliberately NOT allowlisted. Reuse terms are unresolved (see
-# README_method_selection.md's Licence section), and an allowlist entry here would let
-# `git add -A` publish a grant of rights that may not be ours to make. Add this line back
-# as `!/LICENSE.md` once the institutions confirm who may license the code.
+!/LICENSE.md
 !/README_method_selection.md
 # ----------------------------------------------------------------------------
 # Method-selection paper ("Route, Then Learn", JCIM): analysis code + the few

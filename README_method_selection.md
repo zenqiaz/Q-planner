@@ -161,12 +161,7 @@ Before the paper's camera-ready version:
 
 ## Licence
 
-**Not yet licensed.** Reuse terms are pending confirmation of institutional copyright. NII is an
-institute under the Research Organization of Information and Systems (ROIS), whose published
-regulations on the handling of copyrighted works expressly cover computer programs, and which
-ownership category applies to this code has not been established. Until that is settled no licence
-is granted, which under default copyright means the code may be read but not reused. A licence will
-be added before the archived release is tagged.
+MIT — see [`LICENSE.md`](LICENSE.md).
 
-Third-party components are separate and remain under their own terms: ORCA, benchmark reference
-data, NOMAD input files and base-model weights.
+Third-party components are separate and are not relicensed by it: ORCA, benchmark reference data,
+NOMAD input files and base-model weights each remain under their own terms.
