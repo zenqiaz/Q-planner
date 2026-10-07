@@ -1,0 +1,16 @@
+{
+  "cell": "metal_general",
+  "pair_a": [
+    "M062X",
+    "def2-TZVP"
+  ],
+  "pair_b": [
+    "M06L",
+    "def2-TZVP"
+  ],
+  "n_reactions_total": 35,
+  "n_reactions_usable": 0,
+  "a_wins": 0,
+  "b_wins": 0,
+  "per_reaction": []
+}

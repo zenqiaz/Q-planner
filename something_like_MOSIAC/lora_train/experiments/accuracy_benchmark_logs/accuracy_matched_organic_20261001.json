@@ -1,0 +1,195 @@
+{
+  "log": "accuracy_benchmark_20260908T043300Z.json",
+  "cell": "organic_general",
+  "n_curated": 103,
+  "conditions": {
+    "fixed_default": {
+      "n_published": 102,
+      "mae_published": 16.1801715957852,
+      "n_corrected": 102,
+      "mae_corrected": 16.1801715957852,
+      "shift": 0.0,
+      "attempted": 103,
+      "evaluable": 102,
+      "tied": 0,
+      "not_evaluable": 1
+    },
+    "literature_majority": {
+      "n_published": 69,
+      "mae_published": 14.81127566343794,
+      "n_corrected": 102,
+      "mae_corrected": 15.43693420687533,
+      "shift": 0.6256585434373907,
+      "attempted": 103,
+      "evaluable": 102,
+      "tied": 33,
+      "not_evaluable": 1
+    },
+    "skills_heuristic": {
+      "n_published": 69,
+      "mae_published": 14.81127566343794,
+      "n_corrected": 102,
+      "mae_corrected": 15.43693420687533,
+      "shift": 0.6256585434373907,
+      "attempted": 103,
+      "evaluable": 102,
+      "tied": 33,
+      "not_evaluable": 1
+    },
+    "random_floor": {
+      "n_published": 67,
+      "mae_published": 23.93181913557951,
+      "n_corrected": 69,
+      "mae_corrected": 23.504597230414227,
+      "shift": -0.4272219051652826,
+      "attempted": 103,
+      "evaluable": 69,
+      "tied": 2,
+      "not_evaluable": 34
+    },
+    "selector_rag": {
+      "n_published": 85,
+      "mae_published": 27.174074248880157,
+      "n_corrected": 85,
+      "mae_corrected": 27.174074248880157,
+      "shift": 0.0,
+      "attempted": 103,
+      "evaluable": 85,
+      "tied": 0,
+      "not_evaluable": 18
+    },
+    "selector_rf": {
+      "n_published": 99,
+      "mae_published": 37.38202078146002,
+      "n_corrected": 99,
+      "mae_corrected": 37.38202078146002,
+      "shift": 0.0,
+      "attempted": 103,
+      "evaluable": 99,
+      "tied": 55,
+      "not_evaluable": 4
+    },
+    "selector_sft": {
+      "n_published": 78,
+      "mae_published": 20.729024462155717,
+      "n_corrected": 78,
+      "mae_corrected": 20.729024462155717,
+      "shift": 0.0,
+      "attempted": 103,
+      "evaluable": 78,
+      "tied": 29,
+      "not_evaluable": 25
+    }
+  },
+  "paired": [
+    {
+      "fixed": "fixed_default",
+      "learned": "selector_rag",
+      "n": 85,
+      "mae_fixed": 16.564743026726585,
+      "mae_learned": 27.174074248880157,
+      "diff": 10.609331222153576,
+      "ci95": [
+        5.407466170448707,
+        17.33845856308679
+      ]
+    },
+    {
+      "fixed": "fixed_default",
+      "learned": "selector_rf",
+      "n": 99,
+      "mae_fixed": 16.426688794722573,
+      "mae_learned": 37.38202078146002,
+      "diff": 20.955331986737452,
+      "ci95": [
+        12.910446904747296,
+        30.276521367036512
+      ]
+    },
+    {
+      "fixed": "fixed_default",
+      "learned": "selector_sft",
+      "n": 78,
+      "mae_fixed": 17.334372403604707,
+      "mae_learned": 20.729024462155714,
+      "diff": 3.39465205855101,
+      "ci95": [
+        0.9945972716757604,
+        6.105090079202931
+      ]
+    },
+    {
+      "fixed": "literature_majority",
+      "learned": "selector_rag",
+      "n": 85,
+      "mae_fixed": 15.9106377966121,
+      "mae_learned": 27.174074248880157,
+      "diff": 11.26343645226806,
+      "ci95": [
+        6.14900586542527,
+        17.79392742467014
+      ]
+    },
+    {
+      "fixed": "literature_majority",
+      "learned": "selector_rf",
+      "n": 99,
+      "mae_fixed": 15.834740964738431,
+      "mae_learned": 37.38202078146002,
+      "diff": 21.547279816721584,
+      "ci95": [
+        13.600236018970605,
+        31.034792522729855
+      ]
+    },
+    {
+      "fixed": "literature_majority",
+      "learned": "selector_sft",
+      "n": 78,
+      "mae_fixed": 16.662041174308225,
+      "mae_learned": 20.729024462155714,
+      "diff": 4.066983287847492,
+      "ci95": [
+        1.6727866841965497,
+        6.9435403256165
+      ]
+    },
+    {
+      "fixed": "skills_heuristic",
+      "learned": "selector_rag",
+      "n": 85,
+      "mae_fixed": 15.9106377966121,
+      "mae_learned": 27.174074248880157,
+      "diff": 11.26343645226806,
+      "ci95": [
+        6.1230569995099895,
+        17.7632058370375
+      ]
+    },
+    {
+      "fixed": "skills_heuristic",
+      "learned": "selector_rf",
+      "n": 99,
+      "mae_fixed": 15.834740964738431,
+      "mae_learned": 37.38202078146002,
+      "diff": 21.547279816721584,
+      "ci95": [
+        13.657210856559734,
+        31.058417688199963
+      ]
+    },
+    {
+      "fixed": "skills_heuristic",
+      "learned": "selector_sft",
+      "n": 78,
+      "mae_fixed": 16.662041174308225,
+      "mae_learned": 20.729024462155714,
+      "diff": 4.066983287847492,
+      "ci95": [
+        1.6786447986593047,
+        6.955549501727333
+      ]
+    }
+  ],
+  "note": "MAE corrected = all evaluable reactions, ties counted for every policy. The published figures dropped ties for the four non-learned conditions."
+}

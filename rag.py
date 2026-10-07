@@ -82,6 +82,24 @@ MIN_CELL_SIZE = 30
 # specialists apply the same quality bar to what they'll ever surface.
 EXCLUDED_FUNCTIONALS: frozenset[str] = frozenset({"LDA"})
 
+# Records with these basis-field VALUES are dropped from the pool entirely, regardless of
+# functional. GEN/GENECP is Gaussian's own "custom basis defined elsewhere in the input" marker
+# -- nomad_parse_gjf.py records it literally as if it were a real basis-set name, since the
+# actual per-atom basis definition lives in a separate block the parser doesn't resolve. Found
+# 2026-08-17 tracing real ORCA-execution failures back to their root cause: write_orca_inp()
+# puts this literal string on ORCA's `!` keyword line, which ORCA rejects outright
+# (UNRECOGNIZED OR DUPLICATED KEYWORD) -- 34/46 (74%) of a real metal_general accuracy-benchmark
+# run's failures traced to exactly this. Prevalence is small pool-wide (318/112,882, 0.28%) but
+# concentrated: iochem_methods.jsonl (the catalysis/TM-complex source) is 94.7% (250/264)
+# GEN-contaminated; gaussian_methods.jsonl is 1.6% (68/4,171) GENECP-contaminated;
+# orca_methods.jsonl and tmQM_methods.jsonl are unaffected (0%, both parsed from native ORCA
+# input where this placeholder can't occur). Excluded rather than masked to basis=None: the
+# codebase already gives basis=None a real, different meaning (SEMI_EMPIRICAL methods genuinely
+# take no basis argument, see generate_sft.py's is_clean()) -- masking these instead would teach
+# the model that ordinary hybrid-DFT methods can also omit basis, a new defect for negligible
+# (0.28%) data retained.
+EXCLUDED_BASIS_TOKENS: frozenset[str] = frozenset({"GEN", "GENECP", "CHKBAS", "CHECKPOINT"})
+
 # Cap on how many records a single upload_id may contribute to the pool.
 # Without this, a few large batch-screening uploads (each running thousands
 # of near-identical molecules at one functional) dominate BM25 ties in dense
@@ -152,16 +170,21 @@ def load_pool(
     base_dir: str | Path | None = None,
     upload_cap: int | None = DEFAULT_UPLOAD_CAP,
     exclude_functionals: frozenset[str] = EXCLUDED_FUNCTIONALS,
+    exclude_basis_tokens: frozenset[str] = EXCLUDED_BASIS_TOKENS,
     seed: int = 0,
 ) -> list[dict]:
     """
     Load and concatenate the full per-source record pool, then:
       1. drop records whose functional is in `exclude_functionals` (quality
          filter -- e.g. LDA, regardless of how often it appears)
-      2. cap any single upload_id's contribution to `upload_cap` records
+      2. drop records whose basis is in `exclude_basis_tokens` (quality
+         filter -- GEN/GENECP-style placeholders that were never a real
+         basis-set name to begin with, see EXCLUDED_BASIS_TOKENS)
+      3. cap any single upload_id's contribution to `upload_cap` records
          (redundancy filter -- stops one bulk study from dominating ties)
-    Pass upload_cap=None or exclude_functionals=frozenset() to disable either
-    step, e.g. for diagnostics that want the raw, uncapped pool.
+    Pass upload_cap=None, exclude_functionals=frozenset(), or
+    exclude_basis_tokens=frozenset() to disable any step, e.g. for
+    diagnostics that want the raw, uncapped pool.
     """
     base = Path(base_dir) if base_dir is not None else BASE_DIR
     records: list[dict] = []
@@ -178,6 +201,13 @@ def load_pool(
         records = [r for r in records if r.get("functional") not in exclude_functionals]
         print(f"[rag] excluded {before - len(records)} records with functional in "
               f"{sorted(exclude_functionals)}", file=sys.stderr)
+
+    if exclude_basis_tokens:
+        before = len(records)
+        records = [r for r in records
+                   if (r.get("basis") or "").strip().upper() not in exclude_basis_tokens]
+        print(f"[rag] excluded {before - len(records)} records with basis in "
+              f"{sorted(exclude_basis_tokens)}", file=sys.stderr)
 
     if upload_cap is not None:
         before = len(records)

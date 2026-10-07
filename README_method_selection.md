@@ -139,6 +139,25 @@ python something_like_MOSIAC/lora_train/experiments/evaluate_frozen_router.py
 Steps 1–3 need a GPU; step 4 needs ORCA and is the long pole (the paper's benchmark campaign was
 984 ORCA jobs). Steps 5–6 are CPU-only and run in seconds from the stored JSONs.
 
+### Which code state produced the reported numbers
+
+**Re-running the stored analysis reproduces the paper; re-running the full pipeline does not.**
+
+`rag.py` gained an `EXCLUDED_BASIS_TOKENS` filter on 2026-08-17, dropping `GEN`/`GENECP`/`ChkBasis`
+placeholder values that are not real basis-set names (the finding is reported in the paper's
+Supporting Information). The manuscript's precedent-matching numbers come from
+`rag_sft_experiment_results_20260803T075244Z.json`, produced two weeks **before** that filter
+existed.
+
+So:
+
+- **Steps 5-6** (boundary/routing analysis, the prospective test) read the stored result JSONs and
+  reproduce the published numbers exactly.
+- **Steps 1-4** rebuild the pool from scratch and will give slightly different precedent-matching
+  figures, because the pool they build now excludes those placeholder records. This is an
+  improvement to the pipeline, not a correction to the paper: the filter removes 318 of 112,882
+  records pool-wide (0.28%).
+
 ### Two conventions that are easy to get wrong
 
 - **Label polarity in pair logs.** In `boundary_analysis.load_from_pair_log`, `y == 1` means

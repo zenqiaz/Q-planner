@@ -1,0 +1,196 @@
+{
+  "type": "classical_baseline_results_molecule_split",
+  "timestamp_utc": "20260806T091813Z",
+  "design_doc": "organic_general_classical_baseline_design.md",
+  "split": "jsonl_molecule_split (molecule-identity, primary per 2026-08-06 update)",
+  "note": "hist_gradient_boosting substitutes for LightGBM/XGBoost -- neither installed in this environment; knn added per user discussion as the closest classical analogue to RAG's retrieval mechanism (not in the original design doc's headline models, kept as a comparison row).",
+  "duration_s": 142.43700000000536,
+  "results": {
+    "organic_general": {
+      "n_features": 17,
+      "feature_names": [
+        "log1p_n_atoms",
+        "charge",
+        "mult_ne_1",
+        "has_solvent",
+        "elem_C",
+        "elem_H",
+        "elem_N",
+        "elem_O",
+        "elem_F",
+        "task_FREQ",
+        "task_OPT",
+        "task_SP",
+        "scale_S",
+        "scale_M",
+        "scale_L",
+        "scale_XL",
+        "scale_unknown"
+      ],
+      "models": {
+        "random_forest": {
+          "best_params": {
+            "n_estimators": 500,
+            "max_depth": null
+          },
+          "novel_subset": {
+            "n": 208,
+            "functional_match_pct": 90.4,
+            "basis_match_pct": 87.5,
+            "both_match_pct": 83.7
+          },
+          "memorized_subset": {
+            "n": 208,
+            "functional_match_pct": 92.8,
+            "basis_match_pct": 88.5,
+            "both_match_pct": 85.6
+          },
+          "memorization_gap_pp": 1.9
+        },
+        "hist_gradient_boosting": {
+          "best_params": {
+            "max_iter": 200,
+            "max_depth": null
+          },
+          "novel_subset": {
+            "n": 208,
+            "functional_match_pct": 45.2,
+            "basis_match_pct": 45.7,
+            "both_match_pct": 38.9
+          },
+          "memorized_subset": {
+            "n": 208,
+            "functional_match_pct": 48.6,
+            "basis_match_pct": 43.8,
+            "both_match_pct": 38.5
+          },
+          "memorization_gap_pp": -0.4
+        },
+        "knn": {
+          "best_params": {
+            "n_neighbors": 1
+          },
+          "novel_subset": {
+            "n": 208,
+            "functional_match_pct": 83.2,
+            "basis_match_pct": 86.1,
+            "both_match_pct": 80.3
+          },
+          "memorized_subset": {
+            "n": 208,
+            "functional_match_pct": 86.1,
+            "basis_match_pct": 89.4,
+            "both_match_pct": 85.6
+          },
+          "memorization_gap_pp": 5.3
+        }
+      }
+    },
+    "metal_general": {
+      "n_features": 43,
+      "feature_names": [
+        "log1p_n_atoms",
+        "charge",
+        "mult_ne_1",
+        "has_solvent",
+        "elem_Al",
+        "elem_As",
+        "elem_Au",
+        "elem_B",
+        "elem_Br",
+        "elem_C",
+        "elem_Cl",
+        "elem_Cr",
+        "elem_Cu",
+        "elem_F",
+        "elem_Fe",
+        "elem_H",
+        "elem_I",
+        "elem_Kr",
+        "elem_Li",
+        "elem_Mn",
+        "elem_N",
+        "elem_Na",
+        "elem_Ni",
+        "elem_O",
+        "elem_P",
+        "elem_Pd",
+        "elem_Pt",
+        "elem_S",
+        "elem_Sc",
+        "elem_Se",
+        "elem_Si",
+        "elem_Ti",
+        "elem_V",
+        "elem_Zn",
+        "task_FREQ",
+        "task_OPT",
+        "task_SP",
+        "task_TDDFT",
+        "scale_S",
+        "scale_M",
+        "scale_L",
+        "scale_XL",
+        "scale_unknown"
+      ],
+      "models": {
+        "random_forest": {
+          "best_params": {
+            "n_estimators": 500,
+            "max_depth": null
+          },
+          "novel_subset": {
+            "n": 295,
+            "functional_match_pct": 81.7,
+            "basis_match_pct": 83.7,
+            "both_match_pct": 80.7
+          },
+          "memorized_subset": {
+            "n": 293,
+            "functional_match_pct": 84.3,
+            "basis_match_pct": 84.6,
+            "both_match_pct": 83.6
+          },
+          "memorization_gap_pp": 2.9
+        },
+        "hist_gradient_boosting": {
+          "best_params": {
+            "max_iter": 200,
+            "max_depth": null
+          },
+          "novel_subset": {
+            "n": 295,
+            "functional_match_pct": 72.5,
+            "basis_match_pct": 70.8,
+            "both_match_pct": 70.5
+          },
+          "memorized_subset": {
+            "n": 293,
+            "functional_match_pct": 72.4,
+            "basis_match_pct": 71.0,
+            "both_match_pct": 71.0
+          },
+          "memorization_gap_pp": 0.5
+        },
+        "knn": {
+          "best_params": {
+            "n_neighbors": 1
+          },
+          "novel_subset": {
+            "n": 295,
+            "functional_match_pct": 81.7,
+            "basis_match_pct": 82.7,
+            "both_match_pct": 79.7
+          },
+          "memorized_subset": {
+            "n": 293,
+            "functional_match_pct": 84.3,
+            "basis_match_pct": 83.6,
+            "both_match_pct": 82.3
+          },
+          "memorization_gap_pp": 2.6
+        }
+      }
+    }
+  }
+}

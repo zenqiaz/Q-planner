@@ -48,6 +48,20 @@ from geometry_helpers import (
     structure_proton_edit,
 )
 
+# Found 2026-08-10 (RCCS accuracy-benchmark run, the first time this project ever actually
+# executed a wavefunction-correlated SP job): RIJCOSX auto-provides an aux basis for the SCF/DFT
+# Fock matrix, but NOT for ORCA's MDCI (post-HF correlated) module's own RI needs -- adding it
+# unconditionally (the use_ri=True default) makes CCSD/CCSD(T)/QCISD/MP2/DLPNO-* jobs fail with
+# "Please provide an AuxC basis for RCSinglesFock". This was never caught before because
+# run_accuracy_benchmark.py's cheap-DFT filter always kept these methods off qcl -- it's a real
+# latent bug in this server, not something specific to the RCCS export script. Plain HF/RHF/UHF/
+# ROHF and CASSCF are NOT excluded -- they use RIJCOSX for the Fock matrix only, no MDCI module,
+# confirmed fine empirically (_functional_validity_probe.py, 2026-08-08).
+_WF_CORRELATED_PATTERN = re.compile(
+    r"(CCSD|MP[234]|QCISD|CISD|CEPA|CASPT2|NEVPT2|DLPNO)",
+    re.IGNORECASE,
+)
+
 # -----------------------------
 # Small text parsers (keep simple)
 # -----------------------------
@@ -224,7 +238,16 @@ def _build_calc(
         task_kw = ""   # CASSCF keyword is the method itself; no separate task keyword
     else:
         task_kw = "SP"
-    ri_kw = "RIJCOSX" if use_ri else ""
+    # AutoAux for WF-correlated methods, not just "no RIJCOSX": DLPNO-family methods need an
+    # explicit auxiliary basis unconditionally (independent of RIJCOSX) for their domain/PNO
+    # construction. Found 2026-08-10, second real-batch failure round (see _WF_CORRELATED_PATTERN
+    # docstring above for the first). AutoAux is a no-op for canonical correlated methods that
+    # don't reference an aux basis, so applying it uniformly to the whole WF-correlated group is
+    # safe, not just to the DLPNO subset.
+    if _WF_CORRELATED_PATTERN.search(method):
+        ri_kw = "AutoAux"
+    else:
+        ri_kw = "RIJCOSX" if use_ri else ""
     nbo_kw = "NBO" if nbo else ""
 
     main_line = " ".join(p for p in [f"! {method}", basis, task_kw, ri_kw, nbo_kw] if p.strip())

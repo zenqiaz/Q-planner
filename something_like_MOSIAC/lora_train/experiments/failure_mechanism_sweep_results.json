@@ -1,0 +1,1635 @@
+{
+  "n_total": 180,
+  "n_better_or_equal": 92,
+  "n_worse": 88,
+  "n_meaningfully_worse": 40,
+  "mechanism_counts": {
+    "mechanism_3_common_gga_bias": 18,
+    "mechanism_2_popular_suboptimal_wf": 12,
+    "mechanism_1_rare_precedent": 8,
+    "unclassified_worse": 2
+  },
+  "rare_threshold": 5,
+  "all_rows": [
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_hof",
+      "condition": "selector_rag",
+      "setting": "PBE0/def2-TZVP",
+      "error": 3.30381670308131,
+      "fd_error": 6.094347180488768,
+      "regret": -2.790530477407458
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_hof",
+      "condition": "selector_rf",
+      "setting": "PBE/def2-TZVPP",
+      "error": 22.836244383985758,
+      "fd_error": 6.094347180488768,
+      "regret": 16.74189720349699
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_allene",
+      "condition": "selector_rag",
+      "setting": "PBE0/def2-TZVP",
+      "error": 39.20300902397207,
+      "fd_error": 35.79385917627201,
+      "regret": 3.409149847700064
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_allene",
+      "condition": "selector_rf",
+      "setting": "PBE0/def2-TZVP",
+      "error": 39.20300902397207,
+      "fd_error": 35.79385917627201,
+      "regret": 3.409149847700064
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_allene",
+      "condition": "selector_sft",
+      "setting": "PBE0/def2-TZVP",
+      "error": 39.20300902397207,
+      "fd_error": 35.79385917627201,
+      "regret": 3.409149847700064
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "g2rc_11",
+      "condition": "selector_rag",
+      "setting": "PBE0/def2-TZVP",
+      "error": 2.061587789435656,
+      "fd_error": 3.065134261774162,
+      "regret": -1.0035464723385061
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "g2rc_11",
+      "condition": "selector_rf",
+      "setting": "PBE/def2-TZVPP",
+      "error": 0.55196184738897,
+      "fd_error": 3.065134261774162,
+      "regret": -2.513172414385192
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "g2rc_11",
+      "condition": "selector_sft",
+      "setting": "PBE0/def2-TZVP",
+      "error": 2.061587789435656,
+      "fd_error": 3.065134261774162,
+      "regret": -1.0035464723385061
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_cch",
+      "condition": "selector_rf",
+      "setting": "BP86/def2-TZVP",
+      "error": 16.679141318379322,
+      "fd_error": 6.019703379847272,
+      "regret": 10.65943793853205
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_t-n2h2",
+      "condition": "selector_rag",
+      "setting": "PBE0/def2-TZVP",
+      "error": 15.44335948474236,
+      "fd_error": 18.513814756651925,
+      "regret": -3.070455271909566
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_t-n2h2",
+      "condition": "selector_rf",
+      "setting": "PBE0/def2-TZVP",
+      "error": 15.44335948474236,
+      "fd_error": 18.513814756651925,
+      "regret": -3.070455271909566
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_glyoxal",
+      "condition": "selector_rag",
+      "setting": "PBE0/def2-TZVP",
+      "error": 23.501685164790388,
+      "fd_error": 25.302433200607993,
+      "regret": -1.8007480358176053
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_glyoxal",
+      "condition": "selector_rf",
+      "setting": "PBE/def2-TZVPP",
+      "error": 52.33398291008757,
+      "fd_error": 25.302433200607993,
+      "regret": 27.031549709479577
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_glyoxal",
+      "condition": "selector_sft",
+      "setting": "PBE0/def2-TZVP",
+      "error": 23.501685164790388,
+      "fd_error": 25.302433200607993,
+      "regret": -1.8007480358176053
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_ch2ch",
+      "condition": "selector_rf",
+      "setting": "BP86/def2-TZVP",
+      "error": 36.45469534178193,
+      "fd_error": 24.029831037364943,
+      "regret": 12.424864304416985
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_ch2ch",
+      "condition": "selector_sft",
+      "setting": "B3LYP/6-311G*",
+      "error": 16.916240878560018,
+      "fd_error": 24.029831037364943,
+      "regret": -7.113590158804925
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_f2",
+      "condition": "selector_rag",
+      "setting": "QCISD/6-31G*",
+      "error": 8.731654843149133,
+      "fd_error": 2.1208763574209684,
+      "regret": 6.610778485728165
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_f2",
+      "condition": "selector_rf",
+      "setting": "PBE/LanL2DZ",
+      "error": 6.627377505477462,
+      "fd_error": 2.1208763574209684,
+      "regret": 4.506501148056493
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_f2",
+      "condition": "selector_sft",
+      "setting": "QCISD/6-31G*",
+      "error": 8.731654843149133,
+      "fd_error": 2.1208763574209684,
+      "regret": 6.610778485728165
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_fccf",
+      "condition": "selector_rag",
+      "setting": "QCISD/6-31G*",
+      "error": 28.701824397668133,
+      "fd_error": 16.75351349782801,
+      "regret": 11.948310899840124
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_fccf",
+      "condition": "selector_rf",
+      "setting": "HF/3-21g",
+      "error": 172.61445108525214,
+      "fd_error": 16.75351349782801,
+      "regret": 155.86093758742413
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_fccf",
+      "condition": "selector_sft",
+      "setting": "PBE/def2-TZVPP",
+      "error": 39.86872401924529,
+      "fd_error": 16.75351349782801,
+      "regret": 23.115210521417282
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_ch2nh",
+      "condition": "selector_rag",
+      "setting": "PBE0/def2-TZVP",
+      "error": 23.290109902314043,
+      "fd_error": 24.754081690782357,
+      "regret": -1.4639717884683137
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_ch2nh",
+      "condition": "selector_rf",
+      "setting": "PBE0/def2-TZVP",
+      "error": 23.290109902314043,
+      "fd_error": 24.754081690782357,
+      "regret": -1.4639717884683137
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_ch2nh",
+      "condition": "selector_sft",
+      "setting": "PBE0/def2-TZVP",
+      "error": 23.290109902314043,
+      "fd_error": 24.754081690782357,
+      "regret": -1.4639717884683137
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_dioxirane",
+      "condition": "selector_rag",
+      "setting": "PBE0/def2-TZVP",
+      "error": 18.65333675365258,
+      "fd_error": 16.952368681766075,
+      "regret": 1.700968071886507
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_dioxirane",
+      "condition": "selector_rf",
+      "setting": "PBE/def2-TZVPP",
+      "error": 44.85986104660674,
+      "fd_error": 16.952368681766075,
+      "regret": 27.907492364840664
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_dioxirane",
+      "condition": "selector_sft",
+      "setting": "PBE0/def2-TZVP",
+      "error": 18.65333675365258,
+      "fd_error": 16.952368681766075,
+      "regret": 1.700968071886507
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "g2rc_22",
+      "condition": "selector_rag",
+      "setting": "CCSD(T)/cc-pCV5Z",
+      "error": 0.4933957177734669,
+      "fd_error": 17.114981750308317,
+      "regret": -16.62158603253485
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "g2rc_22",
+      "condition": "selector_rf",
+      "setting": "CCSD(T)/cc-pCV5Z",
+      "error": 0.4933957177734669,
+      "fd_error": 17.114981750308317,
+      "regret": -16.62158603253485
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "g2rc_22",
+      "condition": "selector_sft",
+      "setting": "QCISD/6-31G*",
+      "error": 22.627298651275964,
+      "fd_error": 17.114981750308317,
+      "regret": 5.512316900967647
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_n2o",
+      "condition": "selector_rag",
+      "setting": "PBE0/def2-TZVP",
+      "error": 11.834018985431214,
+      "fd_error": 14.111991214800355,
+      "regret": -2.2779722293691407
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_n2o",
+      "condition": "selector_rf",
+      "setting": "PBE0/def2-TZVP",
+      "error": 11.834018985431214,
+      "fd_error": 14.111991214800355,
+      "regret": -2.2779722293691407
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_n2o",
+      "condition": "selector_sft",
+      "setting": "QCISD/6-31G*",
+      "error": 67.82487790297387,
+      "fd_error": 14.111991214800355,
+      "regret": 53.71288668817351
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_oh",
+      "condition": "selector_rag",
+      "setting": "TPSSH/6-31G**",
+      "error": 0.8526604732925307,
+      "fd_error": 1.6529403367273403,
+      "regret": -0.8002798634348096
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_oh",
+      "condition": "selector_rf",
+      "setting": "BP86/def2-TZVP",
+      "error": 8.495755670175782,
+      "fd_error": 1.6529403367273403,
+      "regret": 6.842815333448442
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_c-hcoh",
+      "condition": "selector_rag",
+      "setting": "PBE0/def2-TZVP",
+      "error": 12.368365794936778,
+      "fd_error": 13.701011830922027,
+      "regret": -1.332646035985249
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_c-hcoh",
+      "condition": "selector_rf",
+      "setting": "PBE/def2-TZVPP",
+      "error": 26.953126865501417,
+      "fd_error": 13.701011830922027,
+      "regret": 13.25211503457939
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_c-hcoh",
+      "condition": "selector_sft",
+      "setting": "PBE0/def2-TZVP",
+      "error": 12.368365794936778,
+      "fd_error": 13.701011830922027,
+      "regret": -1.332646035985249
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_hnnn",
+      "condition": "selector_rag",
+      "setting": "PBE0/def2-TZVP",
+      "error": 19.43612719283226,
+      "fd_error": 22.207200342795886,
+      "regret": -2.7710731499636267
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_hnnn",
+      "condition": "selector_rf",
+      "setting": "PBE0/def2-TZVP",
+      "error": 19.43612719283226,
+      "fd_error": 22.207200342795886,
+      "regret": -2.7710731499636267
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_hno",
+      "condition": "selector_rag",
+      "setting": "PBE0/def2-TZVP",
+      "error": 5.076818733204846,
+      "fd_error": 8.523514118711859,
+      "regret": -3.446695385507013
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_hno",
+      "condition": "selector_rf",
+      "setting": "PBE0/def2-TZVP",
+      "error": 5.076818733204846,
+      "fd_error": 8.523514118711859,
+      "regret": -3.446695385507013
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_t-hcoh",
+      "condition": "selector_rag",
+      "setting": "PBE0/def2-TZVP",
+      "error": 12.981810706643898,
+      "fd_error": 14.966806732610394,
+      "regret": -1.9849960259664954
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_t-hcoh",
+      "condition": "selector_rf",
+      "setting": "PBE/def2-TZVPP",
+      "error": 27.00491903219023,
+      "fd_error": 14.966806732610394,
+      "regret": 12.038112299579836
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_t-hcoh",
+      "condition": "selector_sft",
+      "setting": "PBE0/def2-TZVP",
+      "error": 12.981810706643898,
+      "fd_error": 14.966806732610394,
+      "regret": -1.9849960259664954
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_nh3",
+      "condition": "selector_rag",
+      "setting": "PBE0/def2-TZVP",
+      "error": 15.444206430260977,
+      "fd_error": 15.79103227760811,
+      "regret": -0.34682584734713373
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_nh3",
+      "condition": "selector_rf",
+      "setting": "PBE0/def2-TZVP",
+      "error": 15.444206430260977,
+      "fd_error": 15.79103227760811,
+      "regret": -0.34682584734713373
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_honc",
+      "condition": "selector_rag",
+      "setting": "PBE0/def2-TZVP",
+      "error": 13.349226973274256,
+      "fd_error": 15.290200245913638,
+      "regret": -1.9409732726393827
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_honc",
+      "condition": "selector_rf",
+      "setting": "PBE0/def2-TZVP",
+      "error": 13.349226973274256,
+      "fd_error": 15.290200245913638,
+      "regret": -1.9409732726393827
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_honc",
+      "condition": "selector_sft",
+      "setting": "PBE0/def2-TZVP",
+      "error": 13.349226973274256,
+      "fd_error": 15.290200245913638,
+      "regret": -1.9409732726393827
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_hcn",
+      "condition": "selector_rag",
+      "setting": "PBE0/def2-TZVP",
+      "error": 7.36851821821142,
+      "fd_error": 8.62624329328196,
+      "regret": -1.2577250750705389
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_hcn",
+      "condition": "selector_rf",
+      "setting": "PBE0/def2-TZVP",
+      "error": 7.36851821821142,
+      "fd_error": 8.62624329328196,
+      "regret": -1.2577250750705389
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_hcn",
+      "condition": "selector_sft",
+      "setting": "PBE/def2-TZVPP",
+      "error": 22.953391397829932,
+      "fd_error": 8.62624329328196,
+      "regret": 14.327148104547973
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "g2rc_1",
+      "condition": "selector_rag",
+      "setting": "PBE0/def2-TZVP",
+      "error": 1.1115590715047396,
+      "fd_error": 0.7649396690473995,
+      "regret": 0.34661940245734013
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "g2rc_1",
+      "condition": "selector_rf",
+      "setting": "PBE/def2-TZVPP",
+      "error": 0.9616929459868893,
+      "fd_error": 0.7649396690473995,
+      "regret": 0.19675327693948974
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "g2rc_1",
+      "condition": "selector_sft",
+      "setting": "PBE0/def2-TZVP",
+      "error": 1.1115590715047396,
+      "fd_error": 0.7649396690473995,
+      "regret": 0.34661940245734013
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_c2h3f",
+      "condition": "selector_rag",
+      "setting": "PBE0/def2-TZVP",
+      "error": 29.02559690698706,
+      "fd_error": 28.967021875133128,
+      "regret": 0.05857503185393398
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_c2h3f",
+      "condition": "selector_rf",
+      "setting": "PBE0/def2-TZVP",
+      "error": 29.02559690698706,
+      "fd_error": 28.967021875133128,
+      "regret": 0.05857503185393398
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_c2h3f",
+      "condition": "selector_sft",
+      "setting": "PBE0/def2-TZVP",
+      "error": 29.02559690698706,
+      "fd_error": 28.967021875133128,
+      "regret": 0.05857503185393398
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_methanol",
+      "condition": "selector_rag",
+      "setting": "PBE0/def2-TZVP",
+      "error": 26.828294755295644,
+      "fd_error": 27.099796008836677,
+      "regret": -0.2715012535410324
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_methanol",
+      "condition": "selector_rf",
+      "setting": "PBE/def2-TZVPP",
+      "error": 38.62794459432325,
+      "fd_error": 27.099796008836677,
+      "regret": 11.528148585486576
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_methanol",
+      "condition": "selector_sft",
+      "setting": "PBE0/def2-TZVP",
+      "error": 26.828294755295644,
+      "fd_error": 27.099796008836677,
+      "regret": -0.2715012535410324
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_propane",
+      "condition": "selector_rag",
+      "setting": "PBE0/def2-TZVP",
+      "error": 63.693826249900326,
+      "fd_error": 61.89665406113943,
+      "regret": 1.7971721887608965
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_propane",
+      "condition": "selector_rf",
+      "setting": "PBE/def2-TZVPP",
+      "error": 72.79470664947303,
+      "fd_error": 61.89665406113943,
+      "regret": 10.898052588333599
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_propane",
+      "condition": "selector_sft",
+      "setting": "PBE0/def2-TZVP",
+      "error": 63.693826249900326,
+      "fd_error": 61.89665406113943,
+      "regret": 1.7971721887608965
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "g2rc_14",
+      "condition": "selector_rag",
+      "setting": "PBE0/def2-TZVP",
+      "error": 7.75891848000515,
+      "fd_error": 2.984522038360062,
+      "regret": 4.774396441645088
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "g2rc_14",
+      "condition": "selector_rf",
+      "setting": "PBE0/def2-TZVP",
+      "error": 7.75891848000515,
+      "fd_error": 2.984522038360062,
+      "regret": 4.774396441645088
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "g2rc_14",
+      "condition": "selector_sft",
+      "setting": "QCISD/6-31G*",
+      "error": 20.66812142623788,
+      "fd_error": 2.984522038360062,
+      "regret": 17.68359938787782
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_o2",
+      "condition": "selector_rag",
+      "setting": "BP86/def2-TZVP",
+      "error": 21.930083614060607,
+      "fd_error": 8.856984186048749,
+      "regret": 13.073099428011858
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_o2",
+      "condition": "selector_rf",
+      "setting": "TPSSH/6-31G**",
+      "error": 2.4067017307323795,
+      "fd_error": 8.856984186048749,
+      "regret": -6.450282455316369
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_o2",
+      "condition": "selector_sft",
+      "setting": "QCISD/6-31G*",
+      "error": 18.306865540230675,
+      "fd_error": 8.856984186048749,
+      "regret": 9.449881354181926
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_c2h2",
+      "condition": "selector_rag",
+      "setting": "PBE0/def2-TZVP",
+      "error": 14.90004283683976,
+      "fd_error": 13.041092597641239,
+      "regret": 1.8589502391985206
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_c2h2",
+      "condition": "selector_rf",
+      "setting": "PBE/def2-TZVPP",
+      "error": 26.10340025201924,
+      "fd_error": 13.041092597641239,
+      "regret": 13.062307654378003
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_c2h2",
+      "condition": "selector_sft",
+      "setting": "PBE0/def2-TZVP",
+      "error": 14.90004283683976,
+      "fd_error": 13.041092597641239,
+      "regret": 1.8589502391985206
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "g2rc_21",
+      "condition": "selector_rag",
+      "setting": "PBE0/def2-TZVP",
+      "error": 10.690048373117492,
+      "fd_error": 3.138420278062995,
+      "regret": 7.551628095054497
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "g2rc_21",
+      "condition": "selector_rf",
+      "setting": "PBE/def2-TZVPP",
+      "error": 9.337813867757234,
+      "fd_error": 3.138420278062995,
+      "regret": 6.199393589694239
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "g2rc_21",
+      "condition": "selector_sft",
+      "setting": "PBE0/def2-TZVP",
+      "error": 10.690048373117492,
+      "fd_error": 3.138420278062995,
+      "regret": 7.551628095054497
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_nccn",
+      "condition": "selector_rag",
+      "setting": "PBE0/def2-TZVP",
+      "error": 13.111829943543341,
+      "fd_error": 14.161247266694147,
+      "regret": -1.0494173231508057
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_nccn",
+      "condition": "selector_rf",
+      "setting": "HF/3-21g",
+      "error": 248.59844775836365,
+      "fd_error": 14.161247266694147,
+      "regret": 234.4372004916695
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_nccn",
+      "condition": "selector_sft",
+      "setting": "QCISD/6-31G*",
+      "error": 69.42253831386756,
+      "fd_error": 14.161247266694147,
+      "regret": 55.261291047173415
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_ch4",
+      "condition": "selector_rag",
+      "setting": "PBE0/def2-TZVP",
+      "error": 24.647491023446776,
+      "fd_error": 26.392126830783752,
+      "regret": -1.7446358073369765
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_ch4",
+      "condition": "selector_rf",
+      "setting": "PBE/def2-TZVPP",
+      "error": 27.907387966795966,
+      "fd_error": 26.392126830783752,
+      "regret": 1.5152611360122137
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_ch4",
+      "condition": "selector_sft",
+      "setting": "PBE0/def2-TZVP",
+      "error": 24.647491023446776,
+      "fd_error": 26.392126830783752,
+      "regret": -1.7446358073369765
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_hco",
+      "condition": "selector_rf",
+      "setting": "BP86/def2-TZVP",
+      "error": 22.276635731071565,
+      "fd_error": 11.224001518281455,
+      "regret": 11.05263421279011
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_hocn",
+      "condition": "selector_rag",
+      "setting": "PBE0/def2-TZVP",
+      "error": 13.0662004012147,
+      "fd_error": 13.859395129212658,
+      "regret": -0.7931947279979568
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_hocn",
+      "condition": "selector_rf",
+      "setting": "PBE0/def2-TZVP",
+      "error": 13.0662004012147,
+      "fd_error": 13.859395129212658,
+      "regret": -0.7931947279979568
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_hocn",
+      "condition": "selector_sft",
+      "setting": "PBE0/def2-TZVP",
+      "error": 13.0662004012147,
+      "fd_error": 13.859395129212658,
+      "regret": -0.7931947279979568
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_f2o",
+      "condition": "selector_rag",
+      "setting": "QCISD/6-31G*",
+      "error": 21.224113981651882,
+      "fd_error": 5.809644342168156,
+      "regret": 15.414469639483727
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_f2o",
+      "condition": "selector_rf",
+      "setting": "PBE/def2-TZVPP",
+      "error": 34.3640693700648,
+      "fd_error": 5.809644342168156,
+      "regret": 28.55442502789664
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_f2o",
+      "condition": "selector_sft",
+      "setting": "QCISD/6-31G*",
+      "error": 21.224113981651882,
+      "fd_error": 5.809644342168156,
+      "regret": 15.414469639483727
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_no",
+      "condition": "selector_rag",
+      "setting": "TPSSH/6-31G**",
+      "error": 2.558804024380578,
+      "fd_error": 6.453516861078867,
+      "regret": -3.8947128366982895
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_no",
+      "condition": "selector_rf",
+      "setting": "B3LYP/def2-tzvp",
+      "error": 4.031795376372656,
+      "fd_error": 6.453516861078867,
+      "regret": -2.421721484706211
+    },
+    {
+      "cell": "organic_general",
+      "reaction_id": "w4-11_TAE_no",
+      "condition": "selector_sft",
+      "setting": "QCISD/6-31G*",
+      "error": 35.0099971441379,
+      "fd_error": 6.453516861078867,
+      "regret": 28.55648028305903
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_1",
+      "condition": "selector_rag",
+      "setting": "PBE/6-31g",
+      "error": 8.935947638586477,
+      "fd_error": 2.006885236230822,
+      "regret": 6.929062402355655
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_1",
+      "condition": "selector_rf",
+      "setting": "TPSSH/def2-SVP",
+      "error": 3.5583203343424117,
+      "fd_error": 2.006885236230822,
+      "regret": 1.5514350981115896
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_1",
+      "condition": "selector_sft",
+      "setting": "PBE/cc-pVDZ",
+      "error": 4.392276731146218,
+      "fd_error": 2.006885236230822,
+      "regret": 2.385391494915396
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_2",
+      "condition": "selector_rag",
+      "setting": "BP86/def2-TZVP",
+      "error": 0.5627590839631296,
+      "fd_error": 3.411583512144084,
+      "regret": -2.8488244281809543
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_2",
+      "condition": "selector_rf",
+      "setting": "TPSSH/def2-SVP",
+      "error": 3.5860350631833526,
+      "fd_error": 3.411583512144084,
+      "regret": 0.1744515510392688
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_2",
+      "condition": "selector_sft",
+      "setting": "PBE/def2-TZVP",
+      "error": 1.649108907893165,
+      "fd_error": 3.411583512144084,
+      "regret": -1.7624746042509187
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_3",
+      "condition": "selector_sft",
+      "setting": "PBE/def2-TZVP",
+      "error": 2.214582349583438,
+      "fd_error": 0.8305428064436491,
+      "regret": 1.3840395431397887
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_4",
+      "condition": "selector_rag",
+      "setting": "WB97X-D3/def2-SVP",
+      "error": 5.750530926390027,
+      "fd_error": 4.860254581276038,
+      "regret": 0.890276345113989
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_4",
+      "condition": "selector_rf",
+      "setting": "TPSSH/def2-SVP",
+      "error": 9.179282064252192,
+      "fd_error": 4.860254581276038,
+      "regret": 4.3190274829761535
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_4",
+      "condition": "selector_sft",
+      "setting": "PBE/def2-TZVP",
+      "error": 11.125381923657685,
+      "fd_error": 4.860254581276038,
+      "regret": 6.265127342381646
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_5",
+      "condition": "selector_rag",
+      "setting": "PBE0/lanl2dz",
+      "error": 18.792620657512174,
+      "fd_error": 3.200853748687102,
+      "regret": 15.591766908825072
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_5",
+      "condition": "selector_rf",
+      "setting": "TPSSH/def2-SVP",
+      "error": 6.910005178540938,
+      "fd_error": 3.200853748687102,
+      "regret": 3.7091514298538364
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_5",
+      "condition": "selector_sft",
+      "setting": "M06/def2-TZVP",
+      "error": 2.2125965966097274,
+      "fd_error": 3.200853748687102,
+      "regret": -0.9882571520773746
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_6",
+      "condition": "selector_rag",
+      "setting": "PBE/6-31g",
+      "error": 6.410922706116207,
+      "fd_error": 5.695964776797293,
+      "regret": 0.7149579293189134
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_6",
+      "condition": "selector_rf",
+      "setting": "TPSSH/def2-SVP",
+      "error": 3.5196214599922335,
+      "fd_error": 5.695964776797293,
+      "regret": -2.1763433168050597
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_6",
+      "condition": "selector_sft",
+      "setting": "PBE/def2-TZVP",
+      "error": 4.192694213089371,
+      "fd_error": 5.695964776797293,
+      "regret": -1.5032705637079218
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_9",
+      "condition": "selector_rag",
+      "setting": "B3LYP/DEF2-TZVP",
+      "error": 2.3208589314115535,
+      "fd_error": 7.427600522501823,
+      "regret": -5.10674159109027
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_9",
+      "condition": "selector_rf",
+      "setting": "TPSSH/def2-SVP",
+      "error": 4.832465151272931,
+      "fd_error": 7.427600522501823,
+      "regret": -2.595135371228892
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_9",
+      "condition": "selector_sft",
+      "setting": "TPSSH/def2-SVP",
+      "error": 4.832465151272931,
+      "fd_error": 7.427600522501823,
+      "regret": -2.595135371228892
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_10",
+      "condition": "selector_rag",
+      "setting": "B3LYP/DEF2-TZVP",
+      "error": 16.04579903434944,
+      "fd_error": 12.718650146815358,
+      "regret": 3.327148887534081
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_10",
+      "condition": "selector_rf",
+      "setting": "TPSSH/def2-SVP",
+      "error": 5.98853768983097,
+      "fd_error": 12.718650146815358,
+      "regret": -6.730112456984388
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_10",
+      "condition": "selector_sft",
+      "setting": "PBE/def2-TZVP",
+      "error": 4.934504075663199,
+      "fd_error": 12.718650146815358,
+      "regret": -7.7841460711521595
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_12",
+      "condition": "selector_rag",
+      "setting": "PBE/6-31g",
+      "error": 0.8289567588722591,
+      "fd_error": 8.440522760872959,
+      "regret": -7.6115660020007
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_12",
+      "condition": "selector_rf",
+      "setting": "TPSSH/def2-SVP",
+      "error": 1.651257567853424,
+      "fd_error": 8.440522760872959,
+      "regret": -6.789265193019535
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_12",
+      "condition": "selector_sft",
+      "setting": "PBE/def2-TZVP",
+      "error": 3.3944990824508565,
+      "fd_error": 8.440522760872959,
+      "regret": -5.046023678422102
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_13",
+      "condition": "selector_rag",
+      "setting": "B3LYP/DEF2-TZVP",
+      "error": 13.234157144082893,
+      "fd_error": 10.468161768146047,
+      "regret": 2.7659953759368463
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_13",
+      "condition": "selector_rf",
+      "setting": "TPSSH/def2-SVP",
+      "error": 2.544182627245725,
+      "fd_error": 10.468161768146047,
+      "regret": -7.923979140900322
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_14",
+      "condition": "selector_rf",
+      "setting": "TPSSH/def2-SVP",
+      "error": 2.83784630828805,
+      "fd_error": 6.967896452239906,
+      "regret": -4.1300501439518555
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_14",
+      "condition": "selector_sft",
+      "setting": "PBE/def2-TZVP",
+      "error": 7.492635470571514,
+      "fd_error": 6.967896452239906,
+      "regret": 0.5247390183316085
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_15",
+      "condition": "selector_rf",
+      "setting": "TPSSH/def2-SVP",
+      "error": 2.063058855337613,
+      "fd_error": 2.1230156621579956,
+      "regret": -0.059956806820382624
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_15",
+      "condition": "selector_sft",
+      "setting": "PBE/def2-TZVP",
+      "error": 7.060481047134358,
+      "fd_error": 2.1230156621579956,
+      "regret": 4.937465384976362
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_21",
+      "condition": "selector_rag",
+      "setting": "B3LYP/DEF2-TZVP",
+      "error": 14.593210884543451,
+      "fd_error": 7.889439019372613,
+      "regret": 6.703771865170838
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_21",
+      "condition": "selector_rf",
+      "setting": "TPSSH/def2-SVP",
+      "error": 2.270355669195723,
+      "fd_error": 7.889439019372613,
+      "regret": -5.61908335017689
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_32",
+      "condition": "selector_rag",
+      "setting": "B3LYP/DEF2-TZVP",
+      "error": 1.9453500708718356,
+      "fd_error": 2.7878140905837254,
+      "regret": -0.8424640197118898
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_32",
+      "condition": "selector_rf",
+      "setting": "TPSSH/def2-SVP",
+      "error": 1.3750650275269283,
+      "fd_error": 2.7878140905837254,
+      "regret": -1.4127490630567971
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_32",
+      "condition": "selector_sft",
+      "setting": "PBE/def2-TZVP",
+      "error": 2.677373329807772,
+      "fd_error": 2.7878140905837254,
+      "regret": -0.11044076077595344
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_36",
+      "condition": "selector_rag",
+      "setting": "WB97X-D3/def2-TZVP",
+      "error": 5.316339597639683,
+      "fd_error": 5.662094079221198,
+      "regret": -0.34575448158151545
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_36",
+      "condition": "selector_rf",
+      "setting": "TPSSH/def2-SVP",
+      "error": 3.3014339645853283,
+      "fd_error": 5.662094079221198,
+      "regret": -2.36066011463587
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_37",
+      "condition": "selector_rag",
+      "setting": "WB97X-D3/def2-TZVP",
+      "error": 3.482026552519679,
+      "fd_error": 21.09028770083667,
+      "regret": -17.60826114831699
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_37",
+      "condition": "selector_rf",
+      "setting": "TPSSH/def2-SVP",
+      "error": 16.898359253312066,
+      "fd_error": 21.09028770083667,
+      "regret": -4.191928447524603
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_37",
+      "condition": "selector_sft",
+      "setting": "PBE/def2-TZVP",
+      "error": 12.925437011459424,
+      "fd_error": 21.09028770083667,
+      "regret": -8.164850689377245
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_38",
+      "condition": "selector_rag",
+      "setting": "WB97X-D3/def2-TZVP",
+      "error": 0.6075382915739524,
+      "fd_error": 17.046912445836888,
+      "regret": -16.439374154262936
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_38",
+      "condition": "selector_rf",
+      "setting": "TPSSH/def2-SVP",
+      "error": 13.426207977859534,
+      "fd_error": 17.046912445836888,
+      "regret": -3.6207044679773546
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_38",
+      "condition": "selector_sft",
+      "setting": "PBE/def2-TZVP",
+      "error": 13.591599417005384,
+      "fd_error": 17.046912445836888,
+      "regret": -3.4553130288315046
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_39",
+      "condition": "selector_rag",
+      "setting": "B3LYP/DEF2-TZVP",
+      "error": 16.210925048422574,
+      "fd_error": 10.831156581363715,
+      "regret": 5.3797684670588595
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_39",
+      "condition": "selector_rf",
+      "setting": "TPSSH/def2-SVP",
+      "error": 4.920464581098258,
+      "fd_error": 10.831156581363715,
+      "regret": -5.910692000265456
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_40",
+      "condition": "selector_rag",
+      "setting": "BP86/def2-TZVP(-f)",
+      "error": 3.9641467490021682,
+      "fd_error": 0.3573667720287972,
+      "regret": 3.606779976973371
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_40",
+      "condition": "selector_rf",
+      "setting": "TPSSH/def2-SVP",
+      "error": 2.9377252303748804,
+      "fd_error": 0.3573667720287972,
+      "regret": 2.5803584583460832
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "mor41_40",
+      "condition": "selector_sft",
+      "setting": "PBE/def2-TZVP",
+      "error": 1.7713664275350993,
+      "fd_error": 0.3573667720287972,
+      "regret": 1.4139996555063021
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmd10_0",
+      "condition": "selector_rf",
+      "setting": "B3LYP/aug-cc-pVTZ",
+      "error": 9.430682279167229,
+      "fd_error": 13.386562179615467,
+      "regret": -3.955879900448238
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmd10_0",
+      "condition": "selector_sft",
+      "setting": "B3LYP/6-31G*",
+      "error": 17.845648857581665,
+      "fd_error": 13.386562179615467,
+      "regret": 4.459086677966198
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmd10_2",
+      "condition": "selector_rag",
+      "setting": "PBE/def2-TZVP",
+      "error": 3.9119630161187615,
+      "fd_error": 8.020467226535828,
+      "regret": -4.108504210417067
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmd10_2",
+      "condition": "selector_rf",
+      "setting": "B3LYP/aug-cc-pVTZ",
+      "error": 6.472526442494512,
+      "fd_error": 8.020467226535828,
+      "regret": -1.547940784041316
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmd10_2",
+      "condition": "selector_sft",
+      "setting": "PBE/6-31G",
+      "error": 29.966280984845568,
+      "fd_error": 8.020467226535828,
+      "regret": 21.94581375830974
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmd10_3",
+      "condition": "selector_rf",
+      "setting": "B3LYP/aug-cc-pVTZ",
+      "error": 9.426352702533862,
+      "fd_error": 12.409781864296335,
+      "regret": -2.983429161762473
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmd10_3",
+      "condition": "selector_sft",
+      "setting": "B3LYP/6-31G*",
+      "error": 11.677893034788255,
+      "fd_error": 12.409781864296335,
+      "regret": -0.7318888295080797
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmd10_4",
+      "condition": "selector_rag",
+      "setting": "BP86/def2-TZVP",
+      "error": 2.6857272328188344,
+      "fd_error": 3.1263463688037376,
+      "regret": -0.4406191359849032
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmd10_4",
+      "condition": "selector_rf",
+      "setting": "B3LYP/aug-cc-pVTZ",
+      "error": 0.9173564933132354,
+      "fd_error": 3.1263463688037376,
+      "regret": -2.208989875490502
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmd10_4",
+      "condition": "selector_sft",
+      "setting": "PBE/6-31G",
+      "error": 3.8631607249586324,
+      "fd_error": 3.1263463688037376,
+      "regret": 0.7368143561548948
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmd10_5",
+      "condition": "selector_rag",
+      "setting": "PBE/def2-TZVP",
+      "error": 13.615236127762799,
+      "fd_error": 14.973633483080775,
+      "regret": -1.358397355317976
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmd10_5",
+      "condition": "selector_rf",
+      "setting": "B3LYP/aug-cc-pVTZ",
+      "error": 5.387266485234591,
+      "fd_error": 14.973633483080775,
+      "regret": -9.586366997846184
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmd10_5",
+      "condition": "selector_sft",
+      "setting": "PBE/6-31G",
+      "error": 1.156596406653108,
+      "fd_error": 14.973633483080775,
+      "regret": -13.817037076427667
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmd10_6",
+      "condition": "selector_rf",
+      "setting": "MP2/6-311+G(3df,2p)",
+      "error": 1.2851107411636065,
+      "fd_error": 12.641048771883938,
+      "regret": -11.355938030720331
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmd10_6",
+      "condition": "selector_sft",
+      "setting": "PBE/6-31G",
+      "error": 10.148519770121275,
+      "fd_error": 12.641048771883938,
+      "regret": -2.4925290017626622
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmd10_7",
+      "condition": "selector_rag",
+      "setting": "QCISD/6-31G*",
+      "error": 42.815734604635566,
+      "fd_error": 18.064188362652274,
+      "regret": 24.75154624198329
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmd10_7",
+      "condition": "selector_rf",
+      "setting": "B3LYP/aug-cc-pVTZ",
+      "error": 9.091522101978754,
+      "fd_error": 18.064188362652274,
+      "regret": -8.97266626067352
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmd10_7",
+      "condition": "selector_sft",
+      "setting": "B3LYP/6-31G*",
+      "error": 16.84036438520488,
+      "fd_error": 18.064188362652274,
+      "regret": -1.2238239774473954
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmd10_8",
+      "condition": "selector_rf",
+      "setting": "B3LYP/cc-pVTZ",
+      "error": 6.215113600063205,
+      "fd_error": 2.1592893836234026,
+      "regret": 4.055824216439802
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmd10_8",
+      "condition": "selector_sft",
+      "setting": "B3LYP/6-31G*",
+      "error": 0.4554824964033486,
+      "fd_error": 2.1592893836234026,
+      "regret": -1.703806887220054
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmd10_9",
+      "condition": "selector_rag",
+      "setting": "DLPNO-CCSD(T)/def2-SVP",
+      "error": 18.353954822663056,
+      "fd_error": 9.517049521270941,
+      "regret": 8.836905301392115
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmd10_9",
+      "condition": "selector_rf",
+      "setting": "CCSD/cc-pVTZ",
+      "error": 10.542969887666061,
+      "fd_error": 9.517049521270941,
+      "regret": 1.0259203663951197
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmd10_9",
+      "condition": "selector_sft",
+      "setting": "B3LYP/6-31G*",
+      "error": 5.422268094357079,
+      "fd_error": 9.517049521270941,
+      "regret": -4.094781426913862
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmb11_0",
+      "condition": "selector_rag",
+      "setting": "TPSSH/def2-SVP",
+      "error": 1.2208675753240459,
+      "fd_error": 5.100695108286905,
+      "regret": -3.879827532962859
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmb11_0",
+      "condition": "selector_rf",
+      "setting": "TPSSH/def2-SVP",
+      "error": 1.2208675753240459,
+      "fd_error": 5.100695108286905,
+      "regret": -3.879827532962859
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmb11_2",
+      "condition": "selector_rag",
+      "setting": "TPSSH/def2-SVP",
+      "error": 12.666670577228686,
+      "fd_error": 8.51247068375357,
+      "regret": 4.154199893475116
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmb11_2",
+      "condition": "selector_rf",
+      "setting": "TPSSH/def2-SVP",
+      "error": 12.666670577228686,
+      "fd_error": 8.51247068375357,
+      "regret": 4.154199893475116
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmb11_2",
+      "condition": "selector_sft",
+      "setting": "PBE/def2-TZVP",
+      "error": 10.15602309723747,
+      "fd_error": 8.51247068375357,
+      "regret": 1.643552413483901
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmb11_3",
+      "condition": "selector_rag",
+      "setting": "WB97X-D3/def2-TZVP",
+      "error": 2.5453052510786147,
+      "fd_error": 0.4473030707407748,
+      "regret": 2.09800218033784
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmb11_3",
+      "condition": "selector_rf",
+      "setting": "TPSSH/def2-SVP",
+      "error": 1.7279100008423196,
+      "fd_error": 0.4473030707407748,
+      "regret": 1.2806069301015448
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmb11_3",
+      "condition": "selector_sft",
+      "setting": "PBE/def2-TZVP",
+      "error": 0.8636840210588197,
+      "fd_error": 0.4473030707407748,
+      "regret": 0.4163809503180449
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmb11_7",
+      "condition": "selector_rf",
+      "setting": "TPSSH/def2-SVP",
+      "error": 0.28369249039337596,
+      "fd_error": 2.6874800783088233,
+      "regret": -2.4037875879154473
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmb11_7",
+      "condition": "selector_sft",
+      "setting": "B3LYP/def2-TZVP",
+      "error": 3.0419826649588835,
+      "fd_error": 2.6874800783088233,
+      "regret": 0.3545025866500602
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmb11_8",
+      "condition": "selector_rf",
+      "setting": "TPSSH/def2-SVP",
+      "error": 4.808566534769803,
+      "fd_error": 4.005569141320539,
+      "regret": 0.8029973934492638
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmb11_8",
+      "condition": "selector_sft",
+      "setting": "B3LYP/def2-TZVP",
+      "error": 3.4147315140252674,
+      "fd_error": 4.005569141320539,
+      "regret": -0.5908376272952713
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmb11_9",
+      "condition": "selector_rf",
+      "setting": "TPSSH/def2-SVP",
+      "error": 1.7194169500812002,
+      "fd_error": 1.0424677825086253,
+      "regret": 0.676949167572575
+    },
+    {
+      "cell": "metal_general",
+      "reaction_id": "tmc151_tmb11_9",
+      "condition": "selector_sft",
+      "setting": "B3LYP/def2-TZVP",
+      "error": 1.4681545682625323,
+      "fd_error": 1.0424677825086253,
+      "regret": 0.42568678575390706
+    }
+  ]
+}

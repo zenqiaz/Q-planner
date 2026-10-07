@@ -40,6 +40,18 @@ from opi.input.structures.structure import Structure
 
 _FLOAT_RE = re.compile(r"[-+]?(?:\d+\.\d*|\d*\.\d+|\d+)(?:[eE][-+]?\d+)?")
 
+# Found 2026-08-10 (RCCS accuracy-benchmark run): RIJCOSX auto-provides an aux basis for the
+# SCF/DFT Fock matrix, but NOT for ORCA's MDCI (post-HF correlated) module's own RI needs --
+# adding it unconditionally (use_ri=True default) makes CCSD/CCSD(T)/QCISD/MP2/DLPNO-* jobs fail
+# with "Please provide an AuxC basis for RCSinglesFock". Never caught before because
+# run_accuracy_benchmark.py's cheap-DFT filter always kept these methods off qcl. Plain
+# HF/RHF/UHF/ROHF and CASSCF are NOT excluded -- Fock-matrix-only RIJCOSX use, no MDCI module,
+# confirmed fine empirically (_functional_validity_probe.py, 2026-08-08).
+_WF_CORRELATED_PATTERN = re.compile(
+    r"(CCSD|MP[234]|QCISD|CISD|CEPA|CASPT2|NEVPT2|DLPNO)",
+    re.IGNORECASE,
+)
+
 
 def _last_float_in_line(line: str) -> Optional[float]:
     vals = _FLOAT_RE.findall(line)
@@ -233,7 +245,13 @@ def _build_calc(
     _set_charge_mult(calc, charge, multiplicity)
 
     task_kw = "OPT" if job_type == "opt" else ("FREQ" if job_type == "freq" else "SP")
-    ri_kw = "RIJCOSX" if use_ri else ""
+    # AutoAux for WF-correlated methods, not just "no RIJCOSX": DLPNO-family methods need an
+    # explicit auxiliary basis unconditionally (independent of RIJCOSX). Found 2026-08-10,
+    # second real-batch failure round. No-op for canonical correlated methods.
+    if _WF_CORRELATED_PATTERN.search(method):
+        ri_kw = "AutoAux"
+    else:
+        ri_kw = "RIJCOSX" if use_ri else ""
     nbo_kw = "NBO" if nbo else ""
 
     main_line = f"! {method} {basis} {task_kw} {ri_kw} {nbo_kw}".strip()

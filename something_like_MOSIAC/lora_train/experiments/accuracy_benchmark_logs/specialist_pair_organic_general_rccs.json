@@ -1,0 +1,1942 @@
+{
+  "cell": "organic_general",
+  "pair_a": [
+    "PBE0",
+    "def2-TZVP"
+  ],
+  "pair_b": [
+    "QCISD",
+    "6-311G(2df,2p)"
+  ],
+  "n_reactions_total": 103,
+  "n_reactions_usable": 102,
+  "a_wins": 40,
+  "b_wins": 62,
+  "mae_a_kcal_mol": 15.436968991010337,
+  "mae_b_kcal_mol": 14.104839248813969,
+  "backend": "RCCS only (qcl unavailable -- pod venv interpreter missing)",
+  "corrections": [
+    {
+      "species_id": "w4_atom_H",
+      "functional": "QCISD",
+      "energy_eh": -0.499809815,
+      "reason": "H atom has 1 electron => 0 correlated pairs; QCISD energy is exactly the HF reference energy ORCA printed before aborting in MDCI"
+    }
+  ],
+  "per_reaction": [
+    {
+      "reaction_id": "g2rc_1",
+      "ref_kcal_mol": -2.26,
+      "species_ids": [
+        "40",
+        "1",
+        "104"
+      ],
+      "coeffs": [
+        -1,
+        -1,
+        1
+      ],
+      "pair_a_kcal_mol": -3.3715590068710912,
+      "pair_a_abs_error_kcal_mol": 1.1115590068710914,
+      "pair_b_kcal_mol": 0.2278470158221461,
+      "pair_b_abs_error_kcal_mol": 2.4878470158221457
+    },
+    {
+      "reaction_id": "g2rc_2",
+      "ref_kcal_mol": -2.18,
+      "species_ids": [
+        "113",
+        "30",
+        "8"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        1
+      ],
+      "pair_a_kcal_mol": 4.881207955446672,
+      "pair_a_abs_error_kcal_mol": 7.0612079554466725,
+      "pair_b_kcal_mol": -6.027017446882306,
+      "pair_b_abs_error_kcal_mol": 3.847017446882306
+    },
+    {
+      "reaction_id": "g2rc_4",
+      "ref_kcal_mol": -7.1,
+      "species_ids": [
+        "30",
+        "13",
+        "40",
+        "1"
+      ],
+      "coeffs": [
+        -1,
+        -1,
+        1,
+        1
+      ],
+      "pair_a_kcal_mol": -16.619338705877624,
+      "pair_a_abs_error_kcal_mol": 9.519338705877624,
+      "pair_b_kcal_mol": -9.455759857245114,
+      "pair_b_abs_error_kcal_mol": 2.355759857245115
+    },
+    {
+      "reaction_id": "g2rc_6",
+      "ref_kcal_mol": -19.47,
+      "species_ids": [
+        "100",
+        "13",
+        "106"
+      ],
+      "coeffs": [
+        -1,
+        -1,
+        1
+      ],
+      "pair_a_kcal_mol": -28.990929512334226,
+      "pair_a_abs_error_kcal_mol": 9.520929512334227,
+      "pair_b_kcal_mol": -20.139176270004302,
+      "pair_b_abs_error_kcal_mol": 0.6691762700043036
+    },
+    {
+      "reaction_id": "g2rc_7",
+      "ref_kcal_mol": -26.97,
+      "species_ids": [
+        "25",
+        "14",
+        "121"
+      ],
+      "coeffs": [
+        -1,
+        -1,
+        1
+      ],
+      "pair_a_kcal_mol": -36.250785828704345,
+      "pair_a_abs_error_kcal_mol": 9.280785828704346,
+      "pair_b_kcal_mol": -29.757416737418428,
+      "pair_b_abs_error_kcal_mol": 2.787416737418429
+    },
+    {
+      "reaction_id": "g2rc_11",
+      "ref_kcal_mol": -29.46,
+      "species_ids": [
+        "32",
+        "1",
+        "33"
+      ],
+      "coeffs": [
+        -1,
+        -1,
+        1
+      ],
+      "pair_a_kcal_mol": -31.5215864333864,
+      "pair_a_abs_error_kcal_mol": 2.061586433386399,
+      "pair_b_kcal_mol": -27.048670502890744,
+      "pair_b_abs_error_kcal_mol": 2.411329497109257
+    },
+    {
+      "reaction_id": "g2rc_12",
+      "ref_kcal_mol": -32.71,
+      "species_ids": [
+        "25",
+        "26",
+        "88"
+      ],
+      "coeffs": [
+        -1,
+        -1,
+        1
+      ],
+      "pair_a_kcal_mol": -41.79170428455108,
+      "pair_a_abs_error_kcal_mol": 9.08170428455108,
+      "pair_b_kcal_mol": -31.176563504213757,
+      "pair_b_abs_error_kcal_mol": 1.533436495786244
+    },
+    {
+      "reaction_id": "g2rc_14",
+      "ref_kcal_mol": -39.43,
+      "species_ids": [
+        "34",
+        "1",
+        "11"
+      ],
+      "coeffs": [
+        -1,
+        -3,
+        2
+      ],
+      "pair_a_kcal_mol": -47.18891818445424,
+      "pair_a_abs_error_kcal_mol": 7.758918184454238,
+      "pair_b_kcal_mol": -32.5977063510265,
+      "pair_b_abs_error_kcal_mol": 6.832293648973497
+    },
+    {
+      "reaction_id": "g2rc_16",
+      "ref_kcal_mol": -49.2,
+      "species_ids": [
+        "25",
+        "1",
+        "26"
+      ],
+      "coeffs": [
+        -1,
+        -1,
+        1
+      ],
+      "pair_a_kcal_mol": -55.10631477290408,
+      "pair_a_abs_error_kcal_mol": 5.906314772904075,
+      "pair_b_kcal_mol": -48.98895426935443,
+      "pair_b_abs_error_kcal_mol": 0.21104573064557286
+    },
+    {
+      "reaction_id": "g2rc_18",
+      "ref_kcal_mol": -65.15,
+      "species_ids": [
+        "30",
+        "1",
+        "13",
+        "8"
+      ],
+      "coeffs": [
+        -1,
+        -3,
+        1,
+        1
+      ],
+      "pair_a_kcal_mol": -72.68160130166008,
+      "pair_a_abs_error_kcal_mol": 7.531601301660075,
+      "pair_b_kcal_mol": -58.198195225655795,
+      "pair_b_abs_error_kcal_mol": 6.951804774344211
+    },
+    {
+      "reaction_id": "g2rc_19",
+      "ref_kcal_mol": -68.9,
+      "species_ids": [
+        "73",
+        "1",
+        "39",
+        "13"
+      ],
+      "coeffs": [
+        -1,
+        -1,
+        1,
+        1
+      ],
+      "pair_a_kcal_mol": -63.15279109429101,
+      "pair_a_abs_error_kcal_mol": 5.747208905708995,
+      "pair_b_kcal_mol": -67.1572910725273,
+      "pair_b_abs_error_kcal_mol": 1.7427089274727052
+    },
+    {
+      "reaction_id": "g2rc_20",
+      "ref_kcal_mol": -81.21,
+      "species_ids": [
+        "68",
+        "1",
+        "34",
+        "13"
+      ],
+      "coeffs": [
+        -1,
+        -1,
+        1,
+        1
+      ],
+      "pair_a_kcal_mol": -69.1204735639543,
+      "pair_a_abs_error_kcal_mol": 12.089526436045688,
+      "pair_b_kcal_mol": -80.17583196731937,
+      "pair_b_abs_error_kcal_mol": 1.0341680326806255
+    },
+    {
+      "reaction_id": "g2rc_21",
+      "ref_kcal_mol": -109.11,
+      "species_ids": [
+        "26",
+        "6",
+        "82"
+      ],
+      "coeffs": [
+        -1,
+        -1,
+        1
+      ],
+      "pair_a_kcal_mol": -119.80005148117736,
+      "pair_a_abs_error_kcal_mol": 10.690051481177363,
+      "pair_b_kcal_mol": -106.09078360353838,
+      "pair_b_abs_error_kcal_mol": 3.0192163964616157
+    },
+    {
+      "reaction_id": "g2rc_22",
+      "ref_kcal_mol": -135.4,
+      "species_ids": [
+        "1",
+        "39",
+        "14"
+      ],
+      "coeffs": [
+        -1,
+        -1,
+        2
+      ],
+      "pair_a_kcal_mol": -130.10394007431645,
+      "pair_a_abs_error_kcal_mol": 5.296059925683551,
+      "pair_b_kcal_mol": -130.78012200504494,
+      "pair_b_abs_error_kcal_mol": 4.619877994955061
+    },
+    {
+      "reaction_id": "g2rc_23",
+      "ref_kcal_mol": -154.04,
+      "species_ids": [
+        "25",
+        "94"
+      ],
+      "coeffs": [
+        -3,
+        1
+      ],
+      "pair_a_kcal_mol": -173.6569321962424,
+      "pair_a_abs_error_kcal_mol": 19.616932196242402,
+      "pair_b_kcal_mol": -148.81505433834053,
+      "pair_b_abs_error_kcal_mol": 5.224945661659461
+    },
+    {
+      "reaction_id": "w4-11_TAE_oxirene",
+      "ref_kcal_mol": 437.284,
+      "species_ids": [
+        "w4_oxirene",
+        "w4_atom_C",
+        "w4_atom_H",
+        "w4_atom_O"
+      ],
+      "coeffs": [
+        -1,
+        2,
+        2,
+        1
+      ],
+      "pair_a_kcal_mol": 456.58305584370703,
+      "pair_a_abs_error_kcal_mol": 19.299055843707038,
+      "pair_b_kcal_mol": 425.68597983394864,
+      "pair_b_abs_error_kcal_mol": 11.598020166051356
+    },
+    {
+      "reaction_id": "w4-11_TAE_oxirane",
+      "ref_kcal_mol": 615.02,
+      "species_ids": [
+        "w4_oxirane",
+        "w4_atom_O",
+        "w4_atom_C",
+        "w4_atom_H"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        2,
+        4
+      ],
+      "pair_a_kcal_mol": 653.1576554916142,
+      "pair_a_abs_error_kcal_mol": 38.13765549161417,
+      "pair_b_kcal_mol": 621.926152783697,
+      "pair_b_abs_error_kcal_mol": 6.906152783697053
+    },
+    {
+      "reaction_id": "w4-11_TAE_dioxirane",
+      "ref_kcal_mol": 388.918,
+      "species_ids": [
+        "w4_dioxirane",
+        "w4_atom_C",
+        "w4_atom_H",
+        "w4_atom_O"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        2,
+        2
+      ],
+      "pair_a_kcal_mol": 407.5713651528644,
+      "pair_a_abs_error_kcal_mol": 18.65336515286441,
+      "pair_b_kcal_mol": 382.69510906606223,
+      "pair_b_abs_error_kcal_mol": 6.2228909339377765
+    },
+    {
+      "reaction_id": "w4-11_TAE_ketene",
+      "ref_kcal_mol": 513.097,
+      "species_ids": [
+        "w4_ketene",
+        "w4_atom_C",
+        "w4_atom_H",
+        "w4_atom_O"
+      ],
+      "coeffs": [
+        -1,
+        2,
+        2,
+        1
+      ],
+      "pair_a_kcal_mol": 537.5312789634323,
+      "pair_a_abs_error_kcal_mol": 24.434278963432348,
+      "pair_b_kcal_mol": 507.67355490875315,
+      "pair_b_abs_error_kcal_mol": 5.423445091246833
+    },
+    {
+      "reaction_id": "w4-11_TAE_acetaldehyde",
+      "ref_kcal_mol": 642.577,
+      "species_ids": [
+        "w4_acetaldehyde",
+        "w4_atom_C",
+        "w4_atom_O",
+        "w4_atom_H"
+      ],
+      "coeffs": [
+        -1,
+        2,
+        1,
+        4
+      ],
+      "pair_a_kcal_mol": 677.2650631700519,
+      "pair_a_abs_error_kcal_mol": 34.68806317005192,
+      "pair_b_kcal_mol": 649.5370128226612,
+      "pair_b_abs_error_kcal_mol": 6.960012822661156
+    },
+    {
+      "reaction_id": "w4-11_TAE_formic",
+      "ref_kcal_mol": 479.808,
+      "species_ids": [
+        "w4_formic",
+        "w4_atom_C",
+        "w4_atom_H",
+        "w4_atom_O"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        2,
+        2
+      ],
+      "pair_a_kcal_mol": 499.2324943286635,
+      "pair_a_abs_error_kcal_mol": 19.424494328663513,
+      "pair_b_kcal_mol": 476.2302637448258,
+      "pair_b_abs_error_kcal_mol": 3.577736255174216
+    },
+    {
+      "reaction_id": "w4-11_TAE_acetic",
+      "ref_kcal_mol": 764.369,
+      "species_ids": [
+        "w4_acetic",
+        "w4_atom_C",
+        "w4_atom_O",
+        "w4_atom_H"
+      ],
+      "coeffs": [
+        -1,
+        2,
+        2,
+        4
+      ],
+      "pair_a_kcal_mol": 802.5960802790987,
+      "pair_a_abs_error_kcal_mol": 38.227080279098686,
+      "pair_b_kcal_mol": 767.6266589833151,
+      "pair_b_abs_error_kcal_mol": 3.257658983315082
+    },
+    {
+      "reaction_id": "w4-11_TAE_methanol",
+      "ref_kcal_mol": 480.943,
+      "species_ids": [
+        "w4_methanol",
+        "w4_atom_C",
+        "w4_atom_H",
+        "w4_atom_O"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        4,
+        1
+      ],
+      "pair_a_kcal_mol": 507.77132114647696,
+      "pair_a_abs_error_kcal_mol": 26.82832114647698,
+      "pair_b_kcal_mol": 491.7499091545075,
+      "pair_b_abs_error_kcal_mol": 10.806909154507537
+    },
+    {
+      "reaction_id": "w4-11_TAE_ethanol",
+      "ref_kcal_mol": 760.678,
+      "species_ids": [
+        "w4_ethanol",
+        "w4_atom_H",
+        "w4_atom_O",
+        "w4_atom_C"
+      ],
+      "coeffs": [
+        -1,
+        6,
+        1,
+        2
+      ],
+      "pair_a_kcal_mol": 806.6098493635449,
+      "pair_a_abs_error_kcal_mol": 45.93184936354487,
+      "pair_b_kcal_mol": 779.1217507568763,
+      "pair_b_abs_error_kcal_mol": 18.443750756876284
+    },
+    {
+      "reaction_id": "w4-11_TAE_glyoxal",
+      "ref_kcal_mol": 610.962,
+      "species_ids": [
+        "w4_glyoxal",
+        "w4_atom_C",
+        "w4_atom_H",
+        "w4_atom_O"
+      ],
+      "coeffs": [
+        -1,
+        2,
+        2,
+        2
+      ],
+      "pair_a_kcal_mol": 634.4637395460511,
+      "pair_a_abs_error_kcal_mol": 23.501739546051112,
+      "pair_b_kcal_mol": 601.7989144346296,
+      "pair_b_abs_error_kcal_mol": 9.163085565370352
+    },
+    {
+      "reaction_id": "w4-11_TAE_t-hcoh",
+      "ref_kcal_mol": 305.275,
+      "species_ids": [
+        "w4_t-hcoh",
+        "w4_atom_C",
+        "w4_atom_H",
+        "w4_atom_O"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        2,
+        1
+      ],
+      "pair_a_kcal_mol": 318.2568380089564,
+      "pair_a_abs_error_kcal_mol": 12.981838008956402,
+      "pair_b_kcal_mol": 305.26346480543873,
+      "pair_b_abs_error_kcal_mol": 0.011535194561247408
+    },
+    {
+      "reaction_id": "w4-11_TAE_c-hcoh",
+      "ref_kcal_mol": 300.865,
+      "species_ids": [
+        "w4_c-hcoh",
+        "w4_atom_C",
+        "w4_atom_H",
+        "w4_atom_O"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        2,
+        1
+      ],
+      "pair_a_kcal_mol": 313.2333947206257,
+      "pair_a_abs_error_kcal_mol": 12.368394720625702,
+      "pair_b_kcal_mol": 300.61999587809413,
+      "pair_b_abs_error_kcal_mol": 0.24500412190587895
+    },
+    {
+      "reaction_id": "w4-11_TAE_hcnh",
+      "ref_kcal_mol": 319.887,
+      "species_ids": [
+        "w4_hcnh",
+        "w4_atom_C",
+        "w4_atom_H",
+        "w4_atom_N"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        2,
+        1
+      ],
+      "pair_a_kcal_mol": 338.4511040328503,
+      "pair_a_abs_error_kcal_mol": 18.56410403285031,
+      "pair_b_kcal_mol": 298.74715515945405,
+      "pair_b_abs_error_kcal_mol": 21.139844840545948
+    },
+    {
+      "reaction_id": "w4-11_TAE_hocn",
+      "ref_kcal_mol": 395.977,
+      "species_ids": [
+        "w4_hocn",
+        "w4_atom_C",
+        "w4_atom_N",
+        "w4_atom_O",
+        "w4_atom_H"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "pair_a_kcal_mol": 409.043228594594,
+      "pair_a_abs_error_kcal_mol": 13.066228594594008,
+      "pair_b_kcal_mol": 366.8623584751537,
+      "pair_b_abs_error_kcal_mol": 29.114641524846263
+    },
+    {
+      "reaction_id": "w4-11_TAE_honc",
+      "ref_kcal_mol": 336.831,
+      "species_ids": [
+        "w4_honc",
+        "w4_atom_H",
+        "w4_atom_O",
+        "w4_atom_N",
+        "w4_atom_C"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "pair_a_kcal_mol": 350.18025516100437,
+      "pair_a_abs_error_kcal_mol": 13.34925516100435,
+      "pair_b_kcal_mol": 307.29101020944233,
+      "pair_b_abs_error_kcal_mol": 29.539989790557684
+    },
+    {
+      "reaction_id": "w4-11_TAE_hnco",
+      "ref_kcal_mol": 420.73,
+      "species_ids": [
+        "w4_hnco",
+        "w4_atom_C",
+        "w4_atom_O",
+        "w4_atom_N",
+        "w4_atom_H"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "pair_a_kcal_mol": 438.42149018777894,
+      "pair_a_abs_error_kcal_mol": 17.691490187778925,
+      "pair_b_kcal_mol": 390.6647116930085,
+      "pair_b_abs_error_kcal_mol": 30.065288306991533
+    },
+    {
+      "reaction_id": "w4-11_TAE_hcno",
+      "ref_kcal_mol": 352.246,
+      "species_ids": [
+        "w4_hcno",
+        "w4_atom_C",
+        "w4_atom_H",
+        "w4_atom_N",
+        "w4_atom_O"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "pair_a_kcal_mol": 369.84944023545233,
+      "pair_a_abs_error_kcal_mol": 17.603440235452354,
+      "pair_b_kcal_mol": 318.40484297394175,
+      "pair_b_abs_error_kcal_mol": 33.84115702605823
+    },
+    {
+      "reaction_id": "w4-11_TAE_c-n2h2",
+      "ref_kcal_mol": 273.688,
+      "species_ids": [
+        "w4_c-n2h2",
+        "w4_atom_H",
+        "w4_atom_N"
+      ],
+      "coeffs": [
+        -1,
+        2,
+        2
+      ],
+      "pair_a_kcal_mol": 288.45372372239746,
+      "pair_a_abs_error_kcal_mol": 14.765723722397468,
+      "pair_b_kcal_mol": 233.34197804199346,
+      "pair_b_abs_error_kcal_mol": 40.34602195800653
+    },
+    {
+      "reaction_id": "w4-11_TAE_hnnn",
+      "ref_kcal_mol": 318.063,
+      "species_ids": [
+        "w4_hnnn",
+        "w4_atom_H",
+        "w4_atom_N"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        3
+      ],
+      "pair_a_kcal_mol": 337.4991300567949,
+      "pair_a_abs_error_kcal_mol": 19.436130056794923,
+      "pair_b_kcal_mol": 246.04921166619363,
+      "pair_b_abs_error_kcal_mol": 72.01378833380636
+    },
+    {
+      "reaction_id": "w4-11_TAE_hnc",
+      "ref_kcal_mol": 288.273,
+      "species_ids": [
+        "w4_hnc",
+        "w4_atom_H",
+        "w4_atom_N",
+        "w4_atom_C"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        1,
+        1
+      ],
+      "pair_a_kcal_mol": 296.60899037046465,
+      "pair_a_abs_error_kcal_mol": 8.335990370464629,
+      "pair_b_kcal_mol": 263.24781751510807,
+      "pair_b_abs_error_kcal_mol": 25.025182484891957
+    },
+    {
+      "reaction_id": "w4-11_TAE_t-hono",
+      "ref_kcal_mol": 299.742,
+      "species_ids": [
+        "w4_t-hono",
+        "w4_atom_O",
+        "w4_atom_N",
+        "w4_atom_H"
+      ],
+      "coeffs": [
+        -1,
+        2,
+        1,
+        1
+      ],
+      "pair_a_kcal_mol": 310.491384642479,
+      "pair_a_abs_error_kcal_mol": 10.749384642478958,
+      "pair_b_kcal_mol": 266.29477516765934,
+      "pair_b_abs_error_kcal_mol": 33.44722483234068
+    },
+    {
+      "reaction_id": "w4-11_TAE_c-hono",
+      "ref_kcal_mol": 299.312,
+      "species_ids": [
+        "w4_c-hono",
+        "w4_atom_O",
+        "w4_atom_N",
+        "w4_atom_H"
+      ],
+      "coeffs": [
+        -1,
+        2,
+        1,
+        1
+      ],
+      "pair_a_kcal_mol": 310.47489566514054,
+      "pair_a_abs_error_kcal_mol": 11.162895665140525,
+      "pair_b_kcal_mol": 266.8897956047051,
+      "pair_b_abs_error_kcal_mol": 32.4222043952949
+    },
+    {
+      "reaction_id": "w4-11_TAE_c-hooo",
+      "ref_kcal_mol": 221.146,
+      "species_ids": [
+        "w4_c-hooo",
+        "w4_atom_O",
+        "w4_atom_H"
+      ],
+      "coeffs": [
+        -1,
+        3,
+        1
+      ],
+      "pair_a_kcal_mol": 231.12546126170594,
+      "pair_a_abs_error_kcal_mol": 9.97946126170595,
+      "pair_b_kcal_mol": 205.76877823199504,
+      "pair_b_abs_error_kcal_mol": 15.377221768004944
+    },
+    {
+      "reaction_id": "w4-11_TAE_ch3f",
+      "ref_kcal_mol": 397.675,
+      "species_ids": [
+        "w4_ch3f",
+        "w4_atom_F",
+        "w4_atom_C",
+        "w4_atom_H"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        1,
+        3
+      ],
+      "pair_a_kcal_mol": 419.9613198056522,
+      "pair_a_abs_error_kcal_mol": 22.28631980565217,
+      "pair_b_kcal_mol": 407.12591107370037,
+      "pair_b_abs_error_kcal_mol": 9.450911073700354
+    },
+    {
+      "reaction_id": "w4-11_TAE_ch2f2",
+      "ref_kcal_mol": 415.718,
+      "species_ids": [
+        "w4_ch2f2",
+        "w4_atom_C",
+        "w4_atom_H",
+        "w4_atom_F"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        2,
+        2
+      ],
+      "pair_a_kcal_mol": 435.677393911713,
+      "pair_a_abs_error_kcal_mol": 19.959393911712993,
+      "pair_b_kcal_mol": 419.85659375492713,
+      "pair_b_abs_error_kcal_mol": 4.138593754927115
+    },
+    {
+      "reaction_id": "w4-11_TAE_cf4",
+      "ref_kcal_mol": 465.494,
+      "species_ids": [
+        "w4_cf4",
+        "w4_atom_F",
+        "w4_atom_C"
+      ],
+      "coeffs": [
+        -1,
+        4,
+        1
+      ],
+      "pair_a_kcal_mol": 478.9822506017354,
+      "pair_a_abs_error_kcal_mol": 13.488250601735388,
+      "pair_b_kcal_mol": 459.4768783733646,
+      "pair_b_abs_error_kcal_mol": 6.017121626635401
+    },
+    {
+      "reaction_id": "w4-11_TAE_c2h3f",
+      "ref_kcal_mol": 545.634,
+      "species_ids": [
+        "w4_c2h3f",
+        "w4_atom_C",
+        "w4_atom_H",
+        "w4_atom_F"
+      ],
+      "coeffs": [
+        -1,
+        2,
+        3,
+        1
+      ],
+      "pair_a_kcal_mol": 574.6597161350498,
+      "pair_a_abs_error_kcal_mol": 29.025716135049834,
+      "pair_b_kcal_mol": 549.7536899515077,
+      "pair_b_abs_error_kcal_mol": 4.119689951507667
+    },
+    {
+      "reaction_id": "w4-11_TAE_c2h5f",
+      "ref_kcal_mol": 678.225,
+      "species_ids": [
+        "w4_c2h5f",
+        "w4_atom_F",
+        "w4_atom_C",
+        "w4_atom_H"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        2,
+        5
+      ],
+      "pair_a_kcal_mol": 719.963474125227,
+      "pair_a_abs_error_kcal_mol": 41.73847412522696,
+      "pair_b_kcal_mol": 695.3748231071456,
+      "pair_b_abs_error_kcal_mol": 17.149823107145608
+    },
+    {
+      "reaction_id": "w4-11_TAE_fccf",
+      "ref_kcal_mol": 376.2,
+      "species_ids": [
+        "w4_fccf",
+        "w4_atom_F",
+        "w4_atom_C"
+      ],
+      "coeffs": [
+        -1,
+        2,
+        2
+      ],
+      "pair_a_kcal_mol": 391.2908330476643,
+      "pair_a_abs_error_kcal_mol": 15.090833047664319,
+      "pair_b_kcal_mol": 364.31323159711684,
+      "pair_b_abs_error_kcal_mol": 11.886768402883149
+    },
+    {
+      "reaction_id": "w4-11_TAE_hccf",
+      "ref_kcal_mol": 385.074,
+      "species_ids": [
+        "w4_hccf",
+        "w4_atom_C",
+        "w4_atom_H",
+        "w4_atom_F"
+      ],
+      "coeffs": [
+        -1,
+        2,
+        1,
+        1
+      ],
+      "pair_a_kcal_mol": 400.43961341405026,
+      "pair_a_abs_error_kcal_mol": 15.365613414050245,
+      "pair_b_kcal_mol": 378.2926911938213,
+      "pair_b_abs_error_kcal_mol": 6.781308806178686
+    },
+    {
+      "reaction_id": "w4-11_TAE_hcof",
+      "ref_kcal_mol": 389.55,
+      "species_ids": [
+        "w4_hcof",
+        "w4_atom_C",
+        "w4_atom_O",
+        "w4_atom_H",
+        "w4_atom_F"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "pair_a_kcal_mol": 402.9495445800942,
+      "pair_a_abs_error_kcal_mol": 13.399544580094187,
+      "pair_b_kcal_mol": 384.0822207594611,
+      "pair_b_abs_error_kcal_mol": 5.467779240538903
+    },
+    {
+      "reaction_id": "w4-11_TAE_f2co",
+      "ref_kcal_mol": 410.032,
+      "species_ids": [
+        "w4_f2co",
+        "w4_atom_O",
+        "w4_atom_C",
+        "w4_atom_F"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        1,
+        2
+      ],
+      "pair_a_kcal_mol": 422.39865793164466,
+      "pair_a_abs_error_kcal_mol": 12.366657931644681,
+      "pair_b_kcal_mol": 400.3551426863992,
+      "pair_b_abs_error_kcal_mol": 9.676857313600806
+    },
+    {
+      "reaction_id": "w4-11_TAE_ch2-sing",
+      "ref_kcal_mol": 170.874,
+      "species_ids": [
+        "w4_ch2-sing",
+        "w4_atom_C",
+        "w4_atom_H"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        2
+      ],
+      "pair_a_kcal_mol": 175.5823772832139,
+      "pair_a_abs_error_kcal_mol": 4.708377283213906,
+      "pair_b_kcal_mol": 173.06232339975952,
+      "pair_b_abs_error_kcal_mol": 2.1883233997595255
+    },
+    {
+      "reaction_id": "w4-11_TAE_propane",
+      "ref_kcal_mol": 943.0,
+      "species_ids": [
+        "w4_propane",
+        "w4_atom_C",
+        "w4_atom_H"
+      ],
+      "coeffs": [
+        -1,
+        3,
+        8
+      ],
+      "pair_a_kcal_mol": 1006.6939107440563,
+      "pair_a_abs_error_kcal_mol": 63.693910744056325,
+      "pair_b_kcal_mol": 974.4663786128942,
+      "pair_b_abs_error_kcal_mol": 31.466378612894232
+    },
+    {
+      "reaction_id": "w4-11_TAE_propene",
+      "ref_kcal_mol": 811.558,
+      "species_ids": [
+        "w4_propene",
+        "w4_atom_C",
+        "w4_atom_H"
+      ],
+      "coeffs": [
+        -1,
+        3,
+        6
+      ],
+      "pair_a_kcal_mol": 862.2036130220846,
+      "pair_a_abs_error_kcal_mol": 50.6456130220846,
+      "pair_b_kcal_mol": 829.3442167509124,
+      "pair_b_abs_error_kcal_mol": 17.786216750912445
+    },
+    {
+      "reaction_id": "w4-11_TAE_propyne",
+      "ref_kcal_mol": 670.474,
+      "species_ids": [
+        "w4_propyne",
+        "w4_atom_H",
+        "w4_atom_C"
+      ],
+      "coeffs": [
+        -1,
+        4,
+        3
+      ],
+      "pair_a_kcal_mol": 706.8908156958228,
+      "pair_a_abs_error_kcal_mol": 36.41681569582272,
+      "pair_b_kcal_mol": 675.6311638560537,
+      "pair_b_abs_error_kcal_mol": 5.157163856053671
+    },
+    {
+      "reaction_id": "w4-11_TAE_allene",
+      "ref_kcal_mol": 669.401,
+      "species_ids": [
+        "w4_allene",
+        "w4_atom_C",
+        "w4_atom_H"
+      ],
+      "coeffs": [
+        -1,
+        3,
+        4
+      ],
+      "pair_a_kcal_mol": 708.6040895723544,
+      "pair_a_abs_error_kcal_mol": 39.20308957235443,
+      "pair_b_kcal_mol": 673.7423567166949,
+      "pair_b_abs_error_kcal_mol": 4.341356716694918
+    },
+    {
+      "reaction_id": "w4-11_TAE_c2h6",
+      "ref_kcal_mol": 666.279,
+      "species_ids": [
+        "w4_c2h6",
+        "w4_atom_C",
+        "w4_atom_H"
+      ],
+      "coeffs": [
+        -1,
+        2,
+        6
+      ],
+      "pair_a_kcal_mol": 711.1884456806655,
+      "pair_a_abs_error_kcal_mol": 44.9094456806655,
+      "pair_b_kcal_mol": 690.3634696221563,
+      "pair_b_abs_error_kcal_mol": 24.084469622156348
+    },
+    {
+      "reaction_id": "w4-11_TAE_h2cn",
+      "ref_kcal_mol": 327.951,
+      "species_ids": [
+        "w4_h2cn",
+        "w4_atom_C",
+        "w4_atom_H",
+        "w4_atom_N"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        2,
+        1
+      ],
+      "pair_a_kcal_mol": 346.2907877295755,
+      "pair_a_abs_error_kcal_mol": 18.339787729575505,
+      "pair_b_kcal_mol": 308.41923192933507,
+      "pair_b_abs_error_kcal_mol": 19.531768070664953
+    },
+    {
+      "reaction_id": "w4-11_TAE_nccn",
+      "ref_kcal_mol": 491.497,
+      "species_ids": [
+        "w4_nccn",
+        "w4_atom_N",
+        "w4_atom_C"
+      ],
+      "coeffs": [
+        -1,
+        2,
+        2
+      ],
+      "pair_a_kcal_mol": 504.6088863302931,
+      "pair_a_abs_error_kcal_mol": 13.111886330293089,
+      "pair_b_kcal_mol": 432.68224830518324,
+      "pair_b_abs_error_kcal_mol": 58.81475169481678
+    },
+    {
+      "reaction_id": "w4-11_TAE_ch2nh2",
+      "ref_kcal_mol": 451.028,
+      "species_ids": [
+        "w4_ch2nh2",
+        "w4_atom_C",
+        "w4_atom_H",
+        "w4_atom_N"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        4,
+        1
+      ],
+      "pair_a_kcal_mol": 483.9129019632672,
+      "pair_a_abs_error_kcal_mol": 32.88490196326717,
+      "pair_b_kcal_mol": 441.77423587893253,
+      "pair_b_abs_error_kcal_mol": 9.25376412106749
+    },
+    {
+      "reaction_id": "w4-11_TAE_ch3nh",
+      "ref_kcal_mol": 444.223,
+      "species_ids": [
+        "w4_ch3nh",
+        "w4_atom_C",
+        "w4_atom_H",
+        "w4_atom_N"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        4,
+        1
+      ],
+      "pair_a_kcal_mol": 476.53787171026977,
+      "pair_a_abs_error_kcal_mol": 32.314871710269756,
+      "pair_b_kcal_mol": 436.3239375057097,
+      "pair_b_abs_error_kcal_mol": 7.89906249429032
+    },
+    {
+      "reaction_id": "w4-11_TAE_ch3nh2",
+      "ref_kcal_mol": 542.221,
+      "species_ids": [
+        "w4_ch3nh2",
+        "w4_atom_C",
+        "w4_atom_N",
+        "w4_atom_H"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        1,
+        5
+      ],
+      "pair_a_kcal_mol": 579.1523795232655,
+      "pair_a_abs_error_kcal_mol": 36.93137952326549,
+      "pair_b_kcal_mol": 539.982886730163,
+      "pair_b_abs_error_kcal_mol": 2.2381132698369584
+    },
+    {
+      "reaction_id": "w4-11_TAE_cf2",
+      "ref_kcal_mol": 253.258,
+      "species_ids": [
+        "w4_cf2",
+        "w4_atom_C",
+        "w4_atom_F"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        2
+      ],
+      "pair_a_kcal_mol": 258.21557363670286,
+      "pair_a_abs_error_kcal_mol": 4.957573636702847,
+      "pair_b_kcal_mol": 245.08569292519547,
+      "pair_b_abs_error_kcal_mol": 8.172307074804536
+    },
+    {
+      "reaction_id": "w4-11_TAE_n2h",
+      "ref_kcal_mol": 216.454,
+      "species_ids": [
+        "w4_n2h",
+        "w4_atom_H",
+        "w4_atom_N"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        2
+      ],
+      "pair_a_kcal_mol": 227.17885195976666,
+      "pair_a_abs_error_kcal_mol": 10.724851959766653,
+      "pair_b_kcal_mol": 170.56914297724643,
+      "pair_b_abs_error_kcal_mol": 45.88485702275358
+    },
+    {
+      "reaction_id": "w4-11_TAE_t-n2h2",
+      "ref_kcal_mol": 278.683,
+      "species_ids": [
+        "w4_t-n2h2",
+        "w4_atom_H",
+        "w4_atom_N"
+      ],
+      "coeffs": [
+        -1,
+        2,
+        2
+      ],
+      "pair_a_kcal_mol": 294.1263610516357,
+      "pair_a_abs_error_kcal_mol": 15.44336105163569,
+      "pair_b_kcal_mol": 238.58559233775537,
+      "pair_b_abs_error_kcal_mol": 40.09740766224462
+    },
+    {
+      "reaction_id": "w4-11_TAE_n2h4",
+      "ref_kcal_mol": 404.762,
+      "species_ids": [
+        "w4_n2h4",
+        "w4_atom_N",
+        "w4_atom_H"
+      ],
+      "coeffs": [
+        -1,
+        2,
+        4
+      ],
+      "pair_a_kcal_mol": 434.8970451039765,
+      "pair_a_abs_error_kcal_mol": 30.135045103976495,
+      "pair_b_kcal_mol": 376.818277047183,
+      "pair_b_abs_error_kcal_mol": 27.943722952816984
+    },
+    {
+      "reaction_id": "w4-11_TAE_fo2",
+      "ref_kcal_mol": 130.147,
+      "species_ids": [
+        "w4_fo2",
+        "w4_atom_F",
+        "w4_atom_O"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        2
+      ],
+      "pair_a_kcal_mol": 133.57142438623293,
+      "pair_a_abs_error_kcal_mol": 3.4244243862329427,
+      "pair_b_kcal_mol": 105.86859354734388,
+      "pair_b_abs_error_kcal_mol": 24.278406452656114
+    },
+    {
+      "reaction_id": "w4-11_TAE_foof",
+      "ref_kcal_mol": 146.002,
+      "species_ids": [
+        "w4_foof",
+        "w4_atom_F",
+        "w4_atom_O"
+      ],
+      "coeffs": [
+        -1,
+        2,
+        2
+      ],
+      "pair_a_kcal_mol": 149.91728546862979,
+      "pair_a_abs_error_kcal_mol": 3.915285468629776,
+      "pair_b_kcal_mol": 117.28708684709096,
+      "pair_b_abs_error_kcal_mol": 28.714913152909048
+    },
+    {
+      "reaction_id": "w4-11_TAE_cf",
+      "ref_kcal_mol": 130.348,
+      "species_ids": [
+        "w4_cf",
+        "w4_atom_C",
+        "w4_atom_F"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        1
+      ],
+      "pair_a_kcal_mol": 134.60922172423716,
+      "pair_a_abs_error_kcal_mol": 4.261221724237146,
+      "pair_b_kcal_mol": 125.44711237639476,
+      "pair_b_abs_error_kcal_mol": 4.900887623605257
+    },
+    {
+      "reaction_id": "w4-11_TAE_ch2c",
+      "ref_kcal_mol": 345.098,
+      "species_ids": [
+        "w4_ch2c",
+        "w4_atom_C",
+        "w4_atom_H"
+      ],
+      "coeffs": [
+        -1,
+        2,
+        2
+      ],
+      "pair_a_kcal_mol": 359.3860536429871,
+      "pair_a_abs_error_kcal_mol": 14.288053642987109,
+      "pair_b_kcal_mol": 342.485597875843,
+      "pair_b_abs_error_kcal_mol": 2.612402124157029
+    },
+    {
+      "reaction_id": "w4-11_TAE_ch2ch",
+      "ref_kcal_mol": 423.064,
+      "species_ids": [
+        "w4_ch2ch",
+        "w4_atom_C",
+        "w4_atom_H"
+      ],
+      "coeffs": [
+        -1,
+        2,
+        3
+      ],
+      "pair_a_kcal_mol": 449.1097020266936,
+      "pair_a_abs_error_kcal_mol": 26.04570202669356,
+      "pair_b_kcal_mol": 427.002256728679,
+      "pair_b_abs_error_kcal_mol": 3.9382567286789936
+    },
+    {
+      "reaction_id": "w4-11_TAE_c2h4",
+      "ref_kcal_mol": 532.114,
+      "species_ids": [
+        "w4_c2h4",
+        "w4_atom_C",
+        "w4_atom_H"
+      ],
+      "coeffs": [
+        -1,
+        2,
+        4
+      ],
+      "pair_a_kcal_mol": 563.0592470751689,
+      "pair_a_abs_error_kcal_mol": 30.945247075168822,
+      "pair_b_kcal_mol": 542.6665019852489,
+      "pair_b_abs_error_kcal_mol": 10.55250198524891
+    },
+    {
+      "reaction_id": "w4-11_TAE_ch2nh",
+      "ref_kcal_mol": 414.408,
+      "species_ids": [
+        "w4_ch2nh",
+        "w4_atom_C",
+        "w4_atom_N",
+        "w4_atom_H"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        1,
+        3
+      ],
+      "pair_a_kcal_mol": 437.6981381427463,
+      "pair_a_abs_error_kcal_mol": 23.290138142746287,
+      "pair_b_kcal_mol": 400.0288888398359,
+      "pair_b_abs_error_kcal_mol": 14.379111160164143
+    },
+    {
+      "reaction_id": "w4-11_TAE_hco",
+      "ref_kcal_mol": 270.661,
+      "species_ids": [
+        "w4_hco",
+        "w4_atom_O",
+        "w4_atom_C",
+        "w4_atom_H"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        1,
+        1
+      ],
+      "pair_a_kcal_mol": 279.99839188824603,
+      "pair_a_abs_error_kcal_mol": 9.337391888246032,
+      "pair_b_kcal_mol": 264.2740695692449,
+      "pair_b_abs_error_kcal_mol": 6.386930430755115
+    },
+    {
+      "reaction_id": "w4-11_TAE_h2co",
+      "ref_kcal_mol": 357.51,
+      "species_ids": [
+        "w4_h2co",
+        "w4_atom_O",
+        "w4_atom_C",
+        "w4_atom_H"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        1,
+        2
+      ],
+      "pair_a_kcal_mol": 371.7733047182927,
+      "pair_a_abs_error_kcal_mol": 14.263304718292716,
+      "pair_b_kcal_mol": 357.20881077805336,
+      "pair_b_abs_error_kcal_mol": 0.301189221946629
+    },
+    {
+      "reaction_id": "w4-11_TAE_co2",
+      "ref_kcal_mol": 381.94,
+      "species_ids": [
+        "w4_co2",
+        "w4_atom_C",
+        "w4_atom_O"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        2
+      ],
+      "pair_a_kcal_mol": 391.486313691456,
+      "pair_a_abs_error_kcal_mol": 9.546313691456021,
+      "pair_b_kcal_mol": 368.95714561629603,
+      "pair_b_abs_error_kcal_mol": 12.982854383703966
+    },
+    {
+      "reaction_id": "w4-11_TAE_hno",
+      "ref_kcal_mol": 196.782,
+      "species_ids": [
+        "w4_hno",
+        "w4_atom_N",
+        "w4_atom_H",
+        "w4_atom_O"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        1,
+        1
+      ],
+      "pair_a_kcal_mol": 201.85881980939791,
+      "pair_a_abs_error_kcal_mol": 5.076819809397904,
+      "pair_b_kcal_mol": 169.49214907445992,
+      "pair_b_abs_error_kcal_mol": 27.289850925540094
+    },
+    {
+      "reaction_id": "w4-11_TAE_no2",
+      "ref_kcal_mol": 221.611,
+      "species_ids": [
+        "w4_no2",
+        "w4_atom_N",
+        "w4_atom_O"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        2
+      ],
+      "pair_a_kcal_mol": 233.57379398809988,
+      "pair_a_abs_error_kcal_mol": 11.96279398809989,
+      "pair_b_kcal_mol": 182.58828382557522,
+      "pair_b_abs_error_kcal_mol": 39.02271617442477
+    },
+    {
+      "reaction_id": "w4-11_TAE_n2o",
+      "ref_kcal_mol": 263.43,
+      "species_ids": [
+        "w4_n2o",
+        "w4_atom_N",
+        "w4_atom_O"
+      ],
+      "coeffs": [
+        -1,
+        2,
+        1
+      ],
+      "pair_a_kcal_mol": 275.264021517433,
+      "pair_a_abs_error_kcal_mol": 11.834021517432973,
+      "pair_b_kcal_mol": 207.6798478223875,
+      "pair_b_abs_error_kcal_mol": 55.750152177612506
+    },
+    {
+      "reaction_id": "w4-11_TAE_o3",
+      "ref_kcal_mol": 142.336,
+      "species_ids": [
+        "w4_o3",
+        "w4_atom_O"
+      ],
+      "coeffs": [
+        -1,
+        3
+      ],
+      "pair_a_kcal_mol": 138.55783778705873,
+      "pair_a_abs_error_kcal_mol": 3.7781622129412824,
+      "pair_b_kcal_mol": 112.59963649797432,
+      "pair_b_abs_error_kcal_mol": 29.736363502025696
+    },
+    {
+      "reaction_id": "w4-11_TAE_hoo",
+      "ref_kcal_mol": 165.975,
+      "species_ids": [
+        "w4_hoo",
+        "w4_atom_O",
+        "w4_atom_H"
+      ],
+      "coeffs": [
+        -1,
+        2,
+        1
+      ],
+      "pair_a_kcal_mol": 174.71774327792156,
+      "pair_a_abs_error_kcal_mol": 8.742743277921562,
+      "pair_b_kcal_mol": 160.55349997870977,
+      "pair_b_abs_error_kcal_mol": 5.421500021290228
+    },
+    {
+      "reaction_id": "w4-11_TAE_hooh",
+      "ref_kcal_mol": 252.075,
+      "species_ids": [
+        "w4_hooh",
+        "w4_atom_H",
+        "w4_atom_O"
+      ],
+      "coeffs": [
+        -1,
+        2,
+        2
+      ],
+      "pair_a_kcal_mol": 260.6680277085455,
+      "pair_a_abs_error_kcal_mol": 8.593027708545492,
+      "pair_b_kcal_mol": 248.99992355528286,
+      "pair_b_abs_error_kcal_mol": 3.0750764447171264
+    },
+    {
+      "reaction_id": "w4-11_TAE_f2o",
+      "ref_kcal_mol": 89.427,
+      "species_ids": [
+        "w4_f2o",
+        "w4_atom_F",
+        "w4_atom_O"
+      ],
+      "coeffs": [
+        -1,
+        2,
+        1
+      ],
+      "pair_a_kcal_mol": 91.48690505714494,
+      "pair_a_abs_error_kcal_mol": 2.059905057144931,
+      "pair_b_kcal_mol": 74.31496436866827,
+      "pair_b_abs_error_kcal_mol": 15.112035631331736
+    },
+    {
+      "reaction_id": "w4-11_TAE_nh",
+      "ref_kcal_mol": 78.344,
+      "species_ids": [
+        "w4_nh",
+        "w4_atom_N",
+        "w4_atom_H"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        1
+      ],
+      "pair_a_kcal_mol": 84.29628116324263,
+      "pair_a_abs_error_kcal_mol": 5.952281163242631,
+      "pair_b_kcal_mol": 60.732763723885,
+      "pair_b_abs_error_kcal_mol": 17.611236276114994
+    },
+    {
+      "reaction_id": "w4-11_TAE_nh2",
+      "ref_kcal_mol": 170.579,
+      "species_ids": [
+        "w4_nh2",
+        "w4_atom_N",
+        "w4_atom_H"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        2
+      ],
+      "pair_a_kcal_mol": 181.25585410654946,
+      "pair_a_abs_error_kcal_mol": 10.676854106549456,
+      "pair_b_kcal_mol": 154.67151709097246,
+      "pair_b_abs_error_kcal_mol": 15.90748290902755
+    },
+    {
+      "reaction_id": "w4-11_TAE_hcn",
+      "ref_kcal_mol": 303.211,
+      "species_ids": [
+        "w4_hcn",
+        "w4_atom_H",
+        "w4_atom_C",
+        "w4_atom_N"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        1,
+        1
+      ],
+      "pair_a_kcal_mol": 310.5795464009121,
+      "pair_a_abs_error_kcal_mol": 7.3685464009120665,
+      "pair_b_kcal_mol": 277.94334115766037,
+      "pair_b_abs_error_kcal_mol": 25.267658842339642
+    },
+    {
+      "reaction_id": "w4-11_TAE_hof",
+      "ref_kcal_mol": 149.323,
+      "species_ids": [
+        "w4_hof",
+        "w4_atom_H",
+        "w4_atom_O",
+        "w4_atom_F"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        1,
+        1
+      ],
+      "pair_a_kcal_mol": 152.6268821178266,
+      "pair_a_abs_error_kcal_mol": 3.303882117826589,
+      "pair_b_kcal_mol": 143.61563770917834,
+      "pair_b_abs_error_kcal_mol": 5.7073622908216635
+    },
+    {
+      "reaction_id": "w4-11_TAE_h2",
+      "ref_kcal_mol": 103.279,
+      "species_ids": [
+        "w4_h2",
+        "w4_atom_H"
+      ],
+      "coeffs": [
+        -1,
+        2
+      ],
+      "pair_a_kcal_mol": 104.32383115720133,
+      "pair_a_abs_error_kcal_mol": 1.0448311572013296,
+      "pair_b_kcal_mol": 107.4315832924119,
+      "pair_b_abs_error_kcal_mol": 4.152583292411904
+    },
+    {
+      "reaction_id": "w4-11_TAE_oh",
+      "ref_kcal_mol": 101.765,
+      "species_ids": [
+        "w4_oh",
+        "w4_atom_O",
+        "w4_atom_H"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        1
+      ],
+      "pair_a_kcal_mol": 104.12863540962314,
+      "pair_a_abs_error_kcal_mol": 2.363635409623143,
+      "pair_b_kcal_mol": 100.27414006762136,
+      "pair_b_abs_error_kcal_mol": 1.4908599323786405
+    },
+    {
+      "reaction_id": "w4-11_TAE_hf",
+      "ref_kcal_mol": 135.269,
+      "species_ids": [
+        "w4_hf",
+        "w4_atom_F",
+        "w4_atom_H"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        1
+      ],
+      "pair_a_kcal_mol": 134.68202204699085,
+      "pair_a_abs_error_kcal_mol": 0.5869779530091535,
+      "pair_b_kcal_mol": 133.76294729827282,
+      "pair_b_abs_error_kcal_mol": 1.5060527017271852
+    },
+    {
+      "reaction_id": "w4-11_TAE_h2o",
+      "ref_kcal_mol": 219.317,
+      "species_ids": [
+        "w4_h2o",
+        "w4_atom_O",
+        "w4_atom_H"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        2
+      ],
+      "pair_a_kcal_mol": 223.87712536352132,
+      "pair_a_abs_error_kcal_mol": 4.560125363521308,
+      "pair_b_kcal_mol": 219.67515912267015,
+      "pair_b_abs_error_kcal_mol": 0.3581591226701448
+    },
+    {
+      "reaction_id": "w4-11_TAE_ch",
+      "ref_kcal_mol": 79.991,
+      "species_ids": [
+        "w4_ch",
+        "w4_atom_C",
+        "w4_atom_H"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        1
+      ],
+      "pair_a_kcal_mol": 82.58680208624361,
+      "pair_a_abs_error_kcal_mol": 2.5958020862436086,
+      "pair_b_kcal_mol": 79.88365172014397,
+      "pair_b_abs_error_kcal_mol": 0.10734827985602635
+    },
+    {
+      "reaction_id": "w4-11_TAE_ch2-trip",
+      "ref_kcal_mol": 179.856,
+      "species_ids": [
+        "w4_ch2-trip",
+        "w4_atom_C",
+        "w4_atom_H"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        2
+      ],
+      "pair_a_kcal_mol": 193.29651596770003,
+      "pair_a_abs_error_kcal_mol": 13.440515967700037,
+      "pair_b_kcal_mol": 184.73137322043814,
+      "pair_b_abs_error_kcal_mol": 4.875373220438149
+    },
+    {
+      "reaction_id": "w4-11_TAE_ch3",
+      "ref_kcal_mol": 289.079,
+      "species_ids": [
+        "w4_ch3",
+        "w4_atom_C",
+        "w4_atom_H"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        3
+      ],
+      "pair_a_kcal_mol": 307.84621095160907,
+      "pair_a_abs_error_kcal_mol": 18.76721095160906,
+      "pair_b_kcal_mol": 298.2209495781172,
+      "pair_b_abs_error_kcal_mol": 9.141949578117192
+    },
+    {
+      "reaction_id": "w4-11_TAE_ch4",
+      "ref_kcal_mol": 392.459,
+      "species_ids": [
+        "w4_ch4",
+        "w4_atom_H",
+        "w4_atom_C"
+      ],
+      "coeffs": [
+        -1,
+        4,
+        1
+      ],
+      "pair_a_kcal_mol": 417.1065185855468,
+      "pair_a_abs_error_kcal_mol": 24.647518585546777,
+      "pair_b_kcal_mol": 408.22615651990145,
+      "pair_b_abs_error_kcal_mol": 15.767156519901448
+    },
+    {
+      "reaction_id": "w4-11_TAE_cch",
+      "ref_kcal_mol": 257.041,
+      "species_ids": [
+        "w4_cch",
+        "w4_atom_C",
+        "w4_atom_H"
+      ],
+      "coeffs": [
+        -1,
+        2,
+        1
+      ],
+      "pair_a_kcal_mol": 266.1613413585755,
+      "pair_a_abs_error_kcal_mol": 9.120341358575502,
+      "pair_b_kcal_mol": 249.72627790936403,
+      "pair_b_abs_error_kcal_mol": 7.314722090635968
+    },
+    {
+      "reaction_id": "w4-11_TAE_c2h2",
+      "ref_kcal_mol": 388.704,
+      "species_ids": [
+        "w4_c2h2",
+        "w4_atom_H",
+        "w4_atom_C"
+      ],
+      "coeffs": [
+        -1,
+        2,
+        2
+      ],
+      "pair_a_kcal_mol": 403.6040973297737,
+      "pair_a_abs_error_kcal_mol": 14.9000973297737,
+      "pair_b_kcal_mol": 386.2566729429327,
+      "pair_b_abs_error_kcal_mol": 2.447327057067298
+    },
+    {
+      "reaction_id": "w4-11_TAE_nh3",
+      "ref_kcal_mol": 276.53,
+      "species_ids": [
+        "w4_nh3",
+        "w4_atom_N",
+        "w4_atom_H"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        3
+      ],
+      "pair_a_kcal_mol": 291.97420716883954,
+      "pair_a_abs_error_kcal_mol": 15.444207168839569,
+      "pair_b_kcal_mol": 264.93113432969955,
+      "pair_b_abs_error_kcal_mol": 11.598865670300427
+    },
+    {
+      "reaction_id": "w4-11_TAE_c2",
+      "ref_kcal_mol": 144.064,
+      "species_ids": [
+        "w4_c2",
+        "w4_atom_C"
+      ],
+      "coeffs": [
+        -1,
+        2
+      ],
+      "pair_a_kcal_mol": 120.37786857279549,
+      "pair_a_abs_error_kcal_mol": 23.6861314272045,
+      "pair_b_kcal_mol": 124.94369363382572,
+      "pair_b_abs_error_kcal_mol": 19.120306366174276
+    },
+    {
+      "reaction_id": "w4-11_TAE_n2",
+      "ref_kcal_mol": 224.996,
+      "species_ids": [
+        "w4_n2",
+        "w4_atom_N"
+      ],
+      "coeffs": [
+        -1,
+        2
+      ],
+      "pair_a_kcal_mol": 224.82852081663268,
+      "pair_a_abs_error_kcal_mol": 0.16747918336733392,
+      "pair_b_kcal_mol": 175.8118584755055,
+      "pair_b_abs_error_kcal_mol": 49.18414152449452
+    },
+    {
+      "reaction_id": "w4-11_TAE_co",
+      "ref_kcal_mol": 256.155,
+      "species_ids": [
+        "w4_co",
+        "w4_atom_C",
+        "w4_atom_O"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        1
+      ],
+      "pair_a_kcal_mol": 255.26216021327895,
+      "pair_a_abs_error_kcal_mol": 0.8928397867210265,
+      "pair_b_kcal_mol": 247.35424519821086,
+      "pair_b_abs_error_kcal_mol": 8.800754801789111
+    },
+    {
+      "reaction_id": "w4-11_TAE_cn",
+      "ref_kcal_mol": 178.178,
+      "species_ids": [
+        "w4_cn",
+        "w4_atom_C",
+        "w4_atom_N"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        1
+      ],
+      "pair_a_kcal_mol": 178.33779732855407,
+      "pair_a_abs_error_kcal_mol": 0.15979732855407747,
+      "pair_b_kcal_mol": 148.18183362389973,
+      "pair_b_abs_error_kcal_mol": 29.996166376100263
+    },
+    {
+      "reaction_id": "w4-11_TAE_no",
+      "ref_kcal_mol": 149.804,
+      "species_ids": [
+        "w4_no",
+        "w4_atom_N",
+        "w4_atom_O"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        1
+      ],
+      "pair_a_kcal_mol": 153.05320612826375,
+      "pair_a_abs_error_kcal_mol": 3.2492061282637508,
+      "pair_b_kcal_mol": 120.83094537473865,
+      "pair_b_abs_error_kcal_mol": 28.973054625261355
+    },
+    {
+      "reaction_id": "w4-11_TAE_o2",
+      "ref_kcal_mol": 117.959,
+      "species_ids": [
+        "w4_o2",
+        "w4_atom_O"
+      ],
+      "coeffs": [
+        -1,
+        2
+      ],
+      "pair_a_kcal_mol": 124.30875297739614,
+      "pair_a_abs_error_kcal_mol": 6.349752977396136,
+      "pair_b_kcal_mol": 108.29527028047629,
+      "pair_b_abs_error_kcal_mol": 9.663729719523715
+    },
+    {
+      "reaction_id": "w4-11_TAE_of",
+      "ref_kcal_mol": 51.173,
+      "species_ids": [
+        "w4_of",
+        "w4_atom_O",
+        "w4_atom_F"
+      ],
+      "coeffs": [
+        -1,
+        1,
+        1
+      ],
+      "pair_a_kcal_mol": 54.193292206858104,
+      "pair_a_abs_error_kcal_mol": 3.0202922068581017,
+      "pair_b_kcal_mol": 44.041025673806516,
+      "pair_b_abs_error_kcal_mol": 7.131974326193486
+    },
+    {
+      "reaction_id": "w4-11_TAE_f2",
+      "ref_kcal_mol": 36.947,
+      "species_ids": [
+        "w4_f2",
+        "w4_atom_F"
+      ],
+      "coeffs": [
+        -1,
+        2
+      ],
+      "pair_a_kcal_mol": 34.63472484823734,
+      "pair_a_abs_error_kcal_mol": 2.3122751517626625,
+      "pair_b_kcal_mol": 29.05813846208338,
+      "pair_b_abs_error_kcal_mol": 7.888861537916622
+    }
+  ]
+}

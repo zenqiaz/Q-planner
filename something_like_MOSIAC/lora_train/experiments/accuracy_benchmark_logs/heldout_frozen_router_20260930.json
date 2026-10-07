@@ -1,0 +1,24 @@
+{
+  "frozen_sha256": "965bd671569d5278",
+  "comparator": "MP2",
+  "n_reactions": 32,
+  "fixed_mae": {
+    "PBE0": 2.4529776455418983,
+    "QCISD": 1.681004480782831,
+    "MP2": 1.4951028861755602
+  },
+  "routed_mae": 1.6810044807828315,
+  "oracle_mae": 0.7553030684190831,
+  "gain_vs_comparator": -0.1859015946072714,
+  "ci95": [
+    -0.8027668113504661,
+    0.5091115814754995
+  ],
+  "routing_distribution": {
+    "PBE0": 0,
+    "QCISD": 32,
+    "MP2": 0
+  },
+  "endpoint_note": "all reactions are reaction energies (FH51+TAUT15)",
+  "status": "single-shot held-out evaluation; router frozen before data existed"
+}

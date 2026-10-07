@@ -1,0 +1,62 @@
+{
+  "created": "2026-09-28",
+  "purpose": "frozen for single-shot held-out evaluation (review follow-up plan S1)",
+  "cell": "organic_general",
+  "features": [
+    "degree_unsaturation",
+    "n_atoms"
+  ],
+  "classes": [
+    "PBE0",
+    "QCISD",
+    "MP2"
+  ],
+  "class_order_in_model": [
+    0,
+    1,
+    2
+  ],
+  "scaler_mean": [
+    1.0686274509803921,
+    4.5
+  ],
+  "scaler_scale": [
+    0.8773825145815832,
+    2.1224754323158406
+  ],
+  "coef": [
+    [
+      0.06522001009893527,
+      -0.9222340626224264
+    ],
+    [
+      -0.12699990065397565,
+      0.7092912781344995
+    ],
+    [
+      0.06177989055504043,
+      0.2129427844879273
+    ]
+  ],
+  "intercept": [
+    -0.7127813803999827,
+    0.33115118314460396,
+    0.3816301972553799
+  ],
+  "n_train_reactions": 102,
+  "train_label_counts": {
+    "PBE0": 21,
+    "QCISD": 41,
+    "MP2": 40
+  },
+  "train_fixed_mae": {
+    "PBE0": 15.436968991010335,
+    "QCISD": 14.104839248813965,
+    "MP2": 10.582832604838412
+  },
+  "train_best_fixed": "MP2",
+  "train_oracle_mae": 5.893483392397815,
+  "comparator_for_heldout": "fixed MP2 (best single method on development set)",
+  "primary_endpoint": "paired MAE difference (fixed MP2 - routed), bootstrap 95% CI",
+  "sha256": "965bd671569d5278"
+}

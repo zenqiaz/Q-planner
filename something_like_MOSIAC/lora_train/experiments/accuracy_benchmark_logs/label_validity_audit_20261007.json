@@ -1,0 +1,353 @@
+{
+  "merged parse  (resampled_corpus\\methods.jsonl)": {
+    "n": 112573,
+    "counts": {
+      "ok": 111787,
+      "null": 680,
+      "unknown": 4,
+      "functional": 16,
+      "placeholder": 65,
+      "artifact": 21
+    },
+    "n_invalid": 782,
+    "pct_invalid": 0.6946603537260266,
+    "examples": [
+      {
+        "functional": "PM6",
+        "basis": null,
+        "n": 470
+      },
+      {
+        "functional": "PBEH-3C",
+        "basis": null,
+        "n": 141
+      },
+      {
+        "functional": "PBE",
+        "basis": "genecp",
+        "n": 54
+      },
+      {
+        "functional": null,
+        "basis": null,
+        "n": 31
+      },
+      {
+        "functional": "DLPNO-CCSD(T)",
+        "basis": null,
+        "n": 16
+      },
+      {
+        "functional": "B3LYP",
+        "basis": "7=3)",
+        "n": 14
+      },
+      {
+        "functional": null,
+        "basis": "genecp",
+        "n": 8
+      },
+      {
+        "functional": "PBE",
+        "basis": null,
+        "n": 8
+      },
+      {
+        "functional": "G4",
+        "basis": null,
+        "n": 7
+      },
+      {
+        "functional": "BEPBE",
+        "basis": "BEPBE",
+        "n": 4
+      }
+    ],
+    "unrecognised": [
+      {
+        "basis": "cc-pCV5Z",
+        "n": 1
+      },
+      {
+        "basis": "CCD",
+        "n": 1
+      },
+      {
+        "basis": "STO-3G*",
+        "n": 1
+      },
+      {
+        "basis": "ub97d",
+        "n": 1
+      }
+    ]
+  },
+  "sampled pool  (jsonl\\methods.jsonl)": {
+    "n": 3876,
+    "counts": {
+      "ok": 3410,
+      "null": 286,
+      "functional": 148,
+      "placeholder": 14,
+      "unknown": 3,
+      "artifact": 15
+    },
+    "n_invalid": 463,
+    "pct_invalid": 11.9453044375645,
+    "examples": [
+      {
+        "functional": "PM6",
+        "basis": null,
+        "n": 236
+      },
+      {
+        "functional": "B3LYP",
+        "basis": "b3lyp",
+        "n": 127
+      },
+      {
+        "functional": "DLPNO-CCSD(T)",
+        "basis": null,
+        "n": 16
+      },
+      {
+        "functional": null,
+        "basis": null,
+        "n": 15
+      },
+      {
+        "functional": "PBE",
+        "basis": "genecp",
+        "n": 10
+      },
+      {
+        "functional": "B3LYP",
+        "basis": "7=3)",
+        "n": 8
+      },
+      {
+        "functional": "PBE",
+        "basis": "pbepbe",
+        "n": 8
+      },
+      {
+        "functional": "PBEH-3C",
+        "basis": null,
+        "n": 7
+      },
+      {
+        "functional": "AM1",
+        "basis": null,
+        "n": 5
+      },
+      {
+        "functional": "G4",
+        "basis": null,
+        "n": 3
+      }
+    ],
+    "unrecognised": [
+      {
+        "basis": "CCD",
+        "n": 1
+      },
+      {
+        "basis": "cc-pCV5Z",
+        "n": 1
+      },
+      {
+        "basis": "ub97d",
+        "n": 1
+      }
+    ]
+  },
+  "SFT split  (lora_train/jsonl/)": {
+    "n": 7034,
+    "counts": {
+      "ok": 7005,
+      "artifact": 15,
+      "functional": 10,
+      "unknown": 1,
+      "placeholder": 3
+    },
+    "n_invalid": 28,
+    "pct_invalid": 0.398066533977822,
+    "examples": [
+      {
+        "functional": "B3LYP",
+        "basis": "7=3)",
+        "n": 12
+      },
+      {
+        "functional": "QCISD",
+        "basis": "QCISD(T)",
+        "n": 3
+      },
+      {
+        "functional": "LC-WPBE",
+        "basis": "ChkBasis",
+        "n": 3
+      },
+      {
+        "functional": "LC-WPBE",
+        "basis": "7=3)",
+        "n": 2
+      },
+      {
+        "functional": "LC-WPBE",
+        "basis": "LC-wPBE",
+        "n": 2
+      },
+      {
+        "functional": "B3LYP",
+        "basis": "B3LYP",
+        "n": 2
+      },
+      {
+        "functional": "WB97X-D",
+        "basis": "176=1281000)",
+        "n": 1
+      },
+      {
+        "functional": "MP2",
+        "basis": "MP2",
+        "n": 1
+      },
+      {
+        "functional": "BLYP",
+        "basis": "BLYP",
+        "n": 1
+      },
+      {
+        "functional": "QCISD",
+        "basis": "QCISD",
+        "n": 1
+      }
+    ],
+    "unrecognised": [
+      {
+        "basis": "cc-pCV5Z",
+        "n": 1
+      }
+    ]
+  },
+  "SFT split  (lora_train/jsonl_molecule_split/)": {
+    "n": 4902,
+    "counts": {
+      "ok": 4727,
+      "functional": 10,
+      "artifact": 15,
+      "placeholder": 149,
+      "unknown": 1
+    },
+    "n_invalid": 174,
+    "pct_invalid": 3.5495716034271725,
+    "examples": [
+      {
+        "functional": "B3LYP",
+        "basis": "GEN",
+        "n": 144
+      },
+      {
+        "functional": "B3LYP",
+        "basis": "7=3)",
+        "n": 12
+      },
+      {
+        "functional": "QCISD",
+        "basis": "QCISD(T)",
+        "n": 3
+      },
+      {
+        "functional": "LC-WPBE",
+        "basis": "ChkBasis",
+        "n": 3
+      },
+      {
+        "functional": "LC-WPBE",
+        "basis": "7=3)",
+        "n": 2
+      },
+      {
+        "functional": "PBE",
+        "basis": "GEN",
+        "n": 2
+      },
+      {
+        "functional": "B3LYP",
+        "basis": "B3LYP",
+        "n": 2
+      },
+      {
+        "functional": "LC-WPBE",
+        "basis": "LC-wPBE",
+        "n": 2
+      },
+      {
+        "functional": "WB97X-D",
+        "basis": "176=1281000)",
+        "n": 1
+      },
+      {
+        "functional": "MP2",
+        "basis": "MP2",
+        "n": 1
+      }
+    ],
+    "unrecognised": [
+      {
+        "basis": "cc-pCV5Z",
+        "n": 1
+      }
+    ]
+  },
+  "August 2026 validation (scored)": {
+    "n": 501,
+    "counts": {
+      "ok": 479,
+      "functional": 19,
+      "placeholder": 1,
+      "artifact": 2
+    },
+    "n_invalid": 22,
+    "pct_invalid": 4.391217564870259,
+    "examples": [
+      {
+        "functional": "B3LYP",
+        "basis": "b3lyp",
+        "n": 16
+      },
+      {
+        "functional": "LC-WPBE",
+        "basis": "ChkBasis",
+        "n": 1
+      },
+      {
+        "functional": "LC-WPBE",
+        "basis": "7=3)",
+        "n": 1
+      },
+      {
+        "functional": "PBE",
+        "basis": "pbepbe",
+        "n": 1
+      },
+      {
+        "functional": "QCISD",
+        "basis": "QCISD(T)",
+        "n": 1
+      },
+      {
+        "functional": "MP2",
+        "basis": "MP2",
+        "n": 1
+      },
+      {
+        "functional": "B3LYP",
+        "basis": "7=3)",
+        "n": 1
+      }
+    ],
+    "unrecognised": []
+  }
+}

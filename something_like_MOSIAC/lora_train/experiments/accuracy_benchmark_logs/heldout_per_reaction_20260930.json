@@ -1,0 +1,258 @@
+[
+ {
+  "rid": "fh51_2",
+  "subset": "FH51 (rxn energy)",
+  "ref": -144.38,
+  "err_PBE0": 4.643,
+  "err_QCISD": 7.848,
+  "err_MP2": 8.026
+ },
+ {
+  "rid": "fh51_8",
+  "subset": "FH51 (rxn energy)",
+  "ref": -58.53,
+  "err_PBE0": 3.092,
+  "err_QCISD": 1.96,
+  "err_MP2": 0.14
+ },
+ {
+  "rid": "fh51_13",
+  "subset": "FH51 (rxn energy)",
+  "ref": -44.82,
+  "err_PBE0": 2.816,
+  "err_QCISD": 0.615,
+  "err_MP2": 3.835
+ },
+ {
+  "rid": "fh51_14",
+  "subset": "FH51 (rxn energy)",
+  "ref": -43.67,
+  "err_PBE0": 2.686,
+  "err_QCISD": 0.795,
+  "err_MP2": 4.002
+ },
+ {
+  "rid": "fh51_15",
+  "subset": "FH51 (rxn energy)",
+  "ref": -42.89,
+  "err_PBE0": 3.51,
+  "err_QCISD": 1.581,
+  "err_MP2": 0.794
+ },
+ {
+  "rid": "fh51_17",
+  "subset": "FH51 (rxn energy)",
+  "ref": -34.93,
+  "err_PBE0": 7.463,
+  "err_QCISD": 4.519,
+  "err_MP2": 0.947
+ },
+ {
+  "rid": "fh51_24",
+  "subset": "FH51 (rxn energy)",
+  "ref": -22.45,
+  "err_PBE0": 1.504,
+  "err_QCISD": 2.381,
+  "err_MP2": 0.639
+ },
+ {
+  "rid": "fh51_25",
+  "subset": "FH51 (rxn energy)",
+  "ref": -20.27,
+  "err_PBE0": 3.461,
+  "err_QCISD": 0.279,
+  "err_MP2": 1.095
+ },
+ {
+  "rid": "fh51_27",
+  "subset": "FH51 (rxn energy)",
+  "ref": -19.34,
+  "err_PBE0": 9.525,
+  "err_QCISD": 1.426,
+  "err_MP2": 0.629
+ },
+ {
+  "rid": "fh51_30",
+  "subset": "FH51 (rxn energy)",
+  "ref": -16.98,
+  "err_PBE0": 1.389,
+  "err_QCISD": 4.054,
+  "err_MP2": 1.484
+ },
+ {
+  "rid": "fh51_32",
+  "subset": "FH51 (rxn energy)",
+  "ref": -14.3,
+  "err_PBE0": 7.618,
+  "err_QCISD": 2.94,
+  "err_MP2": 9.438
+ },
+ {
+  "rid": "fh51_33",
+  "subset": "FH51 (rxn energy)",
+  "ref": -13.14,
+  "err_PBE0": 0.803,
+  "err_QCISD": 0.479,
+  "err_MP2": 0.926
+ },
+ {
+  "rid": "fh51_35",
+  "subset": "FH51 (rxn energy)",
+  "ref": -10.7,
+  "err_PBE0": 0.969,
+  "err_QCISD": 3.064,
+  "err_MP2": 0.698
+ },
+ {
+  "rid": "fh51_36",
+  "subset": "FH51 (rxn energy)",
+  "ref": -9.39,
+  "err_PBE0": 5.541,
+  "err_QCISD": 0.768,
+  "err_MP2": 0.718
+ },
+ {
+  "rid": "fh51_41",
+  "subset": "FH51 (rxn energy)",
+  "ref": -5.11,
+  "err_PBE0": 2.411,
+  "err_QCISD": 1.069,
+  "err_MP2": 0.673
+ },
+ {
+  "rid": "fh51_42",
+  "subset": "FH51 (rxn energy)",
+  "ref": -3.25,
+  "err_PBE0": 3.647,
+  "err_QCISD": 2.138,
+  "err_MP2": 4.037
+ },
+ {
+  "rid": "fh51_45",
+  "subset": "FH51 (rxn energy)",
+  "ref": -2.11,
+  "err_PBE0": 0.969,
+  "err_QCISD": 0.056,
+  "err_MP2": 0.341
+ },
+ {
+  "rid": "fh51_47",
+  "subset": "FH51 (rxn energy)",
+  "ref": -1.15,
+  "err_PBE0": 0.13,
+  "err_QCISD": 0.18,
+  "err_MP2": 0.167
+ },
+ {
+  "rid": "fh51_49",
+  "subset": "FH51 (rxn energy)",
+  "ref": -0.43,
+  "err_PBE0": 0.629,
+  "err_QCISD": 2.427,
+  "err_MP2": 0.924
+ },
+ {
+  "rid": "fh51_51",
+  "subset": "FH51 (rxn energy)",
+  "ref": -0.18,
+  "err_PBE0": 0.625,
+  "err_QCISD": 2.457,
+  "err_MP2": 0.945
+ },
+ {
+  "rid": "taut15_1",
+  "subset": "TAUT15 (tautomer)",
+  "ref": 4.3,
+  "err_PBE0": 2.631,
+  "err_QCISD": 2.299,
+  "err_MP2": 0.746
+ },
+ {
+  "rid": "taut15_2",
+  "subset": "TAUT15 (tautomer)",
+  "ref": 6.56,
+  "err_PBE0": 2.665,
+  "err_QCISD": 2.832,
+  "err_MP2": 0.849
+ },
+ {
+  "rid": "taut15_3",
+  "subset": "TAUT15 (tautomer)",
+  "ref": -5.44,
+  "err_PBE0": 1.249,
+  "err_QCISD": 0.368,
+  "err_MP2": 0.006
+ },
+ {
+  "rid": "taut15_4",
+  "subset": "TAUT15 (tautomer)",
+  "ref": 5.25,
+  "err_PBE0": 2.956,
+  "err_QCISD": 2.616,
+  "err_MP2": 0.259
+ },
+ {
+  "rid": "taut15_5",
+  "subset": "TAUT15 (tautomer)",
+  "ref": 13.03,
+  "err_PBE0": 1.216,
+  "err_QCISD": 0.777,
+  "err_MP2": 1.725
+ },
+ {
+  "rid": "taut15_6",
+  "subset": "TAUT15 (tautomer)",
+  "ref": 0.93,
+  "err_PBE0": 1.281,
+  "err_QCISD": 0.457,
+  "err_MP2": 1.274
+ },
+ {
+  "rid": "taut15_7",
+  "subset": "TAUT15 (tautomer)",
+  "ref": 0.74,
+  "err_PBE0": 1.321,
+  "err_QCISD": 0.368,
+  "err_MP2": 0.556
+ },
+ {
+  "rid": "taut15_8",
+  "subset": "TAUT15 (tautomer)",
+  "ref": 1.45,
+  "err_PBE0": 0.156,
+  "err_QCISD": 1.26,
+  "err_MP2": 1.37
+ },
+ {
+  "rid": "taut15_9",
+  "subset": "TAUT15 (tautomer)",
+  "ref": -0.17,
+  "err_PBE0": 0.688,
+  "err_QCISD": 0.822,
+  "err_MP2": 0.326
+ },
+ {
+  "rid": "taut15_10",
+  "subset": "TAUT15 (tautomer)",
+  "ref": -0.87,
+  "err_PBE0": 0.654,
+  "err_QCISD": 0.173,
+  "err_MP2": 0.145
+ },
+ {
+  "rid": "taut15_11",
+  "subset": "TAUT15 (tautomer)",
+  "ref": 2.85,
+  "err_PBE0": 0.159,
+  "err_QCISD": 0.677,
+  "err_MP2": 0.112
+ },
+ {
+  "rid": "taut15_13",
+  "subset": "TAUT15 (tautomer)",
+  "ref": 0.55,
+  "err_PBE0": 0.089,
+  "err_QCISD": 0.109,
+  "err_MP2": 0.014
+ }
+]
