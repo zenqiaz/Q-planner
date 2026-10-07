@@ -4,6 +4,23 @@
 
 Q-planner turns natural-language requests (e.g., “optimize ethanol and compute a single-point energy”) into a **deterministic, reproducible workflow** that runs quantum‑chemistry jobs via **ORCA** (through an MCP tool server), and returns structured results plus run logs and reports.
 
+> ### Also on this branch: the DFT method-selection study
+>
+> Alongside the agent documented below, the `rag-retrieval` branch carries the code and
+> artifacts behind *"Route, Then Learn: A General Recipe for Automating DFT Method Selection
+> from Literature Precedent"* (J. Chem. Inf. Model., submitted). That study builds the
+> method/basis **selection** step that the planner described here assumes has already been
+> decided, so the two fit together rather than overlapping.
+>
+> **Start at [`README_method_selection.md`](README_method_selection.md).** It maps each table in
+> the paper to the script and result file that produced it, gives the reproduction order with its
+> GPU and ORCA requirements, and states what is deliberately not redistributed.
+>
+> To cite that work's code, use the archived release DOI for the tagged commit, never this branch
+> URL -- a branch is mutable. See its "Release and archiving" section. **No licence is granted yet**
+> -- reuse terms are pending confirmation of institutional copyright. ORCA, benchmark reference data
+> and NOMAD inputs remain under their own upstream terms.
+
 ---
 
 ## What the agent does
