@@ -161,7 +161,7 @@ Before the paper's camera-ready version:
 
 ## Licence
 
-MIT — see [`LICENSE.md`](LICENSE.md).
+MIT — see [`LICENSE`](LICENSE).
 
 Third-party components are separate and are not relicensed by it: ORCA, benchmark reference data,
 NOMAD input files and base-model weights each remain under their own terms.

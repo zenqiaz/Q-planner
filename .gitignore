@@ -22,7 +22,8 @@
 !/skills.py
 !/test_success_rate.py
 !/test_skill_schema_consistency.py
-!/LICENSE.md
+!/LICENSE
+!/NOTICE.md
 !/README_method_selection.md
 # ----------------------------------------------------------------------------
 # Method-selection paper ("Route, Then Learn", JCIM): analysis code + the few

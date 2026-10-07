@@ -18,7 +18,7 @@ Q-planner turns natural-language requests (e.g., “optimize ethanol and compute
 >
 > To cite that work's code, use the archived release DOI for the tagged commit, never this branch
 > URL -- a branch is mutable. See its "Release and archiving" section. Licence: MIT
-> ([`LICENSE.md`](LICENSE.md)), which also records the third-party terms covering ORCA, benchmark
+> ([`LICENSE`](LICENSE)), which also records the third-party terms covering ORCA, benchmark
 > reference data and NOMAD inputs.
 
 ---
