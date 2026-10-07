@@ -22,3 +22,65 @@
 !/skills.py
 !/test_success_rate.py
 !/test_skill_schema_consistency.py
+# LICENSE.md is deliberately NOT allowlisted. Reuse terms are unresolved (see
+# README_method_selection.md's Licence section), and an allowlist entry here would let
+# `git add -A` publish a grant of rights that may not be ours to make. Add this line back
+# as `!/LICENSE.md` once the institutions confirm who may license the code.
+!/README_method_selection.md
+# ----------------------------------------------------------------------------
+# Method-selection paper ("Route, Then Learn", JCIM): analysis code + the few
+# artifacts the manuscript cites. Nothing else from this tree.
+#
+# MECHANICS -- this pattern is fiddly and a naive version leaks catastrophically.
+# `!dir/` only tells git to DESCEND into dir; it does not keep dir's contents
+# ignored, because the root `/*` rule above matches root-level entries only. So
+# each level must: (1) re-include the directory, (2) re-exclude its children with
+# `dir/*`, (3) re-include just the wanted children. Omitting step 2 exposes
+# ~163,000 files here (orca_corpus 152,917, gaussian_corpus 4,820, benchmark 259).
+#
+# Those corpora must stay out on licensing grounds, not just size: NOMAD input
+# files carry their depositors' licences and benchmark/ holds publisher supporting
+# information. README_method_selection.md records what is deliberately not redistributed.
+#
+# Python is allowlisted per-directory because the scripts import each other
+# (run_rag_sft_experiment -> train_lora_sft; routing_value_analysis ->
+# boundary_analysis -> run_accuracy_benchmark); a per-file list would ship code
+# that cannot run. JSON is per-file: accuracy_benchmark_logs/ holds 7.2 MB across
+# 43 superseded runs.
+# ----------------------------------------------------------------------------
+
+!/something_like_MOSIAC/
+/something_like_MOSIAC/*
+!/something_like_MOSIAC/lora_train/
+/something_like_MOSIAC/lora_train/*
+!/something_like_MOSIAC/lora_train/*.py
+!/something_like_MOSIAC/lora_train/experiments/
+/something_like_MOSIAC/lora_train/experiments/*
+!/something_like_MOSIAC/lora_train/experiments/*.py
+
+# cited artifacts, top level of experiments/
+!/something_like_MOSIAC/lora_train/experiments/rag_sft_experiment_results_20260803T075244Z.json
+!/something_like_MOSIAC/lora_train/experiments/classical_baseline_results_molecule_split_20260806T091813Z.json
+!/something_like_MOSIAC/lora_train/experiments/failure_mechanism_sweep_results.json
+!/something_like_MOSIAC/lora_train/experiments/pm6_breakdown_eval_20260804T052531Z.json
+!/something_like_MOSIAC/lora_train/experiments/rare_filtered_breakdown_eval_20260804T075024Z.json
+
+# cited artifacts, accuracy_benchmark_logs/ (dir re-included, contents re-excluded)
+!/something_like_MOSIAC/lora_train/experiments/accuracy_benchmark_logs/
+/something_like_MOSIAC/lora_train/experiments/accuracy_benchmark_logs/*
+!/something_like_MOSIAC/lora_train/experiments/accuracy_benchmark_logs/frozen_three_way_router.json
+!/something_like_MOSIAC/lora_train/experiments/accuracy_benchmark_logs/heldout_frozen_router_20260930.json
+!/something_like_MOSIAC/lora_train/experiments/accuracy_benchmark_logs/heldout_per_reaction_20260930.json
+!/something_like_MOSIAC/lora_train/experiments/accuracy_benchmark_logs/accuracy_matched_organic_20261001.json
+!/something_like_MOSIAC/lora_train/experiments/accuracy_benchmark_logs/accuracy_matched_metal_20261001.json
+!/something_like_MOSIAC/lora_train/experiments/accuracy_benchmark_logs/cost_accuracy_20260929.json
+!/something_like_MOSIAC/lora_train/experiments/accuracy_benchmark_logs/four_pair_summary_*.json
+!/something_like_MOSIAC/lora_train/experiments/accuracy_benchmark_logs/deposit_grouped_cv_*.json
+!/something_like_MOSIAC/lora_train/experiments/accuracy_benchmark_logs/label_validity_audit_*.json
+!/something_like_MOSIAC/lora_train/experiments/accuracy_benchmark_logs/specialist_pair_*.json
+
+# build noise, belt-and-braces
+**/__pycache__/
+*.pyc
+.env
+.env.*
