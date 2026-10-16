@@ -1,6 +1,6 @@
 # Q-planner
 
-[![GitHub](https://img.shields.io/badge/GitHub-Q--planner-blue)](https://github.com/zenqiaz/Q-planner)
+[[![GitHub](https://img.shields.io/badge/GitHub-Q--planner-blue)](https://github.com/zenqiaz/Q-planner)](https://doi.org/10.5281/zenodo.23235930)
 
 Q-planner turns natural-language requests (e.g., “optimize ethanol and compute a single-point energy”) into a **deterministic, reproducible workflow** that runs quantum‑chemistry jobs via **ORCA** (through an MCP tool server), and returns structured results plus run logs and reports.
 
