@@ -25,6 +25,10 @@
 !/LICENSE
 !/NOTICE.md
 !/README_method_selection.md
+# Scripts that draw Figures 1 and 2 of the Q-planner paper (cited in its
+# Acknowledgement as part of the code release).
+!/figure_architecture.py
+!/figure_workflow.py
 # ----------------------------------------------------------------------------
 # Method-selection paper ("Route, Then Learn", JCIM): analysis code + the few
 # artifacts the manuscript cites. Nothing else from this tree.
