@@ -29,6 +29,18 @@
 # Acknowledgement as part of the code release).
 !/figure_architecture.py
 !/figure_workflow.py
+# Q-planner paper: the chemistry-audit script and the run logs its SI cites by path.
+# test_logs/ holds ~100 other logs, so re-include the directory, re-exclude its
+# children, then re-include only the cited files (see MECHANICS below).
+!/run_model_harness_ablation.py
+!/test_logs/
+/test_logs/*
+!/test_logs/model_harness_ablation_20260825T020658Z_SI_archive.json
+!/test_logs/model_harness_ablation_20260825T020658Z_SI_archive_rescored.json
+!/test_logs/model_harness_ablation_20260828T120448Z_SI_archive.json
+!/test_logs/audit_validation_levelAB_20261019.json
+!/test_logs/scaling_20260401T084119Z_sp_notempl_n10-100.json
+!/test_logs/scaling_20260406T110100Z_sp_fullscheme_n10-100.json
 # ----------------------------------------------------------------------------
 # Method-selection paper ("Route, Then Learn", JCIM): analysis code + the few
 # artifacts the manuscript cites. Nothing else from this tree.

@@ -1,0 +1,5129 @@
+{
+  "title": "Chemistry-audit validation on the known Level A/B pKa plans",
+  "run_date": "2026-10-19",
+  "audit_code": {
+    "file": "run_model_harness_ablation.py",
+    "functions": [
+      "audit_chemistry",
+      "chemistry_defects"
+    ],
+    "sha256": "7844fd293ba625803de8fe3b64b9895d33d41e8f82cc4fa6da97029c98a8dfed"
+  },
+  "note": "Deterministic re-scoring of archived plans; no model call. The superseded plans requested CPCM(Water) in the method string and used frequency jobs, so the solvation and single-point checks are expected to pass on them.",
+  "cases": [
+    {
+      "case": "superseded Level A",
+      "source": "elAgente_pka_approachA_full_20260417T062812Z.json",
+      "audit": {
+        "solvation_in_method": true,
+        "no_inert_solvation_keys": true,
+        "freq_not_sp": true,
+        "deterministic_pka": false,
+        "proton_ref_sane": false,
+        "calibration_refs_used": false,
+        "solvation_or_calibration": true
+      },
+      "defects": [
+        "deterministic_pka",
+        "proton_ref_sane",
+        "calibration_refs_used"
+      ],
+      "plan": {
+        "user_text": "Calculate the pKa of chlorofluoroacetic acid (CHClFCOOH) using B3LYP/6-31G* with CPCM(Water) implicit solvation. To calibrate the systematic error, also compute Gibbs free energies for three reference carboxylic acids (and their conjugate bases) at the same level.\n\nStep 1 \u2014 load 4 neutral acids by name (charge=0, mult=1):\n  ha_acetic (acetic acid), ha_fluoroacetic (fluoroacetic acid), ha_chloroacetic (chloroacetic acid), ha_clfa (chlorofluoroacetic acid).\n\nStep 2 \u2014 derive conjugate base geometries using structure_add_remove_proton (action='remove', auto=True) on each neutral acid. Use output_id:\n  a_acetic (from ha_acetic), a_fluoroacetate (from ha_fluoroacetic), a_chloroacetate (from ha_chloroacetic), a_clfa (from ha_clfa).\nEach output has charge=-1, mult=1.\n\nStep 3 \u2014 run geometry optimisation + frequency job for all 8 species in parallel. Use method=\"B3LYP CPCM(Water)\", basis=\"6-31G*\", use_ri=False for ALL jobs. CRITICAL: do NOT use a 'template' or 'compounds' block \u2014 write every node explicitly as an individual entry in the nodes list. Use the geometry from the proton-removal step for each anion node.\n\nStore Gibbs free energies as: G_ha_acetic_eh, G_a_acetic_eh, G_ha_fluoroacetic_eh, G_a_fluoroacetate_eh, G_ha_chloroacetic_eh, G_a_chloroacetate_eh, G_ha_clfa_eh, G_a_clfa_eh.\n\nAfter all 8 freq jobs complete, add ONE LLM node (id: calibrate_pka) that:\n  (a) Uses G_H_plus_ref_eh from settings and the 8 G values above.\n  (b) Computes raw pKa for each reference acid: pKa = (G_A + G_H_plus_ref - G_HA) * 627.509 / 1.3644.\n  (c) Derives correction delta_i = pKa_exp_i - pKa_raw_i for each reference acid (acetic=4.76, fluoroacetic=2.586, chloroacetic=2.86).\n  (d) Applies delta_i to pKa_raw(CHClFCOOH) and reports their average as pka_clfa_calibrated.\nSettings: G_H_plus_ref_eh = -0.01372",
+        "name": "Calibrated aqueous pKa of chlorofluoroacetic acid via B3LYP/6-31G* CPCM(Water)",
+        "version": "1.3",
+        "geom_ids": [
+          "ha_acetic",
+          "ha_fluoroacetic",
+          "ha_chloroacetic",
+          "ha_clfa",
+          "a_acetic",
+          "a_fluoroacetate",
+          "a_chloroacetate",
+          "a_clfa"
+        ],
+        "artifacts_to_save": [
+          "G_ha_acetic_eh",
+          "G_a_acetic_eh",
+          "G_ha_fluoroacetic_eh",
+          "G_a_fluoroacetate_eh",
+          "G_ha_chloroacetic_eh",
+          "G_a_chloroacetate_eh",
+          "G_ha_clfa_eh",
+          "G_a_clfa_eh",
+          "pka_clfa_calibrated"
+        ],
+        "settings": {
+          "G_H_plus_ref_eh": -0.01372
+        },
+        "nodes": [
+          {
+            "id": "load_ha_acetic",
+            "kind": "tool",
+            "tool": "name_to_geometry_xyz",
+            "output_id": "ha_acetic",
+            "needs": [],
+            "args": {
+              "name": "acetic acid"
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "product": {}
+          },
+          {
+            "id": "load_ha_fluoroacetic",
+            "kind": "tool",
+            "tool": "name_to_geometry_xyz",
+            "output_id": "ha_fluoroacetic",
+            "needs": [],
+            "args": {
+              "name": "fluoroacetic acid"
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "product": {}
+          },
+          {
+            "id": "load_ha_chloroacetic",
+            "kind": "tool",
+            "tool": "name_to_geometry_xyz",
+            "output_id": "ha_chloroacetic",
+            "needs": [],
+            "args": {
+              "name": "chloroacetic acid"
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "product": {}
+          },
+          {
+            "id": "load_ha_clfa",
+            "kind": "tool",
+            "tool": "name_to_geometry_xyz",
+            "output_id": "ha_clfa",
+            "needs": [],
+            "args": {
+              "name": "chlorofluoroacetic acid"
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "product": {}
+          },
+          {
+            "id": "deprot_acetic",
+            "kind": "tool",
+            "tool": "structure_add_remove_proton",
+            "input_id": "ha_acetic",
+            "output_id": "a_acetic",
+            "needs": [
+              "load_ha_acetic"
+            ],
+            "args": {
+              "mode": "remove",
+              "site_selector": "oxygen_hydroxyl"
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "product": {}
+          },
+          {
+            "id": "deprot_fluoroacetic",
+            "kind": "tool",
+            "tool": "structure_add_remove_proton",
+            "input_id": "ha_fluoroacetic",
+            "output_id": "a_fluoroacetate",
+            "needs": [
+              "load_ha_fluoroacetic"
+            ],
+            "args": {
+              "mode": "remove",
+              "site_selector": "oxygen_hydroxyl"
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "product": {}
+          },
+          {
+            "id": "deprot_chloroacetic",
+            "kind": "tool",
+            "tool": "structure_add_remove_proton",
+            "input_id": "ha_chloroacetic",
+            "output_id": "a_chloroacetate",
+            "needs": [
+              "load_ha_chloroacetic"
+            ],
+            "args": {
+              "mode": "remove",
+              "site_selector": "oxygen_hydroxyl"
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "product": {}
+          },
+          {
+            "id": "deprot_clfa",
+            "kind": "tool",
+            "tool": "structure_add_remove_proton",
+            "input_id": "ha_clfa",
+            "output_id": "a_clfa",
+            "needs": [
+              "load_ha_clfa"
+            ],
+            "args": {
+              "mode": "remove",
+              "site_selector": "oxygen_hydroxyl"
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "product": {}
+          },
+          {
+            "id": "opt_ha_acetic",
+            "kind": "tool",
+            "tool": "run_opt_job",
+            "input_id": "ha_acetic",
+            "output_id": "ha_acetic",
+            "needs": [
+              "load_ha_acetic"
+            ],
+            "args": {
+              "input_geom_id": "ha_acetic",
+              "method": "B3LYP CPCM(Water)",
+              "basis": "6-31G*",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "GEOM_INVALID"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "method": "PBE",
+                  "basis": "def2-SVP",
+                  "use_ri": true
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {}
+          },
+          {
+            "id": "opt_a_acetic",
+            "kind": "tool",
+            "tool": "run_opt_job",
+            "input_id": "a_acetic",
+            "output_id": "a_acetic",
+            "needs": [
+              "deprot_acetic"
+            ],
+            "args": {
+              "input_geom_id": "a_acetic",
+              "method": "B3LYP CPCM(Water)",
+              "basis": "6-31G*",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "GEOM_INVALID"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "method": "PBE",
+                  "basis": "def2-SVP",
+                  "use_ri": true
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {}
+          },
+          {
+            "id": "opt_ha_fluoroacetic",
+            "kind": "tool",
+            "tool": "run_opt_job",
+            "input_id": "ha_fluoroacetic",
+            "output_id": "ha_fluoroacetic",
+            "needs": [
+              "load_ha_fluoroacetic"
+            ],
+            "args": {
+              "input_geom_id": "ha_fluoroacetic",
+              "method": "B3LYP CPCM(Water)",
+              "basis": "6-31G*",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "GEOM_INVALID"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "method": "PBE",
+                  "basis": "def2-SVP",
+                  "use_ri": true
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {}
+          },
+          {
+            "id": "opt_a_fluoroacetate",
+            "kind": "tool",
+            "tool": "run_opt_job",
+            "input_id": "a_fluoroacetate",
+            "output_id": "a_fluoroacetate",
+            "needs": [
+              "deprot_fluoroacetic"
+            ],
+            "args": {
+              "input_geom_id": "a_fluoroacetate",
+              "method": "B3LYP CPCM(Water)",
+              "basis": "6-31G*",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "GEOM_INVALID"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "method": "PBE",
+                  "basis": "def2-SVP",
+                  "use_ri": true
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {}
+          },
+          {
+            "id": "opt_ha_chloroacetic",
+            "kind": "tool",
+            "tool": "run_opt_job",
+            "input_id": "ha_chloroacetic",
+            "output_id": "ha_chloroacetic",
+            "needs": [
+              "load_ha_chloroacetic"
+            ],
+            "args": {
+              "input_geom_id": "ha_chloroacetic",
+              "method": "B3LYP CPCM(Water)",
+              "basis": "6-31G*",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "GEOM_INVALID"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "method": "PBE",
+                  "basis": "def2-SVP",
+                  "use_ri": true
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {}
+          },
+          {
+            "id": "opt_a_chloroacetate",
+            "kind": "tool",
+            "tool": "run_opt_job",
+            "input_id": "a_chloroacetate",
+            "output_id": "a_chloroacetate",
+            "needs": [
+              "deprot_chloroacetic"
+            ],
+            "args": {
+              "input_geom_id": "a_chloroacetate",
+              "method": "B3LYP CPCM(Water)",
+              "basis": "6-31G*",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "GEOM_INVALID"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "method": "PBE",
+                  "basis": "def2-SVP",
+                  "use_ri": true
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {}
+          },
+          {
+            "id": "opt_ha_clfa",
+            "kind": "tool",
+            "tool": "run_opt_job",
+            "input_id": "ha_clfa",
+            "output_id": "ha_clfa",
+            "needs": [
+              "load_ha_clfa"
+            ],
+            "args": {
+              "input_geom_id": "ha_clfa",
+              "method": "B3LYP CPCM(Water)",
+              "basis": "6-31G*",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "GEOM_INVALID"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "method": "PBE",
+                  "basis": "def2-SVP",
+                  "use_ri": true
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {}
+          },
+          {
+            "id": "opt_a_clfa",
+            "kind": "tool",
+            "tool": "run_opt_job",
+            "input_id": "a_clfa",
+            "output_id": "a_clfa",
+            "needs": [
+              "deprot_clfa"
+            ],
+            "args": {
+              "input_geom_id": "a_clfa",
+              "method": "B3LYP CPCM(Water)",
+              "basis": "6-31G*",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "GEOM_INVALID"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "method": "PBE",
+                  "basis": "def2-SVP",
+                  "use_ri": true
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {}
+          },
+          {
+            "id": "freq_ha_acetic",
+            "kind": "tool",
+            "tool": "run_freq_job",
+            "input_id": "ha_acetic",
+            "output_id": "ha_acetic",
+            "needs": [
+              "opt_ha_acetic"
+            ],
+            "args": {
+              "input_geom_id": "ha_acetic",
+              "method": "B3LYP CPCM(Water)",
+              "basis": "6-31G*",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok",
+                "warning"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "IMAG_FREQ"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "opt_max_iter": 300,
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {
+              "G_ha_acetic_eh": "gibbs_free_energy_eh"
+            }
+          },
+          {
+            "id": "freq_a_acetic",
+            "kind": "tool",
+            "tool": "run_freq_job",
+            "input_id": "a_acetic",
+            "output_id": "a_acetic",
+            "needs": [
+              "opt_a_acetic"
+            ],
+            "args": {
+              "input_geom_id": "a_acetic",
+              "method": "B3LYP CPCM(Water)",
+              "basis": "6-31G*",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok",
+                "warning"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "IMAG_FREQ"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "opt_max_iter": 300,
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {
+              "G_a_acetic_eh": "gibbs_free_energy_eh"
+            }
+          },
+          {
+            "id": "freq_ha_fluoroacetic",
+            "kind": "tool",
+            "tool": "run_freq_job",
+            "input_id": "ha_fluoroacetic",
+            "output_id": "ha_fluoroacetic",
+            "needs": [
+              "opt_ha_fluoroacetic"
+            ],
+            "args": {
+              "input_geom_id": "ha_fluoroacetic",
+              "method": "B3LYP CPCM(Water)",
+              "basis": "6-31G*",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok",
+                "warning"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "IMAG_FREQ"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "opt_max_iter": 300,
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {
+              "G_ha_fluoroacetic_eh": "gibbs_free_energy_eh"
+            }
+          },
+          {
+            "id": "freq_a_fluoroacetate",
+            "kind": "tool",
+            "tool": "run_freq_job",
+            "input_id": "a_fluoroacetate",
+            "output_id": "a_fluoroacetate",
+            "needs": [
+              "opt_a_fluoroacetate"
+            ],
+            "args": {
+              "input_geom_id": "a_fluoroacetate",
+              "method": "B3LYP CPCM(Water)",
+              "basis": "6-31G*",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok",
+                "warning"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "IMAG_FREQ"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "opt_max_iter": 300,
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {
+              "G_a_fluoroacetate_eh": "gibbs_free_energy_eh"
+            }
+          },
+          {
+            "id": "freq_ha_chloroacetic",
+            "kind": "tool",
+            "tool": "run_freq_job",
+            "input_id": "ha_chloroacetic",
+            "output_id": "ha_chloroacetic",
+            "needs": [
+              "opt_ha_chloroacetic"
+            ],
+            "args": {
+              "input_geom_id": "ha_chloroacetic",
+              "method": "B3LYP CPCM(Water)",
+              "basis": "6-31G*",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok",
+                "warning"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "IMAG_FREQ"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "opt_max_iter": 300,
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {
+              "G_ha_chloroacetic_eh": "gibbs_free_energy_eh"
+            }
+          },
+          {
+            "id": "freq_a_chloroacetate",
+            "kind": "tool",
+            "tool": "run_freq_job",
+            "input_id": "a_chloroacetate",
+            "output_id": "a_chloroacetate",
+            "needs": [
+              "opt_a_chloroacetate"
+            ],
+            "args": {
+              "input_geom_id": "a_chloroacetate",
+              "method": "B3LYP CPCM(Water)",
+              "basis": "6-31G*",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok",
+                "warning"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "IMAG_FREQ"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "opt_max_iter": 300,
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {
+              "G_a_chloroacetate_eh": "gibbs_free_energy_eh"
+            }
+          },
+          {
+            "id": "freq_ha_clfa",
+            "kind": "tool",
+            "tool": "run_freq_job",
+            "input_id": "ha_clfa",
+            "output_id": "ha_clfa",
+            "needs": [
+              "opt_ha_clfa"
+            ],
+            "args": {
+              "input_geom_id": "ha_clfa",
+              "method": "B3LYP CPCM(Water)",
+              "basis": "6-31G*",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok",
+                "warning"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "IMAG_FREQ"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "opt_max_iter": 300,
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {
+              "G_ha_clfa_eh": "gibbs_free_energy_eh"
+            }
+          },
+          {
+            "id": "freq_a_clfa",
+            "kind": "tool",
+            "tool": "run_freq_job",
+            "input_id": "a_clfa",
+            "output_id": "a_clfa",
+            "needs": [
+              "opt_a_clfa"
+            ],
+            "args": {
+              "input_geom_id": "a_clfa",
+              "method": "B3LYP CPCM(Water)",
+              "basis": "6-31G*",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok",
+                "warning"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "IMAG_FREQ"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "opt_max_iter": 300,
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {
+              "G_a_clfa_eh": "gibbs_free_energy_eh"
+            }
+          },
+          {
+            "id": "calibrate_pka",
+            "kind": "llm",
+            "task": "calibrate_pka",
+            "needs": [
+              "freq_ha_acetic",
+              "freq_a_acetic",
+              "freq_ha_fluoroacetic",
+              "freq_a_fluoroacetate",
+              "freq_ha_chloroacetic",
+              "freq_a_chloroacetate",
+              "freq_ha_clfa",
+              "freq_a_clfa"
+            ],
+            "prompt": "Using settings.G_H_plus_ref_eh and artifacts G_ha_acetic_eh, G_a_acetic_eh, G_ha_fluoroacetic_eh, G_a_fluoroacetate_eh, G_ha_chloroacetic_eh, G_a_chloroacetate_eh, G_ha_clfa_eh, G_a_clfa_eh: compute raw pKa for each reference acid i via pKa_raw_i = (G_A_i + G_H_plus_ref_eh - G_HA_i) * 627.509 / 1.3644. Use experimental pKa values: acetic=4.76, fluoroacetic=2.586, chloroacetic=2.86. Compute delta_i = pKa_exp_i - pKa_raw_i. Compute pKa_raw_clfa analogously from G_a_clfa_eh, G_ha_clfa_eh. Compute corrected values pKa_clfa_i = pKa_raw_clfa + delta_i for i in {acetic, fluoroacetic, chloroacetic}. Report pka_clfa_calibrated as the arithmetic mean of {pKa_clfa_i}. Return JSON: {status, pka}.",
+            "needs_artifacts": [
+              "G_ha_acetic_eh",
+              "G_a_acetic_eh",
+              "G_ha_fluoroacetic_eh",
+              "G_a_fluoroacetate_eh",
+              "G_ha_chloroacetic_eh",
+              "G_a_chloroacetate_eh",
+              "G_ha_clfa_eh",
+              "G_a_clfa_eh"
+            ],
+            "product": {
+              "pka_clfa_calibrated": "pka"
+            }
+          }
+        ],
+        "final_report": {
+          "format": "markdown",
+          "fields": [
+            "G_ha_acetic_eh",
+            "G_a_acetic_eh",
+            "G_ha_fluoroacetic_eh",
+            "G_a_fluoroacetate_eh",
+            "G_ha_chloroacetic_eh",
+            "G_a_chloroacetate_eh",
+            "G_ha_clfa_eh",
+            "G_a_clfa_eh",
+            "pka_clfa_calibrated"
+          ]
+        }
+      }
+    },
+    {
+      "case": "superseded Level B",
+      "source": "elAgente_pka_approachB_full_20260417T052543Z.json",
+      "audit": {
+        "solvation_in_method": true,
+        "no_inert_solvation_keys": true,
+        "freq_not_sp": true,
+        "deterministic_pka": false,
+        "proton_ref_sane": false,
+        "calibration_refs_used": false,
+        "solvation_or_calibration": true
+      },
+      "defects": [
+        "deterministic_pka",
+        "proton_ref_sane",
+        "calibration_refs_used"
+      ],
+      "plan": {
+        "user_text": "Calculate the pKa of chlorofluoroacetic acid (CHClFCOOH) using PBE0/def2-TZVP with CPCM(Water) implicit solvation. To calibrate the systematic error, also compute Gibbs free energies for three reference carboxylic acids (and their conjugate bases) at the same level.\n\nStep 1 \u2014 load 4 neutral acids by name (charge=0, mult=1):\n  ha_acetic (acetic acid), ha_fluoroacetic (fluoroacetic acid), ha_chloroacetic (chloroacetic acid), ha_clfa (chlorofluoroacetic acid).\n\nStep 2 \u2014 derive conjugate base geometries using structure_add_remove_proton (action='remove', auto=True) on each neutral acid. Use output_id:\n  a_acetic (from ha_acetic), a_fluoroacetate (from ha_fluoroacetic), a_chloroacetate (from ha_chloroacetic), a_clfa (from ha_clfa).\nEach output has charge=-1, mult=1.\n\nStep 3 \u2014 run geometry optimisation + frequency job for all 8 species in parallel. Use method=\"PBE0 CPCM(Water)\", basis=\"def2-TZVP\", use_ri=False for ALL jobs. Do NOT use a template loop \u2014 list each as an individual node pair. Use the geometry from the proton-removal step for each anion node.\n\nStore Gibbs free energies as: G_ha_acetic_eh, G_a_acetic_eh, G_ha_fluoroacetic_eh, G_a_fluoroacetate_eh, G_ha_chloroacetic_eh, G_a_chloroacetate_eh, G_ha_clfa_eh, G_a_clfa_eh.\n\nAfter all 8 freq jobs complete, add ONE LLM node (id: calibrate_pka) that:\n  (a) Uses G_H_plus_ref_eh from settings and the 8 G values above.\n  (b) Computes raw pKa for each reference acid: pKa = (G_A + G_H_plus_ref - G_HA) * 627.509 / 1.3644.\n  (c) Derives correction delta_i = pKa_exp_i - pKa_raw_i for each reference acid (acetic=4.76, fluoroacetic=2.586, chloroacetic=2.86).\n  (d) Applies delta_i to pKa_raw(CHClFCOOH) and reports their average as pka_clfa_calibrated.\nSettings: G_H_plus_ref_eh = -0.01372",
+        "name": "Calibrated aqueous pKa of chlorofluoroacetic acid (CPCM water, PBE0/def2-TZVP)",
+        "version": "1.3",
+        "geom_ids": [
+          "ha_acetic",
+          "ha_fluoroacetic",
+          "ha_chloroacetic",
+          "ha_clfa",
+          "a_acetic",
+          "a_fluoroacetate",
+          "a_chloroacetate",
+          "a_clfa"
+        ],
+        "artifacts_to_save": [
+          "G_ha_acetic_eh",
+          "G_a_acetic_eh",
+          "G_ha_fluoroacetic_eh",
+          "G_a_fluoroacetate_eh",
+          "G_ha_chloroacetic_eh",
+          "G_a_chloroacetate_eh",
+          "G_ha_clfa_eh",
+          "G_a_clfa_eh",
+          "pka_clfa_calibrated"
+        ],
+        "settings": {
+          "G_H_plus_ref_eh": -0.01372,
+          "temperature_K": 298.15,
+          "pka_exp_acetic": 4.76,
+          "pka_exp_fluoroacetic": 2.586,
+          "pka_exp_chloroacetic": 2.86
+        },
+        "nodes": [
+          {
+            "id": "load_ha_acetic",
+            "kind": "tool",
+            "tool": "name_to_geometry_xyz",
+            "output_id": "ha_acetic",
+            "needs": [],
+            "args": {
+              "name": "acetic acid"
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "product": {}
+          },
+          {
+            "id": "load_ha_fluoroacetic",
+            "kind": "tool",
+            "tool": "name_to_geometry_xyz",
+            "output_id": "ha_fluoroacetic",
+            "needs": [],
+            "args": {
+              "name": "fluoroacetic acid"
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "product": {}
+          },
+          {
+            "id": "load_ha_chloroacetic",
+            "kind": "tool",
+            "tool": "name_to_geometry_xyz",
+            "output_id": "ha_chloroacetic",
+            "needs": [],
+            "args": {
+              "name": "chloroacetic acid"
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "product": {}
+          },
+          {
+            "id": "load_ha_clfa",
+            "kind": "tool",
+            "tool": "name_to_geometry_xyz",
+            "output_id": "ha_clfa",
+            "needs": [],
+            "args": {
+              "name": "chlorofluoroacetic acid"
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "product": {}
+          },
+          {
+            "id": "deprot_acetic",
+            "kind": "tool",
+            "tool": "structure_add_remove_proton",
+            "input_id": "ha_acetic",
+            "output_id": "a_acetic",
+            "needs": [
+              "load_ha_acetic"
+            ],
+            "args": {
+              "mode": "remove",
+              "site_selector": "oxygen_hydroxyl"
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "product": {}
+          },
+          {
+            "id": "deprot_fluoroacetic",
+            "kind": "tool",
+            "tool": "structure_add_remove_proton",
+            "input_id": "ha_fluoroacetic",
+            "output_id": "a_fluoroacetate",
+            "needs": [
+              "load_ha_fluoroacetic"
+            ],
+            "args": {
+              "mode": "remove",
+              "site_selector": "oxygen_hydroxyl"
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "product": {}
+          },
+          {
+            "id": "deprot_chloroacetic",
+            "kind": "tool",
+            "tool": "structure_add_remove_proton",
+            "input_id": "ha_chloroacetic",
+            "output_id": "a_chloroacetate",
+            "needs": [
+              "load_ha_chloroacetic"
+            ],
+            "args": {
+              "mode": "remove",
+              "site_selector": "oxygen_hydroxyl"
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "product": {}
+          },
+          {
+            "id": "deprot_clfa",
+            "kind": "tool",
+            "tool": "structure_add_remove_proton",
+            "input_id": "ha_clfa",
+            "output_id": "a_clfa",
+            "needs": [
+              "load_ha_clfa"
+            ],
+            "args": {
+              "mode": "remove",
+              "site_selector": "oxygen_hydroxyl"
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "product": {}
+          },
+          {
+            "id": "opt_ha_acetic",
+            "kind": "tool",
+            "tool": "run_opt_job",
+            "input_id": "ha_acetic",
+            "output_id": "ha_acetic",
+            "needs": [
+              "load_ha_acetic"
+            ],
+            "args": {
+              "input_geom_id": "ha_acetic",
+              "method": "PBE0 CPCM(Water)",
+              "basis": "def2-TZVP",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "GEOM_INVALID"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "method": "PBE",
+                  "basis": "def2-SVP",
+                  "use_ri": true
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {}
+          },
+          {
+            "id": "opt_a_acetic",
+            "kind": "tool",
+            "tool": "run_opt_job",
+            "input_id": "a_acetic",
+            "output_id": "a_acetic",
+            "needs": [
+              "deprot_acetic"
+            ],
+            "args": {
+              "input_geom_id": "a_acetic",
+              "method": "PBE0 CPCM(Water)",
+              "basis": "def2-TZVP",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "GEOM_INVALID"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "method": "PBE",
+                  "basis": "def2-SVP",
+                  "use_ri": true
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {}
+          },
+          {
+            "id": "opt_ha_fluoroacetic",
+            "kind": "tool",
+            "tool": "run_opt_job",
+            "input_id": "ha_fluoroacetic",
+            "output_id": "ha_fluoroacetic",
+            "needs": [
+              "load_ha_fluoroacetic"
+            ],
+            "args": {
+              "input_geom_id": "ha_fluoroacetic",
+              "method": "PBE0 CPCM(Water)",
+              "basis": "def2-TZVP",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "GEOM_INVALID"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "method": "PBE",
+                  "basis": "def2-SVP",
+                  "use_ri": true
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {}
+          },
+          {
+            "id": "opt_a_fluoroacetate",
+            "kind": "tool",
+            "tool": "run_opt_job",
+            "input_id": "a_fluoroacetate",
+            "output_id": "a_fluoroacetate",
+            "needs": [
+              "deprot_fluoroacetic"
+            ],
+            "args": {
+              "input_geom_id": "a_fluoroacetate",
+              "method": "PBE0 CPCM(Water)",
+              "basis": "def2-TZVP",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "GEOM_INVALID"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "method": "PBE",
+                  "basis": "def2-SVP",
+                  "use_ri": true
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {}
+          },
+          {
+            "id": "opt_ha_chloroacetic",
+            "kind": "tool",
+            "tool": "run_opt_job",
+            "input_id": "ha_chloroacetic",
+            "output_id": "ha_chloroacetic",
+            "needs": [
+              "load_ha_chloroacetic"
+            ],
+            "args": {
+              "input_geom_id": "ha_chloroacetic",
+              "method": "PBE0 CPCM(Water)",
+              "basis": "def2-TZVP",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "GEOM_INVALID"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "method": "PBE",
+                  "basis": "def2-SVP",
+                  "use_ri": true
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {}
+          },
+          {
+            "id": "opt_a_chloroacetate",
+            "kind": "tool",
+            "tool": "run_opt_job",
+            "input_id": "a_chloroacetate",
+            "output_id": "a_chloroacetate",
+            "needs": [
+              "deprot_chloroacetic"
+            ],
+            "args": {
+              "input_geom_id": "a_chloroacetate",
+              "method": "PBE0 CPCM(Water)",
+              "basis": "def2-TZVP",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "GEOM_INVALID"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "method": "PBE",
+                  "basis": "def2-SVP",
+                  "use_ri": true
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {}
+          },
+          {
+            "id": "opt_ha_clfa",
+            "kind": "tool",
+            "tool": "run_opt_job",
+            "input_id": "ha_clfa",
+            "output_id": "ha_clfa",
+            "needs": [
+              "load_ha_clfa"
+            ],
+            "args": {
+              "input_geom_id": "ha_clfa",
+              "method": "PBE0 CPCM(Water)",
+              "basis": "def2-TZVP",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "GEOM_INVALID"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "method": "PBE",
+                  "basis": "def2-SVP",
+                  "use_ri": true
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {}
+          },
+          {
+            "id": "opt_a_clfa",
+            "kind": "tool",
+            "tool": "run_opt_job",
+            "input_id": "a_clfa",
+            "output_id": "a_clfa",
+            "needs": [
+              "deprot_clfa"
+            ],
+            "args": {
+              "input_geom_id": "a_clfa",
+              "method": "PBE0 CPCM(Water)",
+              "basis": "def2-TZVP",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "GEOM_INVALID"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "method": "PBE",
+                  "basis": "def2-SVP",
+                  "use_ri": true
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {}
+          },
+          {
+            "id": "freq_ha_acetic",
+            "kind": "tool",
+            "tool": "run_freq_job",
+            "input_id": "ha_acetic",
+            "output_id": "ha_acetic",
+            "needs": [
+              "opt_ha_acetic"
+            ],
+            "args": {
+              "input_geom_id": "ha_acetic",
+              "method": "PBE0 CPCM(Water)",
+              "basis": "def2-TZVP",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "IMAG_FREQ"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "opt_max_iter": 300
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {
+              "G_ha_acetic_eh": "gibbs_free_energy_eh"
+            }
+          },
+          {
+            "id": "freq_a_acetic",
+            "kind": "tool",
+            "tool": "run_freq_job",
+            "input_id": "a_acetic",
+            "output_id": "a_acetic",
+            "needs": [
+              "opt_a_acetic"
+            ],
+            "args": {
+              "input_geom_id": "a_acetic",
+              "method": "PBE0 CPCM(Water)",
+              "basis": "def2-TZVP",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "IMAG_FREQ"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "opt_max_iter": 300
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {
+              "G_a_acetic_eh": "gibbs_free_energy_eh"
+            }
+          },
+          {
+            "id": "freq_ha_fluoroacetic",
+            "kind": "tool",
+            "tool": "run_freq_job",
+            "input_id": "ha_fluoroacetic",
+            "output_id": "ha_fluoroacetic",
+            "needs": [
+              "opt_ha_fluoroacetic"
+            ],
+            "args": {
+              "input_geom_id": "ha_fluoroacetic",
+              "method": "PBE0 CPCM(Water)",
+              "basis": "def2-TZVP",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "IMAG_FREQ"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "opt_max_iter": 300
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {
+              "G_ha_fluoroacetic_eh": "gibbs_free_energy_eh"
+            }
+          },
+          {
+            "id": "freq_a_fluoroacetate",
+            "kind": "tool",
+            "tool": "run_freq_job",
+            "input_id": "a_fluoroacetate",
+            "output_id": "a_fluoroacetate",
+            "needs": [
+              "opt_a_fluoroacetate"
+            ],
+            "args": {
+              "input_geom_id": "a_fluoroacetate",
+              "method": "PBE0 CPCM(Water)",
+              "basis": "def2-TZVP",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "IMAG_FREQ"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "opt_max_iter": 300
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {
+              "G_a_fluoroacetate_eh": "gibbs_free_energy_eh"
+            }
+          },
+          {
+            "id": "freq_ha_chloroacetic",
+            "kind": "tool",
+            "tool": "run_freq_job",
+            "input_id": "ha_chloroacetic",
+            "output_id": "ha_chloroacetic",
+            "needs": [
+              "opt_ha_chloroacetic"
+            ],
+            "args": {
+              "input_geom_id": "ha_chloroacetic",
+              "method": "PBE0 CPCM(Water)",
+              "basis": "def2-TZVP",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "IMAG_FREQ"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "opt_max_iter": 300
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {
+              "G_ha_chloroacetic_eh": "gibbs_free_energy_eh"
+            }
+          },
+          {
+            "id": "freq_a_chloroacetate",
+            "kind": "tool",
+            "tool": "run_freq_job",
+            "input_id": "a_chloroacetate",
+            "output_id": "a_chloroacetate",
+            "needs": [
+              "opt_a_chloroacetate"
+            ],
+            "args": {
+              "input_geom_id": "a_chloroacetate",
+              "method": "PBE0 CPCM(Water)",
+              "basis": "def2-TZVP",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "IMAG_FREQ"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "opt_max_iter": 300
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {
+              "G_a_chloroacetate_eh": "gibbs_free_energy_eh"
+            }
+          },
+          {
+            "id": "freq_ha_clfa",
+            "kind": "tool",
+            "tool": "run_freq_job",
+            "input_id": "ha_clfa",
+            "output_id": "ha_clfa",
+            "needs": [
+              "opt_ha_clfa"
+            ],
+            "args": {
+              "input_geom_id": "ha_clfa",
+              "method": "PBE0 CPCM(Water)",
+              "basis": "def2-TZVP",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "IMAG_FREQ"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "opt_max_iter": 300
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {
+              "G_ha_clfa_eh": "gibbs_free_energy_eh"
+            }
+          },
+          {
+            "id": "freq_a_clfa",
+            "kind": "tool",
+            "tool": "run_freq_job",
+            "input_id": "a_clfa",
+            "output_id": "a_clfa",
+            "needs": [
+              "opt_a_clfa"
+            ],
+            "args": {
+              "input_geom_id": "a_clfa",
+              "method": "PBE0 CPCM(Water)",
+              "basis": "def2-TZVP",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "IMAG_FREQ"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "opt_max_iter": 300
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {
+              "G_a_clfa_eh": "gibbs_free_energy_eh"
+            }
+          },
+          {
+            "id": "calibrate_pka",
+            "kind": "llm",
+            "task": "calibrate_pka",
+            "needs": [
+              "freq_ha_acetic",
+              "freq_a_acetic",
+              "freq_ha_fluoroacetic",
+              "freq_a_fluoroacetate",
+              "freq_ha_chloroacetic",
+              "freq_a_chloroacetate",
+              "freq_ha_clfa",
+              "freq_a_clfa"
+            ],
+            "prompt": "Using settings.G_H_plus_ref_eh and the 8 Gibbs free energies in Hartree, compute raw pKa for each acid using the USER-SPECIFIED formula: pKa_raw = (G_A + G_H_plus_ref_eh - G_HA) * 627.509 / 1.3644. References: acetic (exp=4.76), fluoroacetic (exp=2.586), chloroacetic (exp=2.86). Compute deltas: delta_i = pKa_exp_i - pKa_raw_i for i in {acetic, fluoroacetic, chloroacetic}. Compute pKa_raw_clfa for chlorofluoroacetic acid the same way. Apply each delta_i to clfa: pKa_clfa_i = pKa_raw_clfa + delta_i. Take the arithmetic mean across the three corrected values to yield pka_clfa_calibrated. Return JSON: {status, pka}.",
+            "needs_artifacts": [
+              "G_ha_acetic_eh",
+              "G_a_acetic_eh",
+              "G_ha_fluoroacetic_eh",
+              "G_a_fluoroacetate_eh",
+              "G_ha_chloroacetic_eh",
+              "G_a_chloroacetate_eh",
+              "G_ha_clfa_eh",
+              "G_a_clfa_eh"
+            ],
+            "product": {
+              "pka_clfa_calibrated": "pka"
+            }
+          }
+        ],
+        "final_report": {
+          "format": "markdown",
+          "fields": [
+            "G_ha_acetic_eh",
+            "G_a_acetic_eh",
+            "G_ha_fluoroacetic_eh",
+            "G_a_fluoroacetate_eh",
+            "G_ha_chloroacetic_eh",
+            "G_a_chloroacetate_eh",
+            "G_ha_clfa_eh",
+            "G_a_clfa_eh",
+            "pka_clfa_calibrated"
+          ]
+        }
+      }
+    },
+    {
+      "case": "corrected Level A",
+      "source": "elagente_levelA_deterministic_20260824T142019Z.json (results[0])",
+      "audit": {
+        "solvation_in_method": true,
+        "no_inert_solvation_keys": true,
+        "freq_not_sp": true,
+        "deterministic_pka": true,
+        "proton_ref_sane": true,
+        "calibration_refs_used": true,
+        "solvation_or_calibration": true
+      },
+      "defects": [],
+      "plan": {
+        "user_text": "Calculate the pKa of chlorofluoroacetic acid (CHClFCOOH) using B3LYP/6-31G* with CPCM(Water) implicit solvation. To calibrate the systematic error, also compute Gibbs free energies for three reference carboxylic acids (and their conjugate bases) at the same level.\n\nStep 1 \u2014 load 4 neutral acids by name (charge=0, mult=1):\n  ha_acetic (acetic acid), ha_fluoroacetic (fluoroacetic acid), ha_chloroacetic (chloroacetic acid), ha_clfa (chlorofluoroacetic acid).\n\nStep 2 \u2014 derive conjugate base geometries using structure_add_remove_proton (action='remove', auto=True) on each neutral acid. Use output_id:\n  a_acetic (from ha_acetic), a_fluoroacetate (from ha_fluoroacetic), a_chloroacetate (from ha_chloroacetic), a_clfa (from ha_clfa).\nEach output has charge=-1, mult=1.\n\nStep 3 \u2014 run geometry optimisation + frequency job for all 8 species in parallel. Use method=\"B3LYP CPCM(Water)\", basis=\"6-31G*\", use_ri=False for ALL jobs. CRITICAL: do NOT use a 'template' or 'compounds' block \u2014 write every node explicitly as an individual entry in the nodes list. Use the geometry from the proton-removal step for each anion node.\n\nStore Gibbs free energies as: G_ha_acetic_eh, G_a_acetic_eh, G_ha_fluoroacetic_eh, G_a_fluoroacetate_eh, G_ha_chloroacetic_eh, G_a_chloroacetate_eh, G_ha_clfa_eh, G_a_clfa_eh.\n\nAfter all 8 freq jobs complete, add ONE kind:\"tool\" node\n(id: calibrate_pka, tool: compute_pka_calibrated) that computes the calibrated\npKa of chlorofluoroacetic acid deterministically. Pass:\n  G_HA_eh:      $(artifacts.G_ha_clfa_eh)\n  G_A_minus_eh: $(artifacts.G_a_clfa_eh)\n  references:   the three reference acids, each as\n                {\"G_HA_eh\": ..., \"G_A_minus_eh\": ..., \"pka_exp\": ...}\n                with acetic=4.76, fluoroacetic=2.586, chloroacetic=2.86\nSet product: {\"pka_clfa_calibrated\": \"pka\"}.\nDo NOT use a kind:\"llm\" node for this arithmetic and do NOT set\nG_H_plus_ref_eh; the tool selects the correct proton reference itself.",
+        "name": "Calibrated aqueous pKa of chlorofluoroacetic acid via B3LYP/6-31G* CPCM(Water)",
+        "version": "1.3",
+        "geom_ids": [
+          "ha_acetic",
+          "ha_fluoroacetic",
+          "ha_chloroacetic",
+          "ha_clfa",
+          "a_acetic",
+          "a_fluoroacetate",
+          "a_chloroacetate",
+          "a_clfa"
+        ],
+        "artifacts_to_save": [
+          "G_ha_acetic_eh",
+          "G_a_acetic_eh",
+          "G_ha_fluoroacetic_eh",
+          "G_a_fluoroacetate_eh",
+          "G_ha_chloroacetic_eh",
+          "G_a_chloroacetate_eh",
+          "G_ha_clfa_eh",
+          "G_a_clfa_eh",
+          "pka_clfa_calibrated"
+        ],
+        "settings": {
+          "method_aq": "B3LYP CPCM(Water)",
+          "basis": "6-31G*",
+          "use_ri": false,
+          "ncores": 1,
+          "opt_wall_timeout_seconds": 1800,
+          "freq_wall_timeout_seconds": 1800
+        },
+        "nodes": [
+          {
+            "id": "load_ha_acetic",
+            "kind": "tool",
+            "tool": "name_to_geometry_xyz",
+            "output_id": "ha_acetic",
+            "needs": [],
+            "args": {
+              "name": "acetic acid"
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            }
+          },
+          {
+            "id": "load_ha_fluoroacetic",
+            "kind": "tool",
+            "tool": "name_to_geometry_xyz",
+            "output_id": "ha_fluoroacetic",
+            "needs": [],
+            "args": {
+              "name": "fluoroacetic acid"
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            }
+          },
+          {
+            "id": "load_ha_chloroacetic",
+            "kind": "tool",
+            "tool": "name_to_geometry_xyz",
+            "output_id": "ha_chloroacetic",
+            "needs": [],
+            "args": {
+              "name": "chloroacetic acid"
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            }
+          },
+          {
+            "id": "load_ha_clfa",
+            "kind": "tool",
+            "tool": "name_to_geometry_xyz",
+            "output_id": "ha_clfa",
+            "needs": [],
+            "args": {
+              "name": "chlorofluoroacetic acid"
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            }
+          },
+          {
+            "id": "deprot_acetic",
+            "kind": "tool",
+            "tool": "structure_add_remove_proton",
+            "input_id": "ha_acetic",
+            "output_id": "a_acetic",
+            "needs": [
+              "load_ha_acetic"
+            ],
+            "args": {
+              "mode": "remove",
+              "site_selector": "oxygen_hydroxyl"
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "GEOM_INVALID"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "method": "PBE",
+                  "basis": "def2-SVP",
+                  "use_ri": true
+                },
+                "max_attempts": 1
+              }
+            ]
+          },
+          {
+            "id": "deprot_fluoroacetic",
+            "kind": "tool",
+            "tool": "structure_add_remove_proton",
+            "input_id": "ha_fluoroacetic",
+            "output_id": "a_fluoroacetate",
+            "needs": [
+              "load_ha_fluoroacetic"
+            ],
+            "args": {
+              "mode": "remove",
+              "site_selector": "oxygen_hydroxyl"
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "GEOM_INVALID"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "method": "PBE",
+                  "basis": "def2-SVP",
+                  "use_ri": true
+                },
+                "max_attempts": 1
+              }
+            ]
+          },
+          {
+            "id": "deprot_chloroacetic",
+            "kind": "tool",
+            "tool": "structure_add_remove_proton",
+            "input_id": "ha_chloroacetic",
+            "output_id": "a_chloroacetate",
+            "needs": [
+              "load_ha_chloroacetic"
+            ],
+            "args": {
+              "mode": "remove",
+              "site_selector": "oxygen_hydroxyl"
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "GEOM_INVALID"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "method": "PBE",
+                  "basis": "def2-SVP",
+                  "use_ri": true
+                },
+                "max_attempts": 1
+              }
+            ]
+          },
+          {
+            "id": "deprot_clfa",
+            "kind": "tool",
+            "tool": "structure_add_remove_proton",
+            "input_id": "ha_clfa",
+            "output_id": "a_clfa",
+            "needs": [
+              "load_ha_clfa"
+            ],
+            "args": {
+              "mode": "remove",
+              "site_selector": "oxygen_hydroxyl"
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "GEOM_INVALID"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "method": "PBE",
+                  "basis": "def2-SVP",
+                  "use_ri": true
+                },
+                "max_attempts": 1
+              }
+            ]
+          },
+          {
+            "id": "opt_ha_acetic",
+            "kind": "tool",
+            "tool": "run_opt_job",
+            "input_id": "ha_acetic",
+            "output_id": "ha_acetic",
+            "needs": [
+              "load_ha_acetic"
+            ],
+            "args": {
+              "input_geom_id": "ha_acetic",
+              "method": "B3LYP CPCM(Water)",
+              "basis": "6-31G*",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ]
+          },
+          {
+            "id": "opt_a_acetic",
+            "kind": "tool",
+            "tool": "run_opt_job",
+            "input_id": "a_acetic",
+            "output_id": "a_acetic",
+            "needs": [
+              "deprot_acetic"
+            ],
+            "args": {
+              "input_geom_id": "a_acetic",
+              "method": "B3LYP CPCM(Water)",
+              "basis": "6-31G*",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ]
+          },
+          {
+            "id": "opt_ha_fluoroacetic",
+            "kind": "tool",
+            "tool": "run_opt_job",
+            "input_id": "ha_fluoroacetic",
+            "output_id": "ha_fluoroacetic",
+            "needs": [
+              "load_ha_fluoroacetic"
+            ],
+            "args": {
+              "input_geom_id": "ha_fluoroacetic",
+              "method": "B3LYP CPCM(Water)",
+              "basis": "6-31G*",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ]
+          },
+          {
+            "id": "opt_a_fluoroacetate",
+            "kind": "tool",
+            "tool": "run_opt_job",
+            "input_id": "a_fluoroacetate",
+            "output_id": "a_fluoroacetate",
+            "needs": [
+              "deprot_fluoroacetic"
+            ],
+            "args": {
+              "input_geom_id": "a_fluoroacetate",
+              "method": "B3LYP CPCM(Water)",
+              "basis": "6-31G*",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ]
+          },
+          {
+            "id": "opt_ha_chloroacetic",
+            "kind": "tool",
+            "tool": "run_opt_job",
+            "input_id": "ha_chloroacetic",
+            "output_id": "ha_chloroacetic",
+            "needs": [
+              "load_ha_chloroacetic"
+            ],
+            "args": {
+              "input_geom_id": "ha_chloroacetic",
+              "method": "B3LYP CPCM(Water)",
+              "basis": "6-31G*",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ]
+          },
+          {
+            "id": "opt_a_chloroacetate",
+            "kind": "tool",
+            "tool": "run_opt_job",
+            "input_id": "a_chloroacetate",
+            "output_id": "a_chloroacetate",
+            "needs": [
+              "deprot_chloroacetic"
+            ],
+            "args": {
+              "input_geom_id": "a_chloroacetate",
+              "method": "B3LYP CPCM(Water)",
+              "basis": "6-31G*",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ]
+          },
+          {
+            "id": "opt_ha_clfa",
+            "kind": "tool",
+            "tool": "run_opt_job",
+            "input_id": "ha_clfa",
+            "output_id": "ha_clfa",
+            "needs": [
+              "load_ha_clfa"
+            ],
+            "args": {
+              "input_geom_id": "ha_clfa",
+              "method": "B3LYP CPCM(Water)",
+              "basis": "6-31G*",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ]
+          },
+          {
+            "id": "opt_a_clfa",
+            "kind": "tool",
+            "tool": "run_opt_job",
+            "input_id": "a_clfa",
+            "output_id": "a_clfa",
+            "needs": [
+              "deprot_clfa"
+            ],
+            "args": {
+              "input_geom_id": "a_clfa",
+              "method": "B3LYP CPCM(Water)",
+              "basis": "6-31G*",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ]
+          },
+          {
+            "id": "freq_ha_acetic",
+            "kind": "tool",
+            "tool": "run_freq_job",
+            "input_id": "ha_acetic",
+            "output_id": "ha_acetic",
+            "needs": [
+              "opt_ha_acetic"
+            ],
+            "args": {
+              "input_geom_id": "ha_acetic",
+              "method": "B3LYP CPCM(Water)",
+              "basis": "6-31G*",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok",
+                "warning"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "product": {
+              "G_ha_acetic_eh": "gibbs_free_energy_eh"
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "IMAG_FREQ"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "opt_max_iter": 500,
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ]
+          },
+          {
+            "id": "freq_a_acetic",
+            "kind": "tool",
+            "tool": "run_freq_job",
+            "input_id": "a_acetic",
+            "output_id": "a_acetic",
+            "needs": [
+              "opt_a_acetic"
+            ],
+            "args": {
+              "input_geom_id": "a_acetic",
+              "method": "B3LYP CPCM(Water)",
+              "basis": "6-31G*",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok",
+                "warning"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "product": {
+              "G_a_acetic_eh": "gibbs_free_energy_eh"
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "IMAG_FREQ"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "opt_max_iter": 500,
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ]
+          },
+          {
+            "id": "freq_ha_fluoroacetic",
+            "kind": "tool",
+            "tool": "run_freq_job",
+            "input_id": "ha_fluoroacetic",
+            "output_id": "ha_fluoroacetic",
+            "needs": [
+              "opt_ha_fluoroacetic"
+            ],
+            "args": {
+              "input_geom_id": "ha_fluoroacetic",
+              "method": "B3LYP CPCM(Water)",
+              "basis": "6-31G*",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok",
+                "warning"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "product": {
+              "G_ha_fluoroacetic_eh": "gibbs_free_energy_eh"
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "IMAG_FREQ"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "opt_max_iter": 500,
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ]
+          },
+          {
+            "id": "freq_a_fluoroacetate",
+            "kind": "tool",
+            "tool": "run_freq_job",
+            "input_id": "a_fluoroacetate",
+            "output_id": "a_fluoroacetate",
+            "needs": [
+              "opt_a_fluoroacetate"
+            ],
+            "args": {
+              "input_geom_id": "a_fluoroacetate",
+              "method": "B3LYP CPCM(Water)",
+              "basis": "6-31G*",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok",
+                "warning"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "product": {
+              "G_a_fluoroacetate_eh": "gibbs_free_energy_eh"
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "IMAG_FREQ"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "opt_max_iter": 500,
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ]
+          },
+          {
+            "id": "freq_ha_chloroacetic",
+            "kind": "tool",
+            "tool": "run_freq_job",
+            "input_id": "ha_chloroacetic",
+            "output_id": "ha_chloroacetic",
+            "needs": [
+              "opt_ha_chloroacetic"
+            ],
+            "args": {
+              "input_geom_id": "ha_chloroacetic",
+              "method": "B3LYP CPCM(Water)",
+              "basis": "6-31G*",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok",
+                "warning"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "product": {
+              "G_ha_chloroacetic_eh": "gibbs_free_energy_eh"
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "IMAG_FREQ"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "opt_max_iter": 500,
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ]
+          },
+          {
+            "id": "freq_a_chloroacetate",
+            "kind": "tool",
+            "tool": "run_freq_job",
+            "input_id": "a_chloroacetate",
+            "output_id": "a_chloroacetate",
+            "needs": [
+              "opt_a_chloroacetate"
+            ],
+            "args": {
+              "input_geom_id": "a_chloroacetate",
+              "method": "B3LYP CPCM(Water)",
+              "basis": "6-31G*",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok",
+                "warning"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "product": {
+              "G_a_chloroacetate_eh": "gibbs_free_energy_eh"
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "IMAG_FREQ"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "opt_max_iter": 500,
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ]
+          },
+          {
+            "id": "freq_ha_clfa",
+            "kind": "tool",
+            "tool": "run_freq_job",
+            "input_id": "ha_clfa",
+            "output_id": "ha_clfa",
+            "needs": [
+              "opt_ha_clfa"
+            ],
+            "args": {
+              "input_geom_id": "ha_clfa",
+              "method": "B3LYP CPCM(Water)",
+              "basis": "6-31G*",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok",
+                "warning"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "product": {
+              "G_ha_clfa_eh": "gibbs_free_energy_eh"
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "IMAG_FREQ"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "opt_max_iter": 500,
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ]
+          },
+          {
+            "id": "freq_a_clfa",
+            "kind": "tool",
+            "tool": "run_freq_job",
+            "input_id": "a_clfa",
+            "output_id": "a_clfa",
+            "needs": [
+              "opt_a_clfa"
+            ],
+            "args": {
+              "input_geom_id": "a_clfa",
+              "method": "B3LYP CPCM(Water)",
+              "basis": "6-31G*",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok",
+                "warning"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "product": {
+              "G_a_clfa_eh": "gibbs_free_energy_eh"
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "IMAG_FREQ"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "opt_max_iter": 500,
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ]
+          },
+          {
+            "id": "calibrate_pka",
+            "kind": "tool",
+            "tool": "compute_pka_calibrated",
+            "needs": [
+              "freq_ha_clfa",
+              "freq_a_clfa",
+              "freq_ha_acetic",
+              "freq_a_acetic",
+              "freq_ha_fluoroacetic",
+              "freq_a_fluoroacetate",
+              "freq_ha_chloroacetic",
+              "freq_a_chloroacetate"
+            ],
+            "args": {
+              "G_HA_eh": "$(artifacts.G_ha_clfa_eh)",
+              "G_A_minus_eh": "$(artifacts.G_a_clfa_eh)",
+              "references": [
+                {
+                  "G_HA_eh": "$(artifacts.G_ha_acetic_eh)",
+                  "G_A_minus_eh": "$(artifacts.G_a_acetic_eh)",
+                  "pka_exp": 4.76
+                },
+                {
+                  "G_HA_eh": "$(artifacts.G_ha_fluoroacetic_eh)",
+                  "G_A_minus_eh": "$(artifacts.G_a_fluoroacetate_eh)",
+                  "pka_exp": 2.586
+                },
+                {
+                  "G_HA_eh": "$(artifacts.G_ha_chloroacetic_eh)",
+                  "G_A_minus_eh": "$(artifacts.G_a_chloroacetate_eh)",
+                  "pka_exp": 2.86
+                }
+              ]
+            },
+            "product": {
+              "pka_clfa_calibrated": "pka"
+            }
+          }
+        ],
+        "final_report": {
+          "format": "markdown",
+          "fields": [
+            "G_ha_acetic_eh",
+            "G_a_acetic_eh",
+            "G_ha_fluoroacetic_eh",
+            "G_a_fluoroacetate_eh",
+            "G_ha_chloroacetic_eh",
+            "G_a_chloroacetate_eh",
+            "G_ha_clfa_eh",
+            "G_a_clfa_eh",
+            "pka_clfa_calibrated"
+          ]
+        }
+      }
+    },
+    {
+      "case": "corrected Level B",
+      "source": "elagente_levelB_deterministic_20260824T182806Z.json (results[0])",
+      "audit": {
+        "solvation_in_method": true,
+        "no_inert_solvation_keys": true,
+        "freq_not_sp": true,
+        "deterministic_pka": true,
+        "proton_ref_sane": true,
+        "calibration_refs_used": true,
+        "solvation_or_calibration": true
+      },
+      "defects": [],
+      "plan": {
+        "user_text": "Calculate the pKa of chlorofluoroacetic acid (CHClFCOOH) using PBE0/def2-TZVP with CPCM(Water) implicit solvation. To calibrate the systematic error, also compute Gibbs free energies for three reference carboxylic acids (and their conjugate bases) at the same level.\n\nStep 1 \u2014 load 4 neutral acids by name (charge=0, mult=1):\n  ha_acetic (acetic acid), ha_fluoroacetic (fluoroacetic acid), ha_chloroacetic (chloroacetic acid), ha_clfa (chlorofluoroacetic acid).\n\nStep 2 \u2014 derive conjugate base geometries using structure_add_remove_proton (action='remove', auto=True) on each neutral acid. Use output_id:\n  a_acetic (from ha_acetic), a_fluoroacetate (from ha_fluoroacetic), a_chloroacetate (from ha_chloroacetic), a_clfa (from ha_clfa).\nEach output has charge=-1, mult=1.\n\nStep 3 \u2014 run geometry optimisation + frequency job for all 8 species in parallel. Use method=\"PBE0 CPCM(Water)\", basis=\"def2-TZVP\", use_ri=False for ALL jobs. Do NOT use a template loop \u2014 list each as an individual node pair. Use the geometry from the proton-removal step for each anion node.\n\nStore Gibbs free energies as: G_ha_acetic_eh, G_a_acetic_eh, G_ha_fluoroacetic_eh, G_a_fluoroacetate_eh, G_ha_chloroacetic_eh, G_a_chloroacetate_eh, G_ha_clfa_eh, G_a_clfa_eh.\n\nAfter all 8 freq jobs complete, add ONE kind:\"tool\" node\n(id: calibrate_pka, tool: compute_pka_calibrated) that computes the calibrated\npKa of chlorofluoroacetic acid deterministically. Pass:\n  G_HA_eh:      $(artifacts.G_ha_clfa_eh)\n  G_A_minus_eh: $(artifacts.G_a_clfa_eh)\n  references:   the three reference acids, each as\n                {\"G_HA_eh\": ..., \"G_A_minus_eh\": ..., \"pka_exp\": ...}\n                with acetic=4.76, fluoroacetic=2.586, chloroacetic=2.86\nSet product: {\"pka_clfa_calibrated\": \"pka\"}.\nDo NOT use a kind:\"llm\" node for this arithmetic and do NOT set\nG_H_plus_ref_eh; the tool selects the correct proton reference itself.",
+        "name": "Calibrated aqueous pKa of chlorofluoroacetic acid via PBE0/def2-TZVP CPCM(Water)",
+        "version": "1.3",
+        "geom_ids": [
+          "ha_acetic",
+          "ha_fluoroacetic",
+          "ha_chloroacetic",
+          "ha_clfa",
+          "a_acetic",
+          "a_fluoroacetate",
+          "a_chloroacetate",
+          "a_clfa"
+        ],
+        "artifacts_to_save": [
+          "G_ha_acetic_eh",
+          "G_a_acetic_eh",
+          "G_ha_fluoroacetic_eh",
+          "G_a_fluoroacetate_eh",
+          "G_ha_chloroacetic_eh",
+          "G_a_chloroacetate_eh",
+          "G_ha_clfa_eh",
+          "G_a_clfa_eh",
+          "pka_clfa_calibrated"
+        ],
+        "settings": {
+          "method_aq": "PBE0 CPCM(Water)",
+          "basis": "def2-TZVP",
+          "use_ri": false,
+          "ncores": 1,
+          "opt_wall_timeout_seconds": 1800,
+          "freq_wall_timeout_seconds": 1800
+        },
+        "nodes": [
+          {
+            "id": "load_ha_acetic",
+            "kind": "tool",
+            "tool": "name_to_geometry_xyz",
+            "output_id": "ha_acetic",
+            "needs": [],
+            "args": {
+              "name": "acetic acid"
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "GEOM_INVALID"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "method": "PBE",
+                  "basis": "def2-SVP",
+                  "use_ri": true
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {}
+          },
+          {
+            "id": "load_ha_fluoroacetic",
+            "kind": "tool",
+            "tool": "name_to_geometry_xyz",
+            "output_id": "ha_fluoroacetic",
+            "needs": [],
+            "args": {
+              "name": "fluoroacetic acid"
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "GEOM_INVALID"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "method": "PBE",
+                  "basis": "def2-SVP",
+                  "use_ri": true
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {}
+          },
+          {
+            "id": "load_ha_chloroacetic",
+            "kind": "tool",
+            "tool": "name_to_geometry_xyz",
+            "output_id": "ha_chloroacetic",
+            "needs": [],
+            "args": {
+              "name": "chloroacetic acid"
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "GEOM_INVALID"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "method": "PBE",
+                  "basis": "def2-SVP",
+                  "use_ri": true
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {}
+          },
+          {
+            "id": "load_ha_clfa",
+            "kind": "tool",
+            "tool": "name_to_geometry_xyz",
+            "output_id": "ha_clfa",
+            "needs": [],
+            "args": {
+              "name": "chlorofluoroacetic acid"
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "GEOM_INVALID"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "method": "PBE",
+                  "basis": "def2-SVP",
+                  "use_ri": true
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {}
+          },
+          {
+            "id": "deprot_acetic",
+            "kind": "tool",
+            "tool": "structure_add_remove_proton",
+            "input_id": "ha_acetic",
+            "output_id": "a_acetic",
+            "needs": [
+              "load_ha_acetic"
+            ],
+            "args": {
+              "mode": "remove",
+              "site_selector": "oxygen_hydroxyl"
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "product": {}
+          },
+          {
+            "id": "deprot_fluoroacetic",
+            "kind": "tool",
+            "tool": "structure_add_remove_proton",
+            "input_id": "ha_fluoroacetic",
+            "output_id": "a_fluoroacetate",
+            "needs": [
+              "load_ha_fluoroacetic"
+            ],
+            "args": {
+              "mode": "remove",
+              "site_selector": "oxygen_hydroxyl"
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "product": {}
+          },
+          {
+            "id": "deprot_chloroacetic",
+            "kind": "tool",
+            "tool": "structure_add_remove_proton",
+            "input_id": "ha_chloroacetic",
+            "output_id": "a_chloroacetate",
+            "needs": [
+              "load_ha_chloroacetic"
+            ],
+            "args": {
+              "mode": "remove",
+              "site_selector": "oxygen_hydroxyl"
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "product": {}
+          },
+          {
+            "id": "deprot_clfa",
+            "kind": "tool",
+            "tool": "structure_add_remove_proton",
+            "input_id": "ha_clfa",
+            "output_id": "a_clfa",
+            "needs": [
+              "load_ha_clfa"
+            ],
+            "args": {
+              "mode": "remove",
+              "site_selector": "oxygen_hydroxyl"
+            },
+            "expect": {
+              "status_in": [
+                "ok"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "product": {}
+          },
+          {
+            "id": "opt_ha_acetic",
+            "kind": "tool",
+            "tool": "run_opt_job",
+            "input_id": "ha_acetic",
+            "output_id": "ha_acetic",
+            "needs": [
+              "load_ha_acetic"
+            ],
+            "args": {
+              "input_geom_id": "ha_acetic",
+              "method": "PBE0 CPCM(Water)",
+              "basis": "def2-TZVP",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok",
+                "warning"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {}
+          },
+          {
+            "id": "freq_ha_acetic",
+            "kind": "tool",
+            "tool": "run_freq_job",
+            "input_id": "ha_acetic",
+            "output_id": "ha_acetic",
+            "needs": [
+              "opt_ha_acetic"
+            ],
+            "args": {
+              "input_geom_id": "ha_acetic",
+              "method": "PBE0 CPCM(Water)",
+              "basis": "def2-TZVP",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok",
+                "warning"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "IMAG_FREQ"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "opt_max_iter": 400,
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {
+              "G_ha_acetic_eh": "gibbs_free_energy_eh"
+            }
+          },
+          {
+            "id": "opt_a_acetic",
+            "kind": "tool",
+            "tool": "run_opt_job",
+            "input_id": "a_acetic",
+            "output_id": "a_acetic",
+            "needs": [
+              "deprot_acetic"
+            ],
+            "args": {
+              "input_geom_id": "a_acetic",
+              "method": "PBE0 CPCM(Water)",
+              "basis": "def2-TZVP",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok",
+                "warning"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {}
+          },
+          {
+            "id": "freq_a_acetic",
+            "kind": "tool",
+            "tool": "run_freq_job",
+            "input_id": "a_acetic",
+            "output_id": "a_acetic",
+            "needs": [
+              "opt_a_acetic"
+            ],
+            "args": {
+              "input_geom_id": "a_acetic",
+              "method": "PBE0 CPCM(Water)",
+              "basis": "def2-TZVP",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok",
+                "warning"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "IMAG_FREQ"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "opt_max_iter": 400,
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {
+              "G_a_acetic_eh": "gibbs_free_energy_eh"
+            }
+          },
+          {
+            "id": "opt_ha_fluoroacetic",
+            "kind": "tool",
+            "tool": "run_opt_job",
+            "input_id": "ha_fluoroacetic",
+            "output_id": "ha_fluoroacetic",
+            "needs": [
+              "load_ha_fluoroacetic"
+            ],
+            "args": {
+              "input_geom_id": "ha_fluoroacetic",
+              "method": "PBE0 CPCM(Water)",
+              "basis": "def2-TZVP",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok",
+                "warning"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {}
+          },
+          {
+            "id": "freq_ha_fluoroacetic",
+            "kind": "tool",
+            "tool": "run_freq_job",
+            "input_id": "ha_fluoroacetic",
+            "output_id": "ha_fluoroacetic",
+            "needs": [
+              "opt_ha_fluoroacetic"
+            ],
+            "args": {
+              "input_geom_id": "ha_fluoroacetic",
+              "method": "PBE0 CPCM(Water)",
+              "basis": "def2-TZVP",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok",
+                "warning"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "IMAG_FREQ"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "opt_max_iter": 400,
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {
+              "G_ha_fluoroacetic_eh": "gibbs_free_energy_eh"
+            }
+          },
+          {
+            "id": "opt_a_fluoroacetate",
+            "kind": "tool",
+            "tool": "run_opt_job",
+            "input_id": "a_fluoroacetate",
+            "output_id": "a_fluoroacetate",
+            "needs": [
+              "deprot_fluoroacetic"
+            ],
+            "args": {
+              "input_geom_id": "a_fluoroacetate",
+              "method": "PBE0 CPCM(Water)",
+              "basis": "def2-TZVP",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok",
+                "warning"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {}
+          },
+          {
+            "id": "freq_a_fluoroacetate",
+            "kind": "tool",
+            "tool": "run_freq_job",
+            "input_id": "a_fluoroacetate",
+            "output_id": "a_fluoroacetate",
+            "needs": [
+              "opt_a_fluoroacetate"
+            ],
+            "args": {
+              "input_geom_id": "a_fluoroacetate",
+              "method": "PBE0 CPCM(Water)",
+              "basis": "def2-TZVP",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok",
+                "warning"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "IMAG_FREQ"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "opt_max_iter": 400,
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {
+              "G_a_fluoroacetate_eh": "gibbs_free_energy_eh"
+            }
+          },
+          {
+            "id": "opt_ha_chloroacetic",
+            "kind": "tool",
+            "tool": "run_opt_job",
+            "input_id": "ha_chloroacetic",
+            "output_id": "ha_chloroacetic",
+            "needs": [
+              "load_ha_chloroacetic"
+            ],
+            "args": {
+              "input_geom_id": "ha_chloroacetic",
+              "method": "PBE0 CPCM(Water)",
+              "basis": "def2-TZVP",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok",
+                "warning"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {}
+          },
+          {
+            "id": "freq_ha_chloroacetic",
+            "kind": "tool",
+            "tool": "run_freq_job",
+            "input_id": "ha_chloroacetic",
+            "output_id": "ha_chloroacetic",
+            "needs": [
+              "opt_ha_chloroacetic"
+            ],
+            "args": {
+              "input_geom_id": "ha_chloroacetic",
+              "method": "PBE0 CPCM(Water)",
+              "basis": "def2-TZVP",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok",
+                "warning"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "IMAG_FREQ"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "opt_max_iter": 400,
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {
+              "G_ha_chloroacetic_eh": "gibbs_free_energy_eh"
+            }
+          },
+          {
+            "id": "opt_a_chloroacetate",
+            "kind": "tool",
+            "tool": "run_opt_job",
+            "input_id": "a_chloroacetate",
+            "output_id": "a_chloroacetate",
+            "needs": [
+              "deprot_chloroacetic"
+            ],
+            "args": {
+              "input_geom_id": "a_chloroacetate",
+              "method": "PBE0 CPCM(Water)",
+              "basis": "def2-TZVP",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok",
+                "warning"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {}
+          },
+          {
+            "id": "freq_a_chloroacetate",
+            "kind": "tool",
+            "tool": "run_freq_job",
+            "input_id": "a_chloroacetate",
+            "output_id": "a_chloroacetate",
+            "needs": [
+              "opt_a_chloroacetate"
+            ],
+            "args": {
+              "input_geom_id": "a_chloroacetate",
+              "method": "PBE0 CPCM(Water)",
+              "basis": "def2-TZVP",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok",
+                "warning"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "IMAG_FREQ"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "opt_max_iter": 400,
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {
+              "G_a_chloroacetate_eh": "gibbs_free_energy_eh"
+            }
+          },
+          {
+            "id": "opt_ha_clfa",
+            "kind": "tool",
+            "tool": "run_opt_job",
+            "input_id": "ha_clfa",
+            "output_id": "ha_clfa",
+            "needs": [
+              "load_ha_clfa"
+            ],
+            "args": {
+              "input_geom_id": "ha_clfa",
+              "method": "PBE0 CPCM(Water)",
+              "basis": "def2-TZVP",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok",
+                "warning"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {}
+          },
+          {
+            "id": "freq_ha_clfa",
+            "kind": "tool",
+            "tool": "run_freq_job",
+            "input_id": "ha_clfa",
+            "output_id": "ha_clfa",
+            "needs": [
+              "opt_ha_clfa"
+            ],
+            "args": {
+              "input_geom_id": "ha_clfa",
+              "method": "PBE0 CPCM(Water)",
+              "basis": "def2-TZVP",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok",
+                "warning"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "IMAG_FREQ"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "opt_max_iter": 400,
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {
+              "G_ha_clfa_eh": "gibbs_free_energy_eh"
+            }
+          },
+          {
+            "id": "opt_a_clfa",
+            "kind": "tool",
+            "tool": "run_opt_job",
+            "input_id": "a_clfa",
+            "output_id": "a_clfa",
+            "needs": [
+              "deprot_clfa"
+            ],
+            "args": {
+              "input_geom_id": "a_clfa",
+              "method": "PBE0 CPCM(Water)",
+              "basis": "def2-TZVP",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok",
+                "warning"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "RESOURCE_LIMIT"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {}
+          },
+          {
+            "id": "freq_a_clfa",
+            "kind": "tool",
+            "tool": "run_freq_job",
+            "input_id": "a_clfa",
+            "output_id": "a_clfa",
+            "needs": [
+              "opt_a_clfa"
+            ],
+            "args": {
+              "input_geom_id": "a_clfa",
+              "method": "PBE0 CPCM(Water)",
+              "basis": "def2-TZVP",
+              "use_ri": false,
+              "ncores": 1,
+              "wall_timeout_seconds": 1800
+            },
+            "expect": {
+              "status_in": [
+                "ok",
+                "warning"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "on_error": [
+              {
+                "if": {
+                  "code_in": [
+                    "SCF_NOT_CONVERGED"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "scf_max_iter": 500
+                },
+                "max_attempts": 2
+              },
+              {
+                "if": {
+                  "code_in": [
+                    "IMAG_FREQ"
+                  ]
+                },
+                "action": "patch_and_retry",
+                "patch": {
+                  "opt_max_iter": 400,
+                  "wall_timeout_seconds": 3600
+                },
+                "max_attempts": 1
+              }
+            ],
+            "product": {
+              "G_a_clfa_eh": "gibbs_free_energy_eh"
+            }
+          },
+          {
+            "id": "calibrate_pka",
+            "kind": "tool",
+            "tool": "compute_pka_calibrated",
+            "needs": [
+              "freq_ha_clfa",
+              "freq_a_clfa",
+              "freq_ha_acetic",
+              "freq_a_acetic",
+              "freq_ha_fluoroacetic",
+              "freq_a_fluoroacetate",
+              "freq_ha_chloroacetic",
+              "freq_a_chloroacetate"
+            ],
+            "args": {
+              "G_HA_eh": "$(artifacts.G_ha_clfa_eh)",
+              "G_A_minus_eh": "$(artifacts.G_a_clfa_eh)",
+              "references": [
+                {
+                  "G_HA_eh": "$(artifacts.G_ha_acetic_eh)",
+                  "G_A_minus_eh": "$(artifacts.G_a_acetic_eh)",
+                  "pka_exp": 4.76
+                },
+                {
+                  "G_HA_eh": "$(artifacts.G_ha_fluoroacetic_eh)",
+                  "G_A_minus_eh": "$(artifacts.G_a_fluoroacetate_eh)",
+                  "pka_exp": 2.586
+                },
+                {
+                  "G_HA_eh": "$(artifacts.G_ha_chloroacetic_eh)",
+                  "G_A_minus_eh": "$(artifacts.G_a_chloroacetate_eh)",
+                  "pka_exp": 2.86
+                }
+              ]
+            },
+            "expect": {
+              "status_in": [
+                "ok",
+                "warning"
+              ],
+              "artifacts_required": [],
+              "properties_required": []
+            },
+            "product": {
+              "pka_clfa_calibrated": "pka"
+            }
+          }
+        ],
+        "final_report": {
+          "format": "markdown",
+          "fields": [
+            "G_ha_acetic_eh",
+            "G_a_acetic_eh",
+            "G_ha_fluoroacetic_eh",
+            "G_a_fluoroacetate_eh",
+            "G_ha_chloroacetic_eh",
+            "G_a_chloroacetate_eh",
+            "G_ha_clfa_eh",
+            "G_a_clfa_eh",
+            "pka_clfa_calibrated"
+          ]
+        }
+      }
+    }
+  ]
+}
