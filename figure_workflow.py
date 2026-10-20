@@ -54,8 +54,13 @@ E_EXEC = '#2E7D4F'
 E_LLM  = '#C0392B'
 EDGE   = '#2C3E50'
 DARK   = '#1C2833'
-GRAY   = '#7F8C8D'
+GRAY   = '#4D5656'   # darker than before, for contrast at print size
 ABLUE  = '#1A5276'
+
+# Every label is drawn through txt(); its size is multiplied by FONT_SCALE so that the
+# smallest label prints at >= ~6 pt. PRINT_SCALE = printed size / drawn size in the paper.
+FONT_SCALE = 1.4
+PRINT_SCALE = 0.679
 
 plt.rcParams.update({
     'font.family': 'sans-serif',
@@ -75,7 +80,7 @@ def rbox(ax, x, y, w, h, fc=C_BOX, ec=EDGE, lw=1.0, r=0.006, z=2, ls='-'):
 
 def txt(ax, x, y, s, fs=8.0, c=DARK, ha='center', va='center',
         bold=False, italic=False, z=4):
-    ax.text(x, y, s, ha=ha, va=va, fontsize=fs, color=c,
+    ax.text(x, y, s, ha=ha, va=va, fontsize=fs * FONT_SCALE, color=c,
             fontweight='bold' if bold else 'normal',
             fontstyle='italic' if italic else 'normal', zorder=z)
 
@@ -128,17 +133,17 @@ for num, name, y0, hgt, fc, ec in [
     rbox(ax, PX, y0, PW, hgt, fc=fc, ec=ec, lw=1.3, r=0.008, z=1)
     lx, ly = PX + LDX, y0 + hgt - LDY
     txt(ax, lx, ly, num, fs=11.0, c=ec, ha='left', bold=True)
-    txt(ax, lx + 0.083, ly, name, fs=11.0, c=ec, ha='left', bold=True)
+    txt(ax, lx + 0.115, ly, name, fs=11.0, c=ec, ha='left', bold=True)
 
 # ══════════════════════════════════════════════════════════════════ PHASE 1 ═══
 R1, R2, R3 = 0.930, 0.858, 0.775          # three content rows, all below label
 
 box2(ax, 0.145, R1, 0.180, 0.046, 'User Request', 'natural language')
-box2(ax, 0.470, R1, 0.250, 0.052, 'Compound Identification LLM', 'PubChem / OPSIN',
+box2(ax, 0.470, R1, 0.310, 0.052, 'Compound Identification LLM', 'PubChem / OPSIN',
      ec=E_LLM, lw=1.5, fs1=7.8)
 
 box2(ax, 0.145, R2, 0.180, 0.042, 'Skill Dispatcher', 'keyword matching')
-box2(ax, 0.470, R2, 0.250, 0.046, '2D Structure Confirmation (User)', None, fs1=7.8)
+box2(ax, 0.470, R2, 0.310, 0.046, '2D Structure Confirmation (User)', None, fs1=7.8)
 box2(ax, 0.800, R2, 0.230, 0.046, 'Compound Cards',
      'formula · SMILES · charge · CID', fs2=6.4)
 
@@ -154,13 +159,13 @@ for nm, on in SKILLS:
          ec=E_PLAN if on else '#B0B0B0', lw=0.9, r=0.005)
     txt(ax, x0 + cw / 2, R3, nm, fs=7.0, c=DARK if on else '#8A8A8A')
     x0 += cw + gap
-txt(ax, 0.062, R3 - 0.030, 'orange = skill activated for this request',
-    fs=6.6, c=GRAY, ha='left', italic=True)
+txt(ax, 0.875, R3 - 0.030, 'orange = skill activated for this request',
+    fs=6.6, c=GRAY, ha='right', italic=True)
 
-arr(ax, (0.235, R1), (0.345, R1))                       # request -> compound id
+arr(ax, (0.235, R1), (0.315, R1))                       # request -> compound id
 arr(ax, (0.145, R1 - 0.023), (0.145, R2 + 0.021))       # request -> dispatcher
 arr(ax, (0.470, R1 - 0.026), (0.470, R2 + 0.023))       # compound id -> confirm
-arr(ax, (0.595, R2), (0.685, R2))                       # confirm -> cards
+arr(ax, (0.625, R2), (0.685, R2))                       # confirm -> cards
 arr(ax, (0.145, R2 - 0.021), (0.145, R3 + 0.016))       # dispatcher -> chips
 
 # Compound cards and the activated skills both become planner inputs: merge them
@@ -171,7 +176,7 @@ ax.plot([CARD_X, CARD_X], [R2 - 0.023, MERGE_Y], color=ABLUE, lw=1.3, zorder=3)
 ax.plot([0.320, 0.320], [R3 - 0.014, MERGE_Y], color=ABLUE, lw=1.3, zorder=3)
 ax.plot([0.320, CARD_X], [MERGE_Y, MERGE_Y], color=ABLUE, lw=1.3, zorder=3)
 arr(ax, (0.560, MERGE_Y), (0.560, P2_Y + P2_H - 0.004), c=ABLUE, lw=1.3)
-txt(ax, 0.572, 0.7005, 'compound cards + active skills',
+txt(ax, 0.572, 0.697, 'compound cards + active skills',
     fs=6.6, c=ABLUE, ha='left', italic=True)
 
 # ══════════════════════════════════════════════════════════════════ PHASE 2 ═══
@@ -186,12 +191,13 @@ for s in INPUTS:
     arr(ax, (0.221, iy), (0.288, 0.516), rad=0.0, lw=1.0)
     iy -= 0.043
 
-box2(ax, 0.395, 0.516, 0.205, 0.054, 'Planner LLM', 'single bounded call',
-     ec=E_LLM, lw=1.5, fs1=8.6)
-txt(ax, 0.395, 0.4955, '~10k tokens', fs=7.0, c=E_LLM, italic=True)
+# taller than its neighbours: three lines (title, role, measured tokens)
+rbox(ax, 0.395 - 0.1025, 0.481, 0.205, 0.072, ec=E_LLM, lw=1.5, r=0.007)
+txt(ax, 0.395, 0.534, 'Planner LLM', fs=8.6, bold=True)
+txt(ax, 0.395, 0.5155, 'single bounded call', fs=6.9, c=GRAY, italic=True)
+txt(ax, 0.395, 0.497, '~10k tokens', fs=7.0, c=E_LLM, italic=True)
 
-box2(ax, 0.630, 0.516, 0.175, 0.054, 'JSON Workflow Plan', None, fs1=8.0)
-txt(ax, 0.630, 0.5035, 'geom_ids · settings · nodes[ ]', fs=6.5, c=GRAY)
+box2(ax, 0.630, 0.516, 0.175, 0.054, 'JSON Plan', 'nodes[ ] · settings', fs1=8.0, fs2=6.5)
 
 # Plan validator -- the only route from planning into execution.
 VX, VY, VW, VH = 0.745, 0.480, 0.205, 0.078
@@ -207,25 +213,25 @@ arr(ax, (0.7175, 0.516), (VX, 0.516))
 
 # bounded-retry loop: validator -> planner, routed BELOW the row so it does not
 # cut through the JSON Workflow Plan box.
-RETRY_Y = 0.4695
+RETRY_Y = 0.462   # below the taller Planner box (bottom 0.481)
 poly(ax, [(VX + 0.030, VY), (VX + 0.030, RETRY_Y),
-          (0.395, RETRY_Y), (0.395, 0.489)], c=E_LLM, lw=1.2)
+          (0.470, RETRY_Y), (0.470, 0.481)], c=E_LLM, lw=1.2)   # turn up right of the legend chips
 txt(ax, 0.598, RETRY_Y + 0.008, 'failed checks — bounded retry',
     fs=7.0, c=E_LLM, italic=True)
 txt(ax, 0.598, RETRY_Y - 0.008, 'no compute dispatched', fs=6.5, c=GRAY, italic=True)
 
 # valid -> execution
 arr(ax, (VX + VW / 2, VY), (VX + VW / 2, P3_Y + P3_H - 0.004), c=E_EXEC, lw=1.5)
-txt(ax, VX + VW / 2 + 0.012, 0.4415, 'valid', fs=7.4, c=E_EXEC, ha='left', bold=True)
+txt(ax, VX + VW / 2 + 0.012, 0.456, 'valid', fs=7.4, c=E_EXEC, ha='left', bold=True)
 
 # plan node-kind key (schema legend, not nodes of this workflow) -- inside panel
 txt(ax, 0.046, 0.4525, 'plan node kinds:', fs=6.6, c=GRAY, ha='left', italic=True)
 for j, (nm, fc, ec) in enumerate([('tool', C_TOOL, E_EXEC),
                                    ('calc_expr', C_CALC, ABLUE),
                                    ('llm', C_LLMN, E_LLM)]):
-    x = 0.150 + j * 0.072
-    rbox(ax, x, 0.4445, 0.064, 0.017, fc=fc, ec=ec, lw=0.9, r=0.004)
-    txt(ax, x + 0.032, 0.4530, nm, fs=6.5)
+    x = 0.195 + j * 0.090
+    rbox(ax, x, 0.4445, 0.082, 0.017, fc=fc, ec=ec, lw=0.9, r=0.004)
+    txt(ax, x + 0.041, 0.4530, nm, fs=6.5)
 
 # ══════════════════════════════════════════════════════════════════ PHASE 3 ═══
 EXEC_TOP = P3_Y + P3_H - LDY - 0.020
@@ -244,7 +250,7 @@ YC = 0.172                       # reference acid row
 GX0, GX1, GY0, GY1 = 0.036, 0.384, 0.126, 0.352
 rbox(ax, GX0, GY0, GX1 - GX0, GY1 - GY0, fc='none', ec=E_EXEC, lw=1.0, ls='--',
      r=0.006, z=1.5)
-txt(ax, GX0 + 0.010, GY0 + 0.009, 'remote ORCA jobs, independent ones run in parallel',
+txt(ax, GX0 + 0.010, GY0 + 0.009, 'remote ORCA jobs, run in parallel',
     fs=6.3, c=E_EXEC, ha='left', italic=True)
 
 box2(ax, 0.118, YA, NW, NH, 'OPT', 'HA (compound i)', fc=C_TOOL, ec=E_EXEC)
@@ -263,7 +269,7 @@ box2(ax, 0.209, YC, 0.330, NH, 'OPT + FREQ', r'HA and A$^{-}$ of the reference a
 PKX, PKY, PKW, PKH = 0.4375, 0.243, 0.165, 0.086
 rbox(ax, PKX, PKY, PKW, PKH, fc=C_TOOL, ec=E_EXEC)
 txt(ax, PKX + PKW / 2, PKY + PKH - 0.020, 'compute_pKa', fs=8.0, bold=True)
-txt(ax, PKX + PKW / 2, PKY + PKH - 0.040, 'calibrated, deterministic', fs=6.6, c=GRAY,
+txt(ax, PKX + PKW / 2, PKY + PKH - 0.040, 'deterministic', fs=6.6, c=GRAY,
     italic=True)
 txt(ax, PKX + PKW / 2, PKY + 0.014, '0 tokens', fs=6.6, c=E_EXEC, italic=True)
 arr(ax, (0.375, YA), (PKX, YA))                       # FREQ HA -> compute_pKa
@@ -272,34 +278,34 @@ poly(ax, [(0.374, YC), (PKX + PKW / 2, YC), (PKX + PKW / 2, PKY)])   # reference
 
 # right column: MCP, artifact store, reporter, report
 MX, MW = 0.735, 0.222
-rbox(ax, MX, 0.250, MW, 0.122, fc='#FFFFFF', ec=E_EXEC, lw=1.2, ls='--')
+rbox(ax, MX, 0.234, MW, 0.138, fc='#FFFFFF', ec=E_EXEC, lw=1.2, ls='--')
 txt(ax, MX + MW / 2, 0.356, 'MCP over SSH', fs=7.8, bold=True)
 txt(ax, MX + MW / 2, 0.342, r'$\rightarrow$ Remote Pod', fs=7.8, bold=True)
 for j, nm in enumerate(['ORCA 6.1.1', 'OPI', 'SOLVATOR', 'xTB']):
-    rbox(ax, MX + 0.028, 0.324 - j * 0.0165 - 0.013, MW - 0.056, 0.013,
+    rbox(ax, MX + 0.028, 0.322 - j * 0.0205 - 0.017, MW - 0.056, 0.017,
          fc=C_TOOL, ec=E_EXEC, lw=0.7, r=0.003)
-    txt(ax, MX + MW / 2, 0.3175 - j * 0.0165, nm, fs=6.3)
+    txt(ax, MX + MW / 2, 0.3135 - j * 0.0205, nm, fs=6.3)
 
 # the grouped remote jobs reach the pod over MCP; routed above compute_pKa
 MCP_Y = 0.341
 arr(ax, (GX1, MCP_Y), (MX, MCP_Y), c=E_EXEC, lw=0.9, ls='--')
 txt(ax, 0.668, MCP_Y + 0.008, 'remote tool calls', fs=6.5, c=E_EXEC, italic=True)
 
-box2(ax, MX + MW / 2, 0.180, MW, 0.050, 'Artifact Store', None, fs1=8.2)
-txt(ax, MX + MW / 2, 0.1685, 'G_<species>_eh · pka_<compound>', fs=6.3, c=GRAY)
-arr(ax, (MX + MW / 2, 0.250), (MX + MW / 2, 0.205), c=E_EXEC)      # results
-txt(ax, MX + MW / 2 + 0.008, 0.228, 'results', fs=6.5, c=E_EXEC, ha='left', italic=True)
+box2(ax, MX + MW / 2, 0.180, MW, 0.064, 'Artifact Store', 'G_*_eh · pka_*', fs1=8.2, fs2=6.6)
+arr(ax, (MX + MW / 2, 0.234), (MX + MW / 2, 0.212), c=E_EXEC)      # results
+txt(ax, MX + MW / 2 + 0.008, 0.223, 'results', fs=6.5, c=E_EXEC, ha='left', italic=True)
 arr(ax, (PKX + PKW, PKY + 0.020), (MX, 0.193))                     # pKa values
 
-box2(ax, MX + MW / 2, 0.098, MW, 0.048, 'Reporter LLM', None, ec=E_LLM, lw=1.5, fs1=8.2)
-txt(ax, MX + MW / 2, 0.0875, '~4k tokens', fs=6.8, c=E_LLM, italic=True)
-arr(ax, (MX + MW / 2, 0.155), (MX + MW / 2, 0.122))
+rbox(ax, MX, 0.098 - 0.029, MW, 0.058, ec=E_LLM, lw=1.5, r=0.007)
+txt(ax, MX + MW / 2, 0.098 + 0.010, 'Reporter LLM', fs=8.2, bold=True)
+txt(ax, MX + MW / 2, 0.098 - 0.013, '~4k tokens', fs=6.8, c=E_LLM, italic=True)
+arr(ax, (MX + MW / 2, 0.148), (MX + MW / 2, 0.127))
 
 box2(ax, MX + MW / 2, 0.042, MW, 0.036, 'Markdown Report', None, fs1=8.0)
-arr(ax, (MX + MW / 2, 0.074), (MX + MW / 2, 0.060))
+arr(ax, (MX + MW / 2, 0.069), (MX + MW / 2, 0.060))
 
 # legend -- two categories, every box in the figure belongs to one
-LX, LY, LW, LH = 0.046, 0.036, 0.300, 0.070
+LX, LY, LW, LH = 0.046, 0.036, 0.372, 0.070
 rbox(ax, LX, LY, LW, LH, fc='#FFFFFF', ec='#B0B0B0', lw=0.9)
 rbox(ax, LX + 0.016, LY + 0.043, 0.040, 0.016, fc='#FFFFFF', ec=E_LLM, lw=1.5, r=0.004)
 txt(ax, LX + 0.066, LY + 0.051, 'red border = LLM call', fs=7.0, ha='left')
@@ -307,6 +313,10 @@ rbox(ax, LX + 0.016, LY + 0.020, 0.040, 0.016, fc='#FFFFFF', ec=EDGE, lw=1.0, r=
 txt(ax, LX + 0.066, LY + 0.028, 'plain border = deterministic code', fs=7.0, ha='left')
 txt(ax, LX + 0.016, LY + 0.008, 'solid = data flow    dashed = remote tool call',
     fs=6.3, c=GRAY, ha='left', italic=True)
+
+if os.environ.get('FIG_CHECK'):
+    from figure_layout_check import check
+    check(fig, ax, PRINT_SCALE)
 
 out = os.path.join(sys.argv[1] if len(sys.argv) > 1 else '.', 'workflow_drawn')
 fig.savefig(out + '.png', dpi=300, bbox_inches='tight', facecolor=BG)

@@ -41,8 +41,13 @@ E_LLM     = '#C0392B'
 E_PLAN    = '#B5651D'
 EDGE      = '#2C3E50'
 DARK      = '#1C2833'
-GRAY      = '#7F8C8D'
+GRAY      = '#4D5656'   # darker than before, for contrast at print size
 ABLUE     = '#1A5276'
+
+# Every label is drawn through txt(); its size is multiplied by FONT_SCALE so that the
+# smallest label prints at >= ~6 pt. PRINT_SCALE = printed size / drawn size in the paper.
+FONT_SCALE = 1.25
+PRINT_SCALE = 0.756
 
 plt.rcParams.update({
     'font.family': 'sans-serif',
@@ -60,7 +65,7 @@ def rbox(ax, x, y, w, h, fc=C_BOX, ec=EDGE, lw=1.0, r=0.008, z=2, ls='-'):
 
 def txt(ax, x, y, s, fs=8.5, c=DARK, ha='center', va='center',
         bold=False, italic=False, z=4):
-    ax.text(x, y, s, ha=ha, va=va, fontsize=fs, color=c,
+    ax.text(x, y, s, ha=ha, va=va, fontsize=fs * FONT_SCALE, color=c,
             fontweight='bold' if bold else 'normal',
             fontstyle='italic' if italic else 'normal', zorder=z)
 
@@ -103,17 +108,17 @@ LDX, LDY = 0.020, 0.040          # same label inset convention as Figure 2
 CY, CH = 0.360, 0.618
 rbox(ax, PX, CY, PW, CH, fc=C_CLIENT, ec=E_CLIENT, lw=1.3, z=1)
 txt(ax, PX + LDX, CY + CH - LDY, 'CLIENT', fs=11.0, c=E_CLIENT, ha='left', bold=True)
-txt(ax, PX + LDX + 0.075, CY + CH - LDY, 'local workstation — all LLM context lives here',
+txt(ax, PX + LDX + 0.100, CY + CH - LDY, 'local workstation — all LLM context lives here',
     fs=8.0, c=E_CLIENT, ha='left', italic=True)
 
-box2(ax, 0.140, 0.892, 0.170, 0.052, 'User', 'natural-language request')
+box2(ax, 0.140, 0.892, 0.190, 0.052, 'User', 'natural-language request')
 
 # three bounded LLM call sites
 # Token costs are deliberately not annotated here: they vary by workflow and are
 # reported per workflow in Figure 2 and Table 1.
-box2(ax, 0.400, 0.892, 0.210, 0.052, 'Compound Identification',
+box2(ax, 0.400, 0.892, 0.240, 0.052, 'Compound Identification',
      'PubChem / OPSIN', ec=E_LLM, lw=1.6, fs1=8.2, fs2=7.0)
-box2(ax, 0.400, 0.790, 0.210, 0.052, 'Planner LLM',
+box2(ax, 0.400, 0.790, 0.240, 0.052, 'Planner LLM',
      'single bounded call', ec=E_LLM, lw=1.6, fs1=8.2, fs2=7.0)
 # Reporter sits under the user, on the left, keeping the centre channel clear
 # for the two arrows that cross the MCP boundary.
@@ -121,40 +126,41 @@ box2(ax, 0.140, 0.470, 0.200, 0.052, 'Reporter LLM',
      'structured artifacts only', ec=E_LLM, lw=1.6, fs1=8.2, fs2=7.0)
 
 # skill library feeds the planner
-rbox(ax, 0.660, 0.762, 0.290, 0.108, fc=C_SKILL, ec=E_PLAN, lw=1.2)
-txt(ax, 0.805, 0.852, 'Skill Library', fs=8.6, bold=True)
-txt(ax, 0.805, 0.836, 'calibrated domain protocols', fs=6.8, c=GRAY, italic=True)
+rbox(ax, 0.660, 0.748, 0.300, 0.128, fc=C_SKILL, ec=E_PLAN, lw=1.2)
+txt(ax, 0.810, 0.857, 'Skill Library', fs=8.6, bold=True)
+txt(ax, 0.810, 0.835, 'calibrated domain protocols', fs=6.8, c=GRAY, italic=True)
 for j, s in enumerate(['method & basis  ·  pKa calibration',
                        'thermochemistry  ·  microsolvation',
                        'NBO  ·  TD-DFT  ·  PES / TS']):
-    txt(ax, 0.805, 0.816 - j * 0.016, s, fs=6.7, c=DARK)
-txt(ax, 0.805, 0.770, 'skills may own deterministic tools', fs=6.5, c=E_PLAN, italic=True)
-arr(ax, (0.660, 0.800), (0.505, 0.796), c=E_PLAN, lw=1.1)
+    txt(ax, 0.810, 0.814 - j * 0.0195, s, fs=6.7, c=DARK)
+txt(ax, 0.810, 0.758, 'skills may own deterministic tools', fs=6.5, c=E_PLAN, italic=True)
+arr(ax, (0.660, 0.800), (0.520, 0.796), c=E_PLAN, lw=1.1)
 
 # validator + executor
-box2(ax, 0.400, 0.690, 0.210, 0.048, 'Plan Validator',
+box2(ax, 0.400, 0.690, 0.240, 0.048, 'Plan Validator',
      'structure · deps · arg schemas', fs1=8.2, fs2=6.6)
-box2(ax, 0.400, 0.580, 0.210, 0.056, 'LangGraph Executor',
+box2(ax, 0.400, 0.580, 0.240, 0.056, 'LangGraph Executor',
      'deterministic DAG · no LLM in loop', fs1=8.2, fs2=6.6)
 box2(ax, 0.735, 0.580, 0.190, 0.056, 'Artifact Store',
      'typed key–value results', fc=C_STORE, fs1=8.2, fs2=6.6)
 
-arr(ax, (0.225, 0.892), (0.295, 0.892))                       # user -> compound id
+arr(ax, (0.235, 0.892), (0.280, 0.892))                       # user -> compound id
 arr(ax, (0.400, 0.866), (0.400, 0.816))                       # compound id -> planner
 arr(ax, (0.400, 0.764), (0.400, 0.714))                       # planner -> validator
 arr(ax, (0.400, 0.666), (0.400, 0.608))                       # validator -> executor
-arr(ax, (0.505, 0.580), (0.640, 0.580))                       # executor -> artifacts
+arr(ax, (0.520, 0.580), (0.640, 0.580))                       # executor -> artifacts
 arr(ax, (0.640, 0.556), (0.245, 0.482))                       # artifacts -> reporter (straight: clears the executor box)
 arr(ax, (0.140, 0.496), (0.140, 0.866))                       # reporter -> user
 txt(ax, 0.152, 0.690, 'report', fs=7.2, c=GRAY, ha='left', italic=True)
 
 # retry loop, consistent with Figure 2
-arr(ax, (0.297, 0.690), (0.297, 0.766), c=E_LLM, lw=1.1, rad=0.0)
-txt(ax, 0.288, 0.728, 'bounded retry', fs=6.6, c=E_LLM, ha='right', italic=True)
+arr(ax, (0.310, 0.714), (0.310, 0.764), c=E_LLM, lw=1.1, rad=0.0)   # validator top -> planner bottom
+txt(ax, 0.298, 0.739, 'bounded retry', fs=6.6, c=E_LLM, ha='right', italic=True)
 
 # ── Boundary ──────────────────────────────────────────────────────────────────
 BY = 0.320
-ax.plot([PX, PX + PW], [BY, BY], color=EDGE, lw=1.4, ls=(0, (6, 4)), zorder=3)
+for xa, xb in ((PX, 0.330), (0.670, PX + PW)):
+    ax.plot([xa, xb], [BY, BY], color=EDGE, lw=1.4, ls=(0, (6, 4)), zorder=3)
 # The box sits above the dashed boundary (z=4) so the line does not run through its text.
 rbox(ax, 0.330, BY - 0.026, 0.340, 0.052, fc='#FFFFFF', ec=EDGE, lw=1.2, z=4)
 txt(ax, 0.500, BY + 0.008, 'MCP over SSH', fs=8.8, bold=True, z=5)
@@ -177,7 +183,7 @@ txt(ax, PX + PW - 0.010, BY - 0.014, 'raw outputs stay on the cluster',
 RY, RH = 0.028, 0.262
 rbox(ax, PX, RY, PW, RH, fc=C_REMOTE, ec=E_REMOTE, lw=1.3, z=1)
 txt(ax, PX + LDX, RY + RH - LDY, 'REMOTE COMPUTE', fs=11.0, c=E_REMOTE, ha='left', bold=True)
-txt(ax, PX + LDX + 0.190, RY + RH - LDY, 'Kubernetes / SLURM cluster',
+txt(ax, PX + LDX + 0.245, RY + RH - LDY, 'Kubernetes / SLURM cluster',
     fs=8.0, c=E_REMOTE, ha='left', italic=True)
 
 rbox(ax, 0.060, 0.132, 0.880, 0.062, fc='#FFFFFF', ec=E_REMOTE, lw=1.1)
@@ -202,6 +208,10 @@ rbox(ax, 0.656, 0.396, 0.034, 0.014, fc='#FFFFFF', ec=E_LLM, lw=1.6, r=0.004)
 txt(ax, 0.700, 0.403, 'red border = LLM call (three in total)', fs=7.0, ha='left')
 rbox(ax, 0.656, 0.378, 0.034, 0.014, fc='#FFFFFF', ec=EDGE, lw=1.0, r=0.004)
 txt(ax, 0.700, 0.385, 'plain border = deterministic code', fs=7.0, ha='left')
+
+if os.environ.get('FIG_CHECK'):
+    from figure_layout_check import check
+    check(fig, ax, PRINT_SCALE)
 
 out = os.path.join(sys.argv[1] if len(sys.argv) > 1 else '.', 'architecture_drawn')
 fig.savefig(out + '.png', dpi=300, bbox_inches='tight', facecolor=BG)

@@ -29,6 +29,7 @@
 # Acknowledgement as part of the code release).
 !/figure_architecture.py
 !/figure_workflow.py
+!/figure_layout_check.py
 # Q-planner paper: the chemistry-audit script and the run logs its SI cites by path.
 # test_logs/ holds ~100 other logs, so re-include the directory, re-exclude its
 # children, then re-include only the cited files (see MECHANICS below).
