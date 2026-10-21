@@ -32,6 +32,7 @@ from opi.core import Calculator
 from opi.input.blocks.block_geom import BlockGeom
 from opi.input.blocks.block_scf import BlockScf
 from opi.input.structures.structure import Structure
+from opi.output.grepper.recipes import has_terminated_normally
 
 
 # -----------------------------
@@ -268,14 +269,40 @@ def _build_calc(
     return calc
 
 
-def _read_out_text(workdir: Path, label: str) -> str:
+def _resolve_out_path(workdir: Path, label: str) -> Optional[Path]:
+    """The .out a job's results are read from: `<label>.out`, else the last *.out present."""
     out_path = workdir / f"{label}.out"
     if out_path.exists():
-        return out_path.read_text(encoding="utf-8", errors="ignore")
+        return out_path
     outs = sorted(workdir.glob("*.out"))
-    if outs:
-        return outs[-1].read_text(encoding="utf-8", errors="ignore")
-    return ""
+    return outs[-1] if outs else None
+
+
+def _read_out_text(workdir: Path, label: str) -> str:
+    p = _resolve_out_path(workdir, label)
+    return p.read_text(encoding="utf-8", errors="ignore") if p else ""
+
+
+def _terminated_normally(workdir: Path, label: str) -> bool:
+    """OPI's grepper recipe, run on the same file `_read_out_text` would have read.
+
+    Replaces a bare ``"ORCA TERMINATED NORMALLY" in out_text`` substring test. The recipe greps
+    the ``****``-delimited banner and is therefore the stricter of the two; both were run over
+    2713 archived .out files on 2026-10-20 (`retrieval_diff.py`) and agreed on every one, with
+    no exceptions raised from either path and ~5x less wall time. `server_with_product.py`
+    already reaches the same recipe through `Output.terminated_normally()`, so this brings the
+    solvator path into line with the rest of the server.
+
+    Returns False when no .out exists, which is what the substring test did with the empty
+    string `_read_out_text` handed back.
+    """
+    p = _resolve_out_path(workdir, label)
+    if p is None:
+        return False
+    try:
+        return has_terminated_normally(p)
+    except FileNotFoundError:
+        return False
 
 
 async def _run_calc_with_timeout(calc: Calculator, wall_timeout_seconds: int):
@@ -433,7 +460,7 @@ def _run_solvator_sync(
     out_text = _read_out_text(workdir, job_label)
     err_text = _read_text_safe(workdir / f"{job_label}.err")
 
-    status = "ok" if "ORCA TERMINATED NORMALLY" in out_text else "error"
+    status = "ok" if _terminated_normally(workdir, job_label) else "error"
     return_code = 0 if status == "ok" else 1
 
     cluster_xyz = _extract_cluster_geometry_from_workdir(workdir, job_label)

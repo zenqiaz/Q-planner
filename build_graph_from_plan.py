@@ -344,6 +344,10 @@ def _infer_error_code(tool_payload: Dict[str, Any]) -> Optional[str]:
         str(tool_payload.get("error") or ""),
         str(tool_payload.get("tail") or ""),
     ]).upper()
+    # Same precedence as the server-side classifier: input that never parsed outranks any
+    # convergence reading of the same tail.
+    if "INPUT ERROR" in text:
+        return "INPUT_ERROR"
     if "SCF NOT CONVERGED" in text:
         return "SCF_NOT_CONVERGED"
     if "IMAGINARY" in text and ("MODE" in text or "FREQ" in text):

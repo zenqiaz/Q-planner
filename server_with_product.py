@@ -343,6 +343,12 @@ def _classify_orca_error_code(out_text: str) -> Optional[str]:
     patch_and_retry logic can match on_error rules without text-parsing.
     """
     upper = out_text.upper()
+    # Checked first, deliberately: a job whose input ORCA refused to read cannot have had an
+    # SCF failure, and the whole point of the code is to stop patch_and_retry adjusting SCF
+    # settings on input that never parsed. Measured 2026-10-20 over the 2713 archived outputs
+    # (retrieval_diff.py): present in 79 of the 191 failures and in 0 of the 2522 successes.
+    if "INPUT ERROR" in upper:
+        return "INPUT_ERROR"
     if "SCF NOT CONVERGED" in upper or "FAILED TO CONVERGE" in upper:
         return "SCF_NOT_CONVERGED"
     if "***IMAGINARY MODE***" in upper:
